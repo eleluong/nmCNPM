@@ -1,11 +1,11 @@
-import React from 'react';
-
-const app = () => {
+import React from 'react'
+import Home from './frontend/components/Home/Home'
+// import HomeStaff from './frontend/components/HomeStaff/HomeStaff'
+const App = () => {
     return (
-        <div>
-            
-        </div>
+        // <HomeStaff />
+        <Home/>
     )
 }
 
-export default app
+export default App
