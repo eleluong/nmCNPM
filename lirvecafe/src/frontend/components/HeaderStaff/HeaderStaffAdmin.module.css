@@ -1,0 +1,104 @@
+.navbar_staff{
+    background-image: linear-gradient(0, #4da8f8,#1a94ff);
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar_home{
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: white;
+    padding: 5px 30px;
+}
+.navbar_user{
+    height: 60%;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    position: relative;
+}
+.navbar_user_icon{
+    font-size: 1rem;
+    color: white;
+    padding: 0 4px;
+}
+.navbar_user_name{
+    color: white;
+}
+.navbar_user:hover{
+    cursor: pointer;
+}
+.navbar_user:hover .navbar_user_name{
+    color: rgb(214, 216, 218);
+}
+.navbar_user:hover .navbar_user_icon{
+    color: rgb(214, 216, 218);
+}
+
+.navbar_user:hover .navbar_user_menu{
+    display: block;
+}
+.navbar_user_menu{
+    position: absolute;
+    margin: 0;
+    padding: 8px 16px;
+    top: 115%;
+    right:0;
+    border-radius: 2px;
+    background-color: white;
+    width: 120px;
+    list-style: none;
+    box-shadow: 0 1px 2px #e0e0e0;
+    display: none;
+}
+.navbar_user_menu::before{
+    content: "";
+    border-width: 20px 27px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    position:absolute;
+    right: 4px;
+    top: -29px;
+}
+.navbar_user_menu::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: -8px;
+    right: 0;
+    width: 83%;
+    height: 8px;
+}
+.navbar_user_item a{
+    padding: 0 16px; 
+    text-decoration: none;
+    font-size: 1rem;
+    color: rgb(22, 22, 22);
+    display: block;
+    padding: 4px 0;
+}
+.navbar_user_item a:hover{
+    color: #1a94ff;
+}
+.tabs{
+    background-color: #ededed;
+    display: flex;
+}
+.tab_item{
+    color: black;
+    background-color: #fff;
+    text-decoration: none;
+    width: 170px;
+    height: 35px;
+    margin: 8px 8px;
+    font-size: 1.2rem;
+    text-align: center;
+    align-content: center;
+    border-radius: 2px;
+    line-height: 2.125rem;
+}
+.active{
+    background-color: #1a94ff;
+    color:#fff;
+}

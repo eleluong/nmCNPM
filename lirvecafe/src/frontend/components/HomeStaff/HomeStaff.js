@@ -1,23 +1,23 @@
-import HeaderStaff from "./HeaderStaff/HeaderStaff"
+import HeaderStaff from "../HeaderStaff/HeaderStaff"
 import {Routes, Route} from "react-router-dom"
-import TaoDonHang from "./TaoDonHang/TaoDonHang"
-import DonHang from "./DonHang/DonHang"
-import Sach from "./Sach/Sach"
-import DoUong from "./DoUong/DoUong"
-import TaoSuKien from "./TaoSuKien/TaoSuKien"
-import SuKien from "./SuKien/SuKien"
+import CreateOrder from "./CreateOrder/CreateOrder"
+import Orders from "./Orders/Orders"
+import Drinks from "./Drinks/Drinks"
+import Book from "./Book/Book"
+import CreateEvent from "./CreateEvent/CreateEvent"
+import Events from "./Events/Events"
 function HomeStaff() {
     return (
         <div>
-            <HeaderStaff />
+            <HeaderStaff/>
             <Routes>
-                <Route path="/" element={<TaoDonHang/>}></Route>
-                <Route path="/TaoDonHang" element={<TaoDonHang/>}></Route>
-                <Route path="/DonHang" element={<DonHang/>}></Route>
-                <Route path="/DoUong" element={<DoUong/>}></Route>
-                <Route path="/Sach" element={<Sach/>}></Route>
-                <Route path="/TaoSuKien" element={<TaoSuKien/>}></Route>
-                <Route path="/SuKien" element={<SuKien/>}></Route>
+                <Route path="/" element={<CreateOrder/>}></Route>
+                <Route path="/CreateOrder" element={<CreateOrder/>}></Route>
+                <Route path="/Orders" element={<Orders/>}></Route>
+                <Route path="/Drinks" element={<Drinks/>}></Route>
+                <Route path="/Book" element={<Book/>}></Route>
+                <Route path="/CreateEvent" element={<CreateEvent/>}></Route>
+                <Route path="/Events" element={<Events/>}></Route>
             </Routes>
         </div>
     )
