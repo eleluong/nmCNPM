@@ -1,5 +1,5 @@
 import HeaderStaff from "../HeaderStaff/HeaderStaff"
-import {Routes, Route} from "react-router-dom"
+import {Routes, Route, HashRouter} from "react-router-dom"
 import CreateOrder from "./CreateOrder/CreateOrder"
 import Orders from "./Orders/Orders"
 import Drinks from "./Drinks/Drinks"

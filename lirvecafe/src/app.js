@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Home from './frontend/components/Home/Home'
-// import HomeStaff from './frontend/components/HomeStaff/HomeStaff'
+// import Home from './frontend/components/Home/Home'
+import HomeStaff from './frontend/components/HomeStaff/HomeStaff'
 
 import SigninScreen from './frontend/components/Signin/SigninScreen'
 import RegisterScreen from './frontend/components/Register/RegisterScreen'
@@ -13,7 +13,7 @@ const App = () => {
        
         <BrowserRouter>
             <Routes>
-                <Route exac path="/" element={<Home/>}></Route>
+                <Route exact path="/*" element={<HomeStaff/>}></Route>
                 <Route path={ROUTES.SIGNIN} element={<SigninScreen/>}></Route>
                 <Route path={ROUTES.REGISTER} element={<RegisterScreen/>}></Route>
             </Routes>
