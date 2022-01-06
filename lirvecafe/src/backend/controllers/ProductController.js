@@ -1,8 +1,8 @@
 const db = require('../models/firebaseAdmin')
 
 class ProductController{
-    //GET
-    async getProducts(req, res){
+    
+    function getProducts(){
         try {
             const query = db.collection('products');
             const querySnapshot = await query.get();
@@ -19,32 +19,26 @@ class ProductController{
                 }
             })
             console.log(items);
-            res.status(204).json();
             return items;
         } catch (error) {
             console.log('Error!');
-            return res.status(500).json(error);
         }
     }
-    // PUT
-    async setProductStock(req, res){
+
+    function setProductStock(stock, productId){
         try {
-            const stock = req.body.stock;
-            const productId = req.body.id;
             await db.collection('products')
                     .doc(productId)
                     .update({
                         stock: stock
                     });
-            return res.status(204).json();
         } catch (error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // POST
-    async addProduct(req, res){
+
+    function addProduct(product){
         try {
-            const product = req.body;
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -58,7 +52,7 @@ class ProductController{
                 await db.collection('products')
                     .doc(product.id)
                     .create({
-                        productId: product.id,
+                        productId: product.productId,
                         name: product.name,
                         price: product.price,
                         image: product.image,
@@ -67,41 +61,33 @@ class ProductController{
                         state: product.state
                     });
             }
-            return res.status(204).json();
         } catch (error) {
             console.log('Error!');
-            return res.status(500).json(error);
         }
     }
-    // DELETE
-    async deleteProduct(req, res){
+    
+    function deleteProduct(productId){
         try {
-            const productId = req.params.id;
             await db.collection('products').doc(productId).delete({});
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // PUT
-    async updateProductState(req, res){
+    
+    function updateProductState(state, productId){
         try {
-            const state = req.body.state;
-            const productId = req.body.id;
             await db.collection('products')
                     .doc(productId)
                     .update({
                         state: state
                     });
-            return res.status(204).json();
         } catch (error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // GET
-    async searchProduct(req, res){
+    
+    function searchProduct(id){
         try {
-            const id = req.params.id;
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -109,17 +95,14 @@ class ProductController{
                 return doc.data().productId === id;
             })
             // console.log(product);
-            res.status(204).json();
             return product.data();
         } catch(error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // GET
-    async checkQuantity(req, res){
+    
+    function checkQuantity(id, stock){
         try {
-            const id = req.params.id;
-            const stock = req.params.stock;
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -127,21 +110,18 @@ class ProductController{
                 return doc.data().productId === id;
             })
 
-            res.status(204).json();
             if (stock <= pareseInt(product.data().stock)) {
                 return true;
             } else {
                 return false;
             }
         } catch(error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // PUT
-    async addToCart(req, res){
+    // Phuong thuc nay chua xog tai chua tao ra Cart
+    function addToCart(cartId, productId){
         try {
-            const cartId = req.body.cartId;
-            const productId = req.body.productId;
             await db.collection('carts')
                     .doc(cart.id)
                     .collection('productId')
@@ -150,9 +130,8 @@ class ProductController{
                         productId: productId,
                         quantity: 1
                     });
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
 }
