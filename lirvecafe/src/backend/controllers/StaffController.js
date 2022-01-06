@@ -10,7 +10,7 @@ class StaffController {
             const docs = querySnapshot.docs;
 
             function isExisted(element) {
-                return element.data().productId == parseInt(product.productId)
+                return element.data().productId != parseInt(product.productId)
             }
             let exist = docs.every(isExisted);
 
