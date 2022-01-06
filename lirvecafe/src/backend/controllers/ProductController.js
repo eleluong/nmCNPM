@@ -119,21 +119,6 @@ class ProductController{
             console.log('Error!');
         }
     }
-    // Phuong thuc nay chua xog tai chua tao ra Cart
-    function addToCart(cartId, productId){
-        try {
-            await db.collection('carts')
-                    .doc(cart.id)
-                    .collection('productId')
-                    .doc(productId)
-                    .create({
-                        productId: productId,
-                        quantity: 1
-                    });
-        } catch(error) {
-            console.log('Error!');
-        }
-    }
 }
 
 module.exports = new ProductController();
