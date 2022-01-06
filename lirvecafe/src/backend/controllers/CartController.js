@@ -1,23 +1,20 @@
 const db = require('../models/firebaseAdmin')
 
 class CartController{
-    //GET
-    async createCart(req, res) {
+    
+    function createCart(cartId) {
         try {
-            const cartId = req.body.cartId;
             await db.collection('carts').doc(cartId)
                     .create({
                         cartId: cartId
                     });
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json();
+            console.log('Error');
         }  
     }
 
-    async getCart(req, res) {
+    function getCart(cartId) {
         try {
-            const cartId = req.params.id;
             const query = db.collection('carts').doc(cartId).collection('productList');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -27,46 +24,35 @@ class CartController{
                     state: cart.data().state
                 }
             })
-            console.log(items);
-            res.status(204).json();
+            // console.log(items);
             return items;
         } catch(error) {
-            res.status(500).json();
+            console.log('Error');
         }
     }
 
-    async deleteToCart(req, res) {
+    function deleteToCart(productId, cartId) {
         try {
-            const productId = req.body.productId;
-            const cartId = req.body.cartId;
             await db.collection('carts').doc(cartId).collection('productList').doc(productId).delete({});
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json();
+            console.log('Error');
         }
     }
 
-    async updateState(req, res) {
+    function updateState(cartId, productId, state) {
         try {
-            const state = req.body.state;
-            const productId = req.body.productId;
-            const cartId = req.body.cartId;
             await db.collection('carts').doc(cartId)
                     .collection('productList').doc(productId)
                     .update({
                         state: state
                     });
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json();
+            console.log('Error');
         }
     }
 
-    async addToCart(req, res) {
+    function addToCart(cartId, productId) {
         try {
-            const productId = req.body.productId;
-            const cartId = req.body.cartId;
-
             const query = db.collection('carts').doc(cartId).collection('productList');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -84,9 +70,8 @@ class CartController{
                             state: 1
                         });
             }
-            return res.status(204).json();
         } catch(error) {
-            return res.status(500).json();
+            console.log('Error');
         }
     }
 }
