@@ -1,10 +1,9 @@
 const db = require('../models/firebaseAdmin');
 
 class StaffController {
-    // POST
-    async createStaff(req, res) {
+   
+    function createStaff(staff) {
         try {
-            const staff = req.body;
             // console.log(staff);
             const query = db.collection('staff');
             const querySnapshot = await query.get();
@@ -26,15 +25,13 @@ class StaffController {
                         TimeStart: staff.TimeStart,
                         TimeEnd: staff.TimeEnd
                     });
-            return res.status(204).json();
             }               
         } catch (error) {
             console.log('Error!');
-            return res.status(500).json(error);
         }
     }
-    // GET
-    async showAll(req, res) {
+    
+    function showAll() {
         try {
             const query = db.collection('staff');
             const querySnapshot = await query.get();
@@ -50,18 +47,15 @@ class StaffController {
                 }
             })
             console.log(items);
-            res.status(204).json();
             return items;
         } catch (error) {
             console.log('Error!');
-            return res.status(500).json(error);
         }
     }
-    // GET
-    async showDetail(req, res) {
+    
+    function showDetail(staffId) {
         try {
-            const staffId = req.params.id;
-            console.log(staffId);
+            // console.log(staffId);
             const query = db.collection('staff');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -69,28 +63,22 @@ class StaffController {
                 return doc.data().id === staffId;
             })
             console.log(staff);
-            res.status(204).json();
             return staff.data();
         } catch (error) {
             console.log('This id does not exist in database.');
-            return res.status(500).json(error);
         }
     }
-    // DELETE
-    async deleteStaff(req, res) {
+    
+    function deleteStaff(staffId) {
         try {
-            const staffId = req.params.id;
             await db.collection('staff').doc(staffId).delete({});
-            return res.status(204).json();
         } catch (error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
-    // PUT
-    async updateStaff(req, res) {
+    
+    function updateStaff(staff) {
         try {
-            const staff = req.body;
-            console.log(staff);
             await db.collection('staff')
                     .doc(staff.id)
                     .update({
@@ -101,9 +89,8 @@ class StaffController {
                         TimeStart: staff.TimeStart,
                         TimeEnd: staff.TimeEnd
                     });
-            return res.status(204).json();
         } catch (error) {
-            return res.status(500).json(error);
+            console.log('Error!');
         }
     }
 }
