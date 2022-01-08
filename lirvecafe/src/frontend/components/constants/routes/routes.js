@@ -1,3 +1,5 @@
 const SIGNIN = '/signin';
 const REGISTER = '/register';
-export {SIGNIN, REGISTER}
+const HOME = '/';
+const HOMESTAFF = '/staff'
+export {SIGNIN, REGISTER, HOME, HOMESTAFF}

@@ -1,6 +1,5 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
-
 import styles from './RegisterScreen.module.css'
 import * as ROUTES from '../constants/routes/routes'
 
@@ -10,17 +9,21 @@ export default function RegisterScreen() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
-
-    const submitHanlder = (e) => {
+    const [error, setError] = useState('');
+    
+   
+    const submitHandler = async (e) => {
         e.preventDefault();
     }
 
     return (
         <div className={styles.register}>
-            <form className={styles.registerform}>
+            <form className={styles.registerform} onSubmit={submitHandler}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng ký</h1>
+                    {error && <span>{error}</span>}
                 </div>
+
                 <div className={styles.form_div1}>
                     <div className={styles.form_div}>
                         <label className={styles.form_label} htmlFor="name">Tên</label>
