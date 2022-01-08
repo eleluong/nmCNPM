@@ -6,7 +6,7 @@ function Navbar() {
     return (
         
         <nav className={styles.navbar}>
-            <a href="" className={styles.navbar_home}> Lirve Coffe</a>
+            <Link to="/" className={styles.navbar_home}> Lirve Coffe</Link>
             
             <ul className={styles.navbar_list}>
                 <Link to={ROUTES.REGISTER} className={`${styles.navbar_item} ${styles.navbar_item_separate}`}> Đăng ký</Link>

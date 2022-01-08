@@ -10,12 +10,11 @@ import RegisterScreen from './frontend/components/Register/RegisterScreen'
 import * as ROUTES from './frontend/components/constants/routes/routes'
 const App = () => {
     return (
-       
-        <BrowserRouter>
+        <BrowserRouter >
             <Routes>
-                <Route exact path="/*" element={<HomeStaff/>}></Route>
-                <Route path={ROUTES.SIGNIN} element={<SigninScreen/>}></Route>
-                <Route path={ROUTES.REGISTER} element={<RegisterScreen/>}></Route>
+                <Route exact path="/*" element={<HomeStaff />}></Route>
+                <Route path={ROUTES.SIGNIN} element={<SigninScreen />}></Route>
+                <Route path={ROUTES.REGISTER} element={<RegisterScreen />}></Route>
             </Routes>
         </BrowserRouter>
     )
