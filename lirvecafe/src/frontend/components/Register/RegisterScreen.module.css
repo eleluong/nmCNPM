@@ -6,8 +6,8 @@
 
 .registerform {
     max-width: 100%;
-    width: 40%;
-    min-width: 400px;
+    width: 500px;
+    min-width: 500px;
     margin: 0 auto;
     background-color: rgb(4, 0, 255);
     background-color: linear-gradient(0, #4da8f8,#1a94ff);
@@ -22,9 +22,9 @@
 }
 .form_div {
     display: flex;
-    min-width: 250px;
+    min-width: 200px;
     flex-direction: column;
-    margin: 0.6rem;
+    margin: 0.3rem;
 }
 .form_div_h1 {
     text-align: center;
@@ -64,4 +64,24 @@
 .form_div.center {
     padding-bottom: 10px;
     text-align: center;
+}
+
+.custome_input_password {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.far_eye {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+    font-size: 20px;
+    cursor: pointer;
+  }
+.far_eye_slash {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+    font-size: 20px;
+    cursor: pointer;
 }
