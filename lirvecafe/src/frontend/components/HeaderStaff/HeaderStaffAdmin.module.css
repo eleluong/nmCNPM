@@ -70,7 +70,7 @@
     width: 83%;
     height: 8px;
 }
-.navbar_user_item a{
+.navbar_user_item_link{
     padding: 0 16px; 
     text-decoration: none;
     font-size: 1rem;
@@ -78,7 +78,7 @@
     display: block;
     padding: 4px 0;
 }
-.navbar_user_item a:hover{
+.navbar_user_item_link:hover{
     color: #1a94ff;
 }
 .tabs{

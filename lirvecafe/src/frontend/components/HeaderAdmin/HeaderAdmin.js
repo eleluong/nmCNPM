@@ -44,17 +44,17 @@ function HeaderStaff(){
                     <span className={styles.navbar_user_name}>ID: {admin.ID}</span>
                     <ul className={styles.navbar_user_menu}>
                         <li className={styles.navbar_user_item}>
-                            <Link to="/">Tài khoản của tôi</Link>
+                            <Link to="/admin" className={styles.navbar_user_item_link}>Tài khoản của tôi</Link>
                         </li>
                         <li className={styles.navbar_user_item}>
-                            <span onClick={adminSignout}>Đăng xuất</span>
+                            <span onClick={adminSignout} className={styles.navbar_user_item_link}>Đăng xuất</span>
                         </li>
                     </ul>
                 </li>
             </nav>
             <div className={styles.tabs} >
-            <Link to="/CRUD" onClick ={()=>setState('CRUD')} className={isActive('CRUD')}>Quản lí nhân viên</Link>
-            <Link to="/Report" onClick ={()=>setState('Report')} className={isActive('Report')}>Thống kê kinh doanh</Link>
+            <Link to="CRUD" onClick ={()=>setState('CRUD')} className={isActive('CRUD')}>Quản lí nhân viên</Link>
+            <Link to="Report" onClick ={()=>setState('Report')} className={isActive('Report')}>Thống kê kinh doanh</Link>
         </div>
         </div>
     )
