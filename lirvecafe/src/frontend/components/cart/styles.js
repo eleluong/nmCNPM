@@ -8,4 +8,9 @@ export default makeStyles((theme)=>({
         backgroundColor:'#f0ffff',
 
     },
+    button:{
+        top : '20px',
+        right : '20px',
+        position : 'fixed',
+    }
 }));
