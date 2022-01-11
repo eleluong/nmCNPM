@@ -19,13 +19,7 @@ const Products = () => {
     },[]);
     console.log(products);
     return(
-        
-<<<<<<< Updated upstream
         <div>
-=======
-        <div >
-            <div />
->>>>>>> Stashed changes
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
                     <Grid item key = {product.id} xs = {4} sm = {4} lg = {2}>
@@ -34,10 +28,7 @@ const Products = () => {
                 ))}
             </Grid>
         </div>
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
+
        
     )
     
