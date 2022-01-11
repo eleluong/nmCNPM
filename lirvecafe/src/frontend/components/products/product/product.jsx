@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
 import useStyles from './style'
 
-const Product = ({product, handleAddToCart}) => {
+const Product = ({product}) => {
     const classes = useStyles();
     function titlechange(string){
         if (string.length > 18) {
@@ -18,7 +18,7 @@ const Product = ({product, handleAddToCart}) => {
             <CardContent>
                 <div className = {classes.cardContent}>
                     <Typography variant = "h6" align='left' >
-                        {titlechange(product.title)}
+                        {titlechange(product.name)}
                     </Typography>
                 </div>
                 {/*<Typography dangerouslySetInnerHTML = {{ __html: product.description}} variant = "body2" color = "textSecondary"></Typography>*/}
@@ -27,7 +27,7 @@ const Product = ({product, handleAddToCart}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                <Button aria-label ="Add to Cart" onClick= {()=> {handleAddToCart(product)}}>
+                <Button aria-label ="Add to Cart" >
                     <AddShoppingCart/> 
                 </Button>
             </CardActions>
