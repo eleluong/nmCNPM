@@ -1,7 +1,12 @@
 import clsx from "clsx"
-import { useState } from "react"
+import { useReducer, useState } from "react"
 import { Link } from "react-router-dom";
 import styles from "./HeaderStaffAdmin.module.css"
+
+import * as ROUTES from '../../components/constants/routes/routes'
+import * as isSignined from '../constants/isSignined'
+import { deleteCookie, setCookie, getCookie } from '../constants/userCookie'
+
 function HeaderStaff() {
     const [state, setState] = useState('CreateOrder');
     const classes = clsx(styles.tab_item, styles.active);
@@ -9,19 +14,41 @@ function HeaderStaff() {
         if (value === state) return classes;
         else return styles.tab_item
     }
+
+    deleteCookie('admin');
+    // deleteCookie('customer');
+    deleteCookie('iscustomerSignined');
+    deleteCookie('isadminSigined');
+    let signined = getCookie(isSignined.staff);
+    if(!signined) {
+        window.location.href = ROUTES.BASE_URL_WEB;
+    }
+    let staffInfo = getCookie('staff');
+    if(staffInfo) {
+        staffInfo = JSON.parse(staffInfo);
+    }
+    else {
+        staffInfo = {};
+    }
+    
+    const staffSignout = () => {
+        deleteCookie(isSignined.staff);
+        deleteCookie('staff');
+        window.location.href = ROUTES.BASE_URL_WEB;
+    }
     return (
         <div>
             <nav className={styles.navbar_staff}>
                 <Link to="/" onClick={() => setState('CreateOrder')} className={styles.navbar_home}> Lirve Coffe</Link>
                 <li className={styles.navbar_user} >
                     <i className={`${styles.navbar_user_icon} fas fa-user`}></i>
-                    <span className={styles.navbar_user_name}>NguyenVanBien</span>
+                    <span className={styles.navbar_user_name}>{staffInfo.ID}</span>
                     <ul className={styles.navbar_user_menu}>
                         <li className={styles.navbar_user_item}>
-                            <Link to="/">Tài khoản của tôi</Link>
+                            <Link to="/staff">Tài khoản của tôi</Link>
                         </li>
                         <li className={styles.navbar_user_item}>
-                            <Link to="/">Đăng xuất</Link>
+                            <span onClick={staffSignout}>Đăng xuất</span>
                         </li>
                     </ul>
                 </li>

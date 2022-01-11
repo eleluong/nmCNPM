@@ -1,7 +1,11 @@
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 import * as ROUTES from '../../components/constants/routes/routes'
+import * as isSignined from '../constants/isSignined'
 import styles from './SigninScreen.module.css'
+import { deleteCookie, setCookie } from '../constants/userCookie'
+
 
 const eye = "far fa-eye";
 const eye_slash = "far fa-eye-slash"
@@ -26,40 +30,78 @@ export default  function SigninScreen() {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState(1);
-    const [error, setError] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const [isShowPassword, setIsShowPassword] = useState(false);
 
     const navigate = useNavigate();
     const value = {
         'phone': phone,
         'password': password,
-        'state': checked,
+        'role': checked,
     }
-    console.log(isShowPassword);
+    // console.log(isShowPassword);
 
     const handleShowHidePassword = (e) => {
         setIsShowPassword(!isShowPassword);
         // console.log('Show hide password')
     }
     // console.log(checked);
-    console.log(value);
-    const submitHanlder =  (e) => {
+    // console.log(value);
+    // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
+    //     console.log(path);
+    let data = {
+        name: 'Chu Mạnh Tiến',
+        ID: 20194182
+    }
+    let datanew = JSON.stringify(data);
+    console.log(datanew);
+    // setCookie('user', datanew, 1);
+    
+    // deleteCookie('user', datanew, 1);
+    const handleSignin =  (e) => {
         // alert('Bạn đã đăng nhập.');
         // console.log(value);
-        console.log("Tài khoản đăng nhập:")
-        console.log('Phone: ', value.phone);
-        console.log('Password: ', value.password);
-        // if(value.state === 1)
-        //     navigate(ROUTES.HOME);
-        // else if (value.state === 2) {
-        //     navigate(ROUTES.HOMESTAFF)
-        // }
-        e.preventDefault();            
+        // console.log("Tài khoản đăng nhập:")
+        // console.log('Phone: ', value.phone);
+        // console.log('Password: ', value.password);
+        // setErrorMsg('');
+        // axios({
+        //     method: 'POST',
+        //     url: '/users/login',
+        //     data: {
+        //         phone: phone,
+        //         password: password,
+        //         role: checked
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log(res);
+        //         let data = res;
+        //         setCookie('userInfo', data, 1);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
+                //Test
+        let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
+        let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+        
+        let data = {
+            name: 'Chu Mạnh Tiến',
+            ID: `${username.toUpperCase()}000${value.role}`
+        }
+        let datanew = JSON.stringify(data);
+        console.log(datanew);
+        setCookie(username, datanew, 1);
+        setCookie(isSignined[username], 'true', 1);
+        window.location.href = `${ROUTES.BASE_URL_WEB + path}`
+        e.preventDefault();       
     }
 
+  
     return (
         <div className={styles.signin}>
-            <form className={styles.form} onSubmit={submitHanlder}>
+            <form className={styles.form} onSubmit={handleSignin}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng nhập</h1>
                 </div>
@@ -102,6 +144,10 @@ export default  function SigninScreen() {
                         <span onClick={handleShowHidePassword}><i className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
                     </div>
                 </div>
+                <div className={styles.form_div}>
+                    {errorMsg}
+                </div>
+
                 <div className={styles.form_div}>
                     <label/>
                     <button className={`${styles.form_btn} ${styles.primary}`} type="submit">

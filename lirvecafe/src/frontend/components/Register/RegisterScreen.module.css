@@ -65,3 +65,23 @@
     padding-bottom: 10px;
     text-align: center;
 }
+
+.custome_input_password {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.far_eye {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+    font-size: 20px;
+    cursor: pointer;
+  }
+.far_eye_slash {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+    font-size: 20px;
+    cursor: pointer;
+}

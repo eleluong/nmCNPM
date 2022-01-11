@@ -2,8 +2,18 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import styles from './RegisterScreen.module.css'
 import * as ROUTES from '../constants/routes/routes'
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 export default function RegisterScreen() {
+
+    const eye = "far fa-eye";
+    const eye_slash = "far fa-eye-slash"
+    const [isShowPassword, setIsShowPassword] = useState(false);
+    const handleShowHidePassword = (e) => {
+        setIsShowPassword(!isShowPassword);
+        // console.log('Show hide password')
+    }
+
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -11,14 +21,33 @@ export default function RegisterScreen() {
     const [address, setAddress] = useState('');
     const [error, setError] = useState('');
     
-   
-    const submitHandler = async (e) => {
+    const navigate = useNavigate();
+    const handleRegister = async (e) => {
+        // axios({
+        //     method: 'POST',
+        //     url: '/users/register',
+        //     data: {
+        //         phone: phone,
+        //         password: password, 
+        //         name: name,
+        //         email: email,
+        //         address: address,
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
+        console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
+        window.location.href = ROUTES.BASE_URL_WEB;
         e.preventDefault();
     }
 
     return (
         <div className={styles.register}>
-            <form className={styles.registerform} onSubmit={submitHandler}>
+            <form className={styles.registerform} onSubmit={handleRegister}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng ký</h1>
                     {error && <span>{error}</span>}
@@ -75,14 +104,17 @@ export default function RegisterScreen() {
 
                 <div className={styles.form_div}>
                     <label className={styles.form_label} htmlFor="password">Mật khẩu</label>
-                    <input 
-                        className={styles.form_input}
-                        type="password" 
-                        id="password" 
-                        placeholder="Mật khẩu"
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                    ></input>
+                    <div className={styles.custome_input_password}>
+                        <input 
+                            className={styles.form_input}
+                            type={isShowPassword ? "text" : "password"}
+                            id="password" 
+                            placeholder="Mật khẩu"
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                            ></input>
+                        <span onClick={handleShowHidePassword}><i className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
+                    </div>
                 </div>
 
                 <div className={styles.form_div}>

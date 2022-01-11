@@ -4,7 +4,7 @@ import Content from "../Content/Content.js"
 function Home() {
     return (
         <div>
-            <Header />
+            <Header/>
             <Content/>
             <Footer />
         </div>
