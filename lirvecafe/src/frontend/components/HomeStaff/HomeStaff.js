@@ -12,12 +12,12 @@ function HomeStaff() {
             <HeaderStaff/>
             <Routes>
                 <Route path="/" element={<CreateOrder/>}></Route>
-                <Route path="/CreateOrder" element={<CreateOrder/>}></Route>
-                <Route path="/Orders" element={<Orders/>}></Route>
-                <Route path="/Drinks" element={<Drinks/>}></Route>
-                <Route path="/Book" element={<Book/>}></Route>
-                <Route path="/CreateEvent" element={<CreateEvent/>}></Route>
-                <Route path="/Events" element={<Events/>}></Route>
+                <Route path="CreateOrder" element={<CreateOrder/>}></Route>
+                <Route path="Orders" element={<Orders/>}></Route>
+                <Route path="Drinks" element={<Drinks/>}></Route>
+                <Route path="Book" element={<Book/>}></Route>
+                <Route path="CreateEvent" element={<CreateEvent/>}></Route>
+                <Route path="Events" element={<Events/>}></Route>
             </Routes>
         </div>
     )

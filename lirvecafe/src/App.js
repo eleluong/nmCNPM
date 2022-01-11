@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-// import Home from './frontend/components/Home/Home'
 import HomeStaff from './frontend/components/HomeStaff/HomeStaff'
 import Home from './frontend/components/Home/Home'
 import HomeAdmin from './frontend/components/HomeAdmin/HomeAdmin'
