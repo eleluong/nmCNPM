@@ -7,7 +7,7 @@ class ProductController{
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
-
+            
             var items = docs.map(function(product) {
                 return {
                     productId: product.id,

@@ -9,6 +9,7 @@ import SigninScreen from './frontend/components/Signin/SigninScreen'
 import RegisterScreen from './frontend/components/Register/RegisterScreen'
 
 import * as ROUTES from './frontend/components/constants/routes/routes'
+import Products from './frontend/components/products/products'
 function App() {
 
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path={ROUTES.REGISTER} element={<RegisterScreen/>}></Route>
             </Routes>
         </BrowserRouter>
+        
     )
 }
 
