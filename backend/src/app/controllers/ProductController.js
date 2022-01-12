@@ -20,7 +20,7 @@ class ProductController{
                 }
             });
 
-            console.log(items);
+            // console.log(items);
             return res.status(200).send(items);
         } catch (error) {
             return res.status(500).send(error);
