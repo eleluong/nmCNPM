@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const Products = () => {
     const classes = useStyles();
-    const [products, setProducts] = useState();
+    const [products, setProducts] = useState([]);
     useEffect (()=>{
         const getProduct = async()=>{
             const url = "http://localhost:5000/product/get_all";
@@ -19,7 +19,7 @@ const Products = () => {
     },[]);
     console.log(products);
     return(
-        <div>
+        <div >
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
                     <Grid item key = {product.id} xs = {4} sm = {4} lg = {2}>
