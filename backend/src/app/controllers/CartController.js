@@ -4,7 +4,8 @@ const carts = db.collection('carts');
 class CartsController {
 
     async getCart(req, res) {
-        const id = req.session.passport.user;
+        //const id = req.session.passport.user;
+        const id = req.params.id;
         await carts.doc(id).get()
         .then(cart => {
             if(!cart.exists) {
@@ -19,7 +20,8 @@ class CartsController {
     }
 
     async deleteFromCart(req, res) {
-        const id = req.session.passport.user;
+        //const id = req.session.passport.user;
+        const id = req.body.customerId;
         const cart = carts.doc(id);
         await cart.collection('productList').doc(req.body.id).get()
         .then(product => {
@@ -35,7 +37,8 @@ class CartsController {
     }
 
     async addToCart(req, res) {
-        const id = req.session.passport.user;
+        //const id = req.session.passport.user;
+        const id = req.body.customerId;
         let doc = carts.doc(id).collection('productList').doc(req.body.id);
         await carts.doc(id).get()
         .then(cart => {
@@ -68,8 +71,9 @@ class CartsController {
         })
     }
 
-    async removeFromCart(req, res) {
-        const id = req.session.passport.user;
+    async descreaseFromCart(req, res) {
+        //const id = req.session.passport.user;
+        const id = req.body.customerId;
         const cart = carts.doc(id);
         await cart.collection('productList').doc(req.body.id).get()
         .then(product => {
