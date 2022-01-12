@@ -23,26 +23,28 @@ export default function RegisterScreen() {
     
     const navigate = useNavigate();
     const handleRegister = async (e) => {
-        // axios({
-        //     method: 'POST',
-        //     url: '/users/register',
-        //     data: {
-        //         phone: phone,
-        //         password: password, 
-        //         name: name,
-        //         email: email,
-        //         address: address,
-        //     }
-        // })
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-        console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
-        window.location.href = ROUTES.BASE_URL_WEB;
-        e.preventDefault();
+        await axios({
+            method: 'POST',
+            url: 'http://localhost:5000/users/register',
+            data: {
+                phone: phone,
+                password: password, 
+                name: name,
+                email: email,
+                address: address,
+            }
+        })
+            .then(res => {
+                console.log(res);
+                alert('Thành công');
+                window.location.href = ROUTES.BASE_URL_WEB;
+                e.preventDefault();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
+       
     }
 
     return (

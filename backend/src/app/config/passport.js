@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const db = require('../models/config');
+const db = require('../models/firebaseAdmin');
 const bcrypt = require('bcrypt')
 
 const customFields  = {
@@ -22,18 +22,19 @@ passport.deserializeUser((id, done) => {
 
 async function authorize(req, username, password, done) {
     var query
-    if (req.body.role == 'admin') {
-        query = db.collection('admin')
-    }
-    if (req.body.role == 'customer') {
+    if (req.body.role == 1) {
         query = db.collection('customers')
     }
-    if (req.body.role == 'staff') {
+    if (req.body.role == 2) {
         query = db.collection('staff')
+    }
+    if (req.body.role == 3) {
+        query = db.collection('admin')
     }
     query.where('phone', '==', `${username}`).get()
     .then(user => {
         if(user.empty) {
+            console.log('Không có tk');
             return done(null, false, {message: 'No user found'});
         }
         const hashedPassword = user.docs[0].data().password;

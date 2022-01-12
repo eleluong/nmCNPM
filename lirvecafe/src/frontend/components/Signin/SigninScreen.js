@@ -49,12 +49,12 @@ export default function SigninScreen() {
     // console.log(value);
     // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
     //     console.log(path);
-    let data = {
-        name: 'Chu Mạnh Tiến',
-        ID: 20194182
-    }
-    let datanew = JSON.stringify(data);
-    console.log(datanew);
+    // let data = {
+    //     name: 'Chu Mạnh Tiến',
+    //     ID: 20194182
+    // }
+    // let datanew = JSON.stringify(data);
+    // console.log(datanew);
     // setCookie('user', datanew, 1);
 
     // deleteCookie('user', datanew, 1);
@@ -65,37 +65,38 @@ export default function SigninScreen() {
         // console.log('Phone: ', value.phone);
         // console.log('Password: ', value.password);
         // setErrorMsg('');
-        // axios({
-        //     method: 'POST',
-        //     url: '/users/login',
-        //     data: {
-        //         phone: phone,
-        //         password: password,
-        //         role: checked
-        //     }
-        // })
-        //     .then(res => {
-        //         console.log(res);
-        //         let data = res;
-        //         setCookie('userInfo', data, 1);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/users/login',
+            data: {
+                phone: phone,
+                password: password,
+                role: checked
+            }
+        })
+            .then(res => {
+                console.log(res);
+                let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+                setCookie(username, res.data , 1);
+                setCookie(isSignined[username], 'true', 1);
+            })
+            .catch(error => {
+                console.log(error);
+            })
         //Test
-        let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
-        let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+        // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
+        // let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
 
-        let data = {
-            name: 'Chu Mạnh Tiến',
-            ID: `${username.toUpperCase()}000${value.role}`
-        }
-        let datanew = JSON.stringify(data);
-        console.log(datanew);
-        setCookie(username, datanew, 1);
-        setCookie(isSignined[username], 'true', 1);
-        window.location.href = `${ROUTES.BASE_URL_WEB + path}`
-        e.preventDefault();
+        // let data = {
+        //     name: 'Chu Mạnh Tiến',
+        //     ID: `${username.toUpperCase()}000${value.role}`
+        // }
+        // let datanew = JSON.stringify(data);
+        // console.log(datanew);
+        // setCookie(username, datanew, 1);
+        // setCookie(isSignined[username], 'true', 1);
+        // window.location.href = `${ROUTES.BASE_URL_WEB + path}`
+        // e.preventDefault();
     }
 
 
