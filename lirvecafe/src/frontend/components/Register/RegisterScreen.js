@@ -47,6 +47,7 @@ export default function RegisterScreen() {
 
     return (
         <div className={styles.register}>
+            <Link to="/" className={styles.home}> Lirve Cafe</Link>
             <form className={styles.registerform} onSubmit={handleRegister}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng ký</h1>

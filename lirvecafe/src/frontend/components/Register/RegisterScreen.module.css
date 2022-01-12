@@ -1,17 +1,26 @@
 .register {
-    top: 80px;
-    bottom: 100px;
     position: relative;
+    background-image: url(https://images.unsplash.com/photo-1615324606662-5d6d2ae148f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmVlJTIwYm9va3xlbnwwfHwwfHw%3D&w=1000&q=80);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    justify-content: center;
+    height: 100vh;
 }
-
-.registerform {
-    max-width: 100%;
-    width: 500px;
-    min-width: 500px;
-    margin: 0 auto;
-    background-color: rgb(4, 0, 255);
-    background-color: linear-gradient(0, #4da8f8,#1a94ff);
+.home{
+    text-decoration: none;
+    font-size: 2rem;
+    color: #2197fe;
+    padding: 16px 20px;
+  }
+.registerform {   
+    position: absolute;
+    top: 80px;
+    left: 300px;
+    width: 600px;
+    margin-top: 0;
+    background-color: #f8f8f8;
     border-radius: 0.2rem;
+    box-shadow: 1px 1px #dbdada;
 }
 .form_div1 {
     display: flex;
@@ -22,7 +31,7 @@
 }
 .form_div {
     display: flex;
-    min-width: 200px;
+    min-width: 280px;
     flex-direction: column;
     margin: 0.3rem;
 }
