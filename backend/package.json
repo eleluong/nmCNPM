@@ -10,10 +10,20 @@
   "author": "Nguyen Van Minh",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^11.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
     "firebase-admin": "^10.0.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0"
   }
 }

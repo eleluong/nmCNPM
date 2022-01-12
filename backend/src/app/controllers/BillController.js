@@ -103,7 +103,7 @@ class BillsController {
     }
 
     async getBillInfo(req, res, next) {
-        await bills.doc(req.body.id).get()
+        await bills.doc(req.params.id).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');

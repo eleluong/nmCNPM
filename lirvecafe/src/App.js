@@ -14,11 +14,11 @@ function App() {
     return (
         <BrowserRouter >
             <Routes>
-            <Route exact path={ROUTES.HOME} element={<Home/>}></Route>
-                    <Route path={ROUTES.HOMESTAFF} element={<HomeStaff/>}></Route>
-                    <Route path={ROUTES.HOMEADMIN} element={<HomeAdmin/>}></Route>
-                    <Route path={ROUTES.SIGNIN} element={<SigninScreen/>}></Route>
-                    <Route path={ROUTES.REGISTER} element={<RegisterScreen/>}></Route>
+                <Route exact path={ROUTES.HOME} element={<Home />}></Route>
+                <Route path={ROUTES.HOMESTAFF} element={<HomeStaff />}></Route>
+                <Route path={ROUTES.HOMEADMIN} element={<HomeAdmin />}></Route>
+                <Route path={ROUTES.SIGNIN} element={<SigninScreen />}></Route>
+                <Route path={ROUTES.REGISTER} element={<RegisterScreen />}></Route>
             </Routes>
         </BrowserRouter>
         
