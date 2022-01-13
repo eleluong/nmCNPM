@@ -7,6 +7,8 @@ import HomeAdmin from './frontend/components/HomeAdmin/HomeAdmin'
 import SigninScreen from './frontend/components/Signin/SigninScreen'
 import RegisterScreen from './frontend/components/Register/RegisterScreen'
 
+import Checkout from './frontend/components/Checkout'
+
 import * as ROUTES from './frontend/components/constants/routes/routes'
 import Products from './frontend/components/products/products'
 function App() {
@@ -21,6 +23,10 @@ function App() {
                 <Route path={ROUTES.REGISTER} element={<RegisterScreen />}></Route>
             </Routes>
         </BrowserRouter>
+
+        
+        
+
         
     )
 }
