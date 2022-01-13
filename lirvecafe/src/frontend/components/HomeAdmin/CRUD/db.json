@@ -1,0 +1,11 @@
+{
+    "staff":[
+        {
+            "id":1,
+            "name":"Nguyễn Văn Biển",
+            "phone":"0394239327",
+            "password":"123456",
+            "email":"tamthieu1902@gmail.com"
+        }
+    ]
+}
