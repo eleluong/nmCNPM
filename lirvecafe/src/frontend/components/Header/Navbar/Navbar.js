@@ -18,6 +18,8 @@ function Navbar() {
     let user = getCookie('customer');
 
     if (user) {
+        console.log(typeof user);
+        console.log(user);
         user = JSON.parse(user);
     }
     else {

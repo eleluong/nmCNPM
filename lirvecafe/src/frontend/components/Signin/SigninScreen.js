@@ -75,9 +75,12 @@ export default function SigninScreen() {
             }
         })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
+                console.log(typeof (res.data));
+
                 let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
-                setCookie(username, res.data , 1);
+                window.location.href=ROUTES.BASE_URL_WEB;
+                setCookie(username, JSON.stringify(res.data) , 1);
                 setCookie(isSignined[username], 'true', 1);
             })
             .catch(error => {
@@ -103,7 +106,7 @@ export default function SigninScreen() {
     return (
         <div className={styles.signin}>
             <Link to="/" className={styles.home}> Lirve Cafe</Link>
-            <form className={styles.form} onSubmit={handleSignin}>
+            <div className={styles.form}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng nhập</h1>
                 </div>
@@ -152,7 +155,7 @@ export default function SigninScreen() {
 
                 <div className={styles.form_div}>
                     <label />
-                    <button className={`${styles.form_btn} ${styles.primary}`} type="submit">
+                    <button className={`${styles.form_btn} ${styles.primary}`}  onClick={handleSignin} type="submit">
                         Đăng nhập
                     </button>
                 </div>
@@ -162,7 +165,7 @@ export default function SigninScreen() {
                         <Link to={ROUTES.REGISTER}>Đăng ký tài khoản</Link>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
