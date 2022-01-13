@@ -35,11 +35,11 @@ async function authorize(req, username, password, done) {
     .then(user => {
         if(user.empty) {
             console.log('Không có tk');
-            return done(null, false, {message: 'No user found'});
+            return done(null, false, {message: 'Không tồn tại số điện thoại đăng nhập'});
         }
         const hashedPassword = user.docs[0].data().password;
-        if(!bcrypt.compareSync(password, hashedPassword)) {
-            return done(null, false, {message: 'Wrong Password'});
+        if(!bcrypt.compareSync(password, hashedPassword) && !(password===hashedPassword)) {
+            return done(null, false, {message: 'Sai mật khẩu'});
         }
         return done(null, user.docs[0]);
     })

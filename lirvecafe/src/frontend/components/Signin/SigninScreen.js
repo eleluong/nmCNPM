@@ -65,41 +65,44 @@ export default function SigninScreen() {
         // console.log('Phone: ', value.phone);
         // console.log('Password: ', value.password);
         // setErrorMsg('');
-        // axios({
-        //     method: 'POST',
-        //     url: 'http://localhost:5000/users/login',
-        //     data: {
-        //         phone: phone,
-        //         password: password,
-        //         role: checked
-        //     }
-        // })
-        //     .then(res => {
-        //         console.log(res.data);
-        //         console.log(typeof (res.data));
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/users/login',
+            data: {
+                phone: phone,
+                password: password,
+                role: checked
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                console.log(typeof (res.data));
 
-        //         let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
-        //         window.location.href=ROUTES.BASE_URL_WEB;
-        //         setCookie(username, JSON.stringify(res.data) , 1);
-        //         setCookie(isSignined[username], 'true', 1);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-        // Test
-        let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
-        let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+                let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+                let end_path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN)
+                window.location.href=(ROUTES.BASE_URL_WEB + end_path);
+                setCookie(username, JSON.stringify(res.data) , 1);
+                setCookie(isSignined[username], 'true', 1);
+            })
+            .catch(error => {
+                console.log(error.response.data);
+                // console.log("sai mật khẩu")
+                setErrorMsg(error.response.data);
+            })
+        //Test
+        // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
+        // let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
 
-        let data = {
-            name: 'Chu Mạnh Tiến',
-            ID: `${username.toUpperCase()}000${value.role}`
-        }
-        let datanew = JSON.stringify(data);
-        console.log(datanew);
-        setCookie(username, datanew, 1);
-        setCookie(isSignined[username], 'true', 1);
-        window.location.href = `${ROUTES.BASE_URL_WEB + path}`
-        e.preventDefault();
+        // let data = {
+        //     name: 'Chu Mạnh Tiến',
+        //     ID: `${username.toUpperCase()}000${value.role}`
+        // }
+        // let datanew = JSON.stringify(data);
+        // console.log(datanew);
+        // setCookie(username, datanew, 1);
+        // setCookie(isSignined[username], 'true', 1);
+        // window.location.href = `${ROUTES.BASE_URL_WEB + path}`
+        // e.preventDefault();
     }
 
 
@@ -150,7 +153,7 @@ export default function SigninScreen() {
                     </div>
                 </div>
                 <div className={styles.form_div}>
-                    {errorMsg}
+                    {errorMsg && <span style={{color: 'red'}}>{errorMsg}</span>}
                 </div>
 
                 <div className={styles.form_div}>
