@@ -8,6 +8,8 @@ import SigninScreen from './frontend/components/Signin/SigninScreen'
 import RegisterScreen from './frontend/components/Register/RegisterScreen'
 
 import Checkout from './frontend/components/Checkout'
+import { FormProvider } from './frontend/components/store'
+import GlobalStyle from './frontend/components/GlobalStyle'
 
 import * as ROUTES from './frontend/components/constants/routes/routes'
 import Products from './frontend/components/products/products'
@@ -22,11 +24,18 @@ function App() {
                 <Route path={ROUTES.HOMEADMIN} element={<HomeAdmin />}></Route>
                 <Route path={ROUTES.SIGNIN} element={<SigninScreen />}></Route>
                 <Route path={ROUTES.REGISTER} element={<RegisterScreen />}></Route>
+
+                <Route path={ROUTES.CHECKOUT} element={
+                    <GlobalStyle>
+                        <FormProvider>
+                            <Checkout />
+                        </FormProvider>
+                    </GlobalStyle>
+                }></Route>
             </Routes>
         </BrowserRouter>
 
         
-        <Checkout />
         </>
 
         
