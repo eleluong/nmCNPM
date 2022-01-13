@@ -26,7 +26,7 @@ function App() {
         </BrowserRouter>
 
         
-        <Checkout></Checkout>
+        <Checkout />
         </>
 
         
