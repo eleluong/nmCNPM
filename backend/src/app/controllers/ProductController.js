@@ -144,6 +144,22 @@ class ProductController{
             return res.status(500).send(error);
         }
     }
+
+    async getProductByID(req, res) {
+        try {
+            const id = req.params.id;
+            await db.collection('products').doc(id).get()
+            .then(product => {
+                res.send(product.data());
+            })
+            .catch(error => {
+                console.log(error);
+            }) 
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports = new ProductController();

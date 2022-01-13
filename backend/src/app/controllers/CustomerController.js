@@ -6,26 +6,48 @@ const hash = require('../config/hash');
 class CustomersController {
 
     async createCustomer(req, res) {
+        // let phone = req.body.phone;
+        // await customers.where('phone', '==', ${phone}).get()
+        // .then(user => {
+        //     if(user.empty) {
+        //         const password = hash.hash(req.body.password);
+        //         customers.add({
+        //             phone: phone,
+        //             password: password,
+        //             name: req.body.name,
+        //             email: req.body.email,
+        //             address: req.body.address,
+                    
+        //         })
+        //         // res.redirect('/users/login')
+        //         console.log('backend');
+        //         res.send('Thành công')
+                
+        //     }
+        //     else res.send('user already exists');
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // })
+
+        //new function
         let phone = req.body.phone;
-        await customers.where('phone', '==', `${phone}`).get()
-        .then(user => {
-            if(user.empty) {
-                const password = hash.hash(req.body.password);
-                customers.add({
-                    phone: phone,
-                    password: password,
-                    name: req.body.name,
-                    mail: req.body.mail,
-                    address: req.body.address,
-                    point: 0,
-                })
-                res.redirect('/users/login')
-            }
-            else res.send('user already exists');
+        let password = hash.hash(req.body.password);
+        const docs =  (await customers.get()).docs;
+        const cust = docs.find(doc => {
+            return doc.data().phone === phone;
         })
-        .catch(err => {
-            console.error(err);
-        })
+        if(!cust) {
+            customers.add({
+                phone: phone,
+                password: password,
+                name: req.body.name,
+                email: req.body.email,
+                address: req.body.address
+            });
+            res.status(200).send('Đăng ký thành công');
+        }
+        else res.status(409).send('Số điện thoại đăng ký đã tồn tại');
     }
 
     async updateCustomer(req, res) {

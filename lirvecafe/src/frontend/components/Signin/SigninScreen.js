@@ -49,12 +49,12 @@ export default function SigninScreen() {
     // console.log(value);
     // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
     //     console.log(path);
-    let data = {
-        name: 'Chu Mạnh Tiến',
-        ID: 20194182
-    }
-    let datanew = JSON.stringify(data);
-    console.log(datanew);
+    // let data = {
+    //     name: 'Chu Mạnh Tiến',
+    //     ID: 20194182
+    // }
+    // let datanew = JSON.stringify(data);
+    // console.log(datanew);
     // setCookie('user', datanew, 1);
 
     // deleteCookie('user', datanew, 1);
@@ -65,44 +65,48 @@ export default function SigninScreen() {
         // console.log('Phone: ', value.phone);
         // console.log('Password: ', value.password);
         // setErrorMsg('');
-        // axios({
-        //     method: 'POST',
-        //     url: '/users/login',
-        //     data: {
-        //         phone: phone,
-        //         password: password,
-        //         role: checked
-        //     }
-        // })
-        //     .then(res => {
-        //         console.log(res);
-        //         let data = res;
-        //         setCookie('userInfo', data, 1);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-        //Test
-        let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
-        let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/users/login',
+            data: {
+                phone: phone,
+                password: password,
+                role: checked
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                console.log(typeof (res.data));
 
-        let data = {
-            name: 'Chu Mạnh Tiến',
-            ID: `${username.toUpperCase()}000${value.role}`
-        }
-        let datanew = JSON.stringify(data);
-        console.log(datanew);
-        setCookie(username, datanew, 1);
-        setCookie(isSignined[username], 'true', 1);
-        window.location.href = `${ROUTES.BASE_URL_WEB + path}`
-        e.preventDefault();
+                let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+                window.location.href=ROUTES.BASE_URL_WEB;
+                setCookie(username, JSON.stringify(res.data) , 1);
+                setCookie(isSignined[username], 'true', 1);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        //Test
+        // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
+        // let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
+
+        // let data = {
+        //     name: 'Chu Mạnh Tiến',
+        //     ID: `${username.toUpperCase()}000${value.role}`
+        // }
+        // let datanew = JSON.stringify(data);
+        // console.log(datanew);
+        // setCookie(username, datanew, 1);
+        // setCookie(isSignined[username], 'true', 1);
+        // window.location.href = `${ROUTES.BASE_URL_WEB + path}`
+        // e.preventDefault();
     }
 
 
     return (
         <div className={styles.signin}>
             <Link to="/" className={styles.home}> Lirve Cafe</Link>
-            <form className={styles.form} onSubmit={handleSignin}>
+            <div className={styles.form}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng nhập</h1>
                 </div>
@@ -151,7 +155,7 @@ export default function SigninScreen() {
 
                 <div className={styles.form_div}>
                     <label />
-                    <button className={`${styles.form_btn} ${styles.primary}`} type="submit">
+                    <button className={`${styles.form_btn} ${styles.primary}`}  onClick={handleSignin} type="submit">
                         Đăng nhập
                     </button>
                 </div>
@@ -161,7 +165,7 @@ export default function SigninScreen() {
                         <Link to={ROUTES.REGISTER}>Đăng ký tài khoản</Link>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
