@@ -14,6 +14,7 @@ import Products from './frontend/components/products/products'
 function App() {
 
     return (
+        <>
         <BrowserRouter >
             <Routes>
                 <Route exact path={ROUTES.HOME} element={<Home />}></Route>
@@ -25,7 +26,8 @@ function App() {
         </BrowserRouter>
 
         
-        
+        <Checkout></Checkout>
+        </>
 
         
     )
