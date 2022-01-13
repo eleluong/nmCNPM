@@ -6,6 +6,10 @@ import { Drawer } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import { useEffect } from 'react';
+import * as ROUTES from '../../constants/routes/routes';
+import * as isSignined from '../../constants/isSignined';
+import { getCookie, deleteCookie } from "../../constants/userCookie";
+
 function printItem(item){
     if (item.amount > 0){
         console.log('print item');
@@ -23,11 +27,23 @@ function printItem(item){
 const Cart = () => {
     const cartItems = [];
     const [items, setItems] = useState();
+    let signined = getCookie(isSignined.customer);
+        let user = getCookie('customer');
+        if (user) {
+            // console.log(typeof user);
+            // console.log(user);
+            user = JSON.parse(user);
+            //console.log(user);
+        }
+        else {
+            user = {}
+        }
+        const id = user.id;
+        console.log(id);
     useEffect (()=>{
         const getCart = async()=>{
-            const id = "";
             const url = 'http://localhost:5000/cart/get/'+id;
-            const res = ( await(fetch(url)));
+            const res = await( await(fetch(url))).json();
             setItems(res);
         }
         getCart();
