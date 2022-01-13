@@ -7,12 +7,33 @@ require('../app/config/passport')
 // const crsfProtections = crsf();
 // router.use(crsfProtections);
 
-router.post('/login', passport.authenticate('local', {
+// router.post('/login', (req, res, next) => {passport.authenticate('local', {
 
-    successRedirect: '/users/login-success',
-    failureRedirect: '/users/login-failure',
+//     successRedirect: '/users/login-success',
+//     failureRedirect: '/users/login-failure',
      
-}))
+// }))
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { 
+            return res.status(401).send( info.message );
+        }
+        else {
+            req.logIn(user, function(err) {
+                if (err) { 
+                    return next(err); 
+                }
+                return res.json({
+                    id: req.session.passport.user,
+                    name: req.user.data().name, //thêm data() vào sau req.user mới log được
+                });
+            });
+        }
+        
+    })(req, res, next);
+})
 
 router.post('/register', customersController.createCustomer)
 

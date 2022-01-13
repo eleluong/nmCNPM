@@ -16,20 +16,22 @@ function Navbar() {
     deleteCookie(isSignined.admin);
     let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
-
     if (user) {
-        console.log(typeof user);
-        console.log(user);
+        // console.log(typeof user);
+        // console.log(user);
         user = JSON.parse(user);
+        //console.log(user);
     }
     else {
         user = {}
     }
+    const ID = user.id;
+    console.log(ID);
     // console.log(user);
 
     const handleSignout = () => {
         window.location.href = `${ROUTES.BASE_URL_WEB}`;
-        deleteCookie('iscustomerSignined')
+        deleteCookie(isSignined.customer);
     }
     return (
         <nav className={styles.navbar}>
@@ -42,11 +44,14 @@ function Navbar() {
                 </>) : (
                     <li className={styless.navbar_user} >
                         <i className={`${styless.navbar_user_icon} fas fa-user`}></i>
-                        <span className={styless.navbar_user_name}>ID: {user.ID}</span>
+                        <span className={styless.navbar_user_name}>ID: {user.id}</span>
                         <ul className={styless.navbar_user_menu}>
                             {/* <li className={styles.navbar_user_item}>
                                     <span>ID: {userObj.ID}</span>
                                 </li> */}
+                            <li className={styless.navbar_user_item}>
+                                <span className={styless.navbar_user_item_link}>{user.name}</span>
+                            </li>
                             <li className={styless.navbar_user_item}>
                                 <Link to="/" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
                             </li>

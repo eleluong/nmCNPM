@@ -17,8 +17,8 @@ function HeaderStaff() {
 
     deleteCookie('admin');
     // deleteCookie('customer');
-    deleteCookie('iscustomerSignined');
-    deleteCookie('isadminSigined');
+    deleteCookie(isSignined.admin);
+    deleteCookie(isSignined.customer);
     let signined = getCookie(isSignined.staff);
     if(!signined) {
         window.location.href = ROUTES.BASE_URL_WEB;
@@ -31,6 +31,8 @@ function HeaderStaff() {
         staffInfo = {};
     }
     
+    const ID = staffInfo.id;
+    console.log(ID);
     const staffSignout = () => {
         deleteCookie(isSignined.staff);
         deleteCookie('staff');
@@ -42,7 +44,7 @@ function HeaderStaff() {
                 <Link to="/staff" onClick={() => setState('CreateOrder')} className={styles.navbar_home}> Lirve Coffe</Link>
                 <li className={styles.navbar_user} >
                     <i className={`${styles.navbar_user_icon} fas fa-user`}></i>
-                    <span className={styles.navbar_user_name}>{staffInfo.ID}</span>
+                    <span className={styles.navbar_user_name}>ID: {staffInfo.id}</span>
                     <ul className={styles.navbar_user_menu}>
                         <li className={styles.navbar_user_item}>
                             <Link to="/staff" className={styles.navbar_user_item_link}>Tài khoản của tôi</Link>

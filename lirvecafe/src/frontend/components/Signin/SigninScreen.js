@@ -79,12 +79,15 @@ export default function SigninScreen() {
                 console.log(typeof (res.data));
 
                 let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
-                window.location.href=ROUTES.BASE_URL_WEB;
+                let end_path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN)
+                window.location.href=(ROUTES.BASE_URL_WEB + end_path);
                 setCookie(username, JSON.stringify(res.data) , 1);
                 setCookie(isSignined[username], 'true', 1);
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response.data);
+                // console.log("sai mật khẩu")
+                setErrorMsg(error.response.data);
             })
         //Test
         // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
@@ -150,7 +153,7 @@ export default function SigninScreen() {
                     </div>
                 </div>
                 <div className={styles.form_div}>
-                    {errorMsg}
+                    {errorMsg && <span style={{color: 'red'}}>{errorMsg}</span>}
                 </div>
 
                 <div className={styles.form_div}>
