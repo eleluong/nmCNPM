@@ -9,5 +9,6 @@ router.delete('/delete/:id', productController.deleteProduct);
 router.put('/update_type', productController.updateProductType);
 router.get('/get_by_name/:name', productController.searchProduct);
 router.get('/check_quantity/:id/:stock', productController.checkQuantity);
+router.get('/getproductbyid/:id', productController.getProductByID);
 
 module.exports = router;

@@ -8,8 +8,10 @@ require('../app/config/passport')
 // router.use(crsfProtections);
 
 router.post('/login', passport.authenticate('local', {
+
+    successRedirect: '/users/login-success',
     failureRedirect: '/users/login-failure',
-    successRedirect: '/bills', 
+     
 }))
 
 router.post('/register', customersController.createCustomer)
@@ -52,11 +54,14 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/login-success', (req, res, next) => {
-    res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
+    console.log(req.user);
+    res.status(200).json(req.session.passport.user);
+    // res.send('{"ID": 20194182}');
 });
 
 router.get('/login-failure', (req, res, next) => {
-    res.send('You entered the wrong password.');
+    res.status(500).json(req.user)
+    // res.send('You entered the wrong password.');
 });
 
 module.exports = router;

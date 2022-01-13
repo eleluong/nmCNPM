@@ -35,9 +35,9 @@ module.exports.postRegister = async (req, res) => {
                     phone = req.body.phone,
                     points = req.body.points,
                 });
-                res.redirect('/users')
+                console.log(res);
             }
-            res.redirect('/register');
+            // res.redirect('/register');
         })
         .catch(err => {
             console.error('err', err);
