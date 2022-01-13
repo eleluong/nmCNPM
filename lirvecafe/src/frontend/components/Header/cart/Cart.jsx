@@ -5,8 +5,7 @@ import { useState } from 'react';
 import { Drawer } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
-
-
+import { useEffect } from 'react';
 function printItem(item){
     if (item.amount > 0){
         console.log('print item');
@@ -22,10 +21,21 @@ function printItem(item){
     }
 }
 const Cart = () => {
+    const cartItems = [];
+    const [items, setItems] = useState();
+    useEffect (()=>{
+        const getCart = async()=>{
+            const id = "";
+            const url = 'http://localhost:5000/cart/get/'+id;
+            const res = ( await(fetch(url)));
+            setItems(res);
+        }
+        getCart();
+    },[]);
+    console.log(items);
     const calculateTotal = (items) =>
     items.reduce((ack: number, item) => ack + item.amount * item.item.price, 0);
     const [cartOpen, setCartOpen] = useState(false);
-    const cartItems = [];
     const classes = useStyles();
     return (
         <div>
