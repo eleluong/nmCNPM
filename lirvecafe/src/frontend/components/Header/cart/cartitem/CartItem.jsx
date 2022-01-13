@@ -4,6 +4,13 @@ import useStyles from './styles';
 import { Typography } from '@material-ui/core';
 
 const CartItem = ({ item}) => {
+    const url = "";
+    const handleAddToCart=((itemId)=>{
+        
+    });
+    const handleRemoveFromCart=((itemId)=>{
+
+    });
     const classes = useStyles();
     return (
         <Card className={classes.item}>
@@ -22,7 +29,7 @@ const CartItem = ({ item}) => {
                         <Button
                             disableElevation
                             variant='contained'
-                            
+                            onClick = {()=>handleAddToCart(item.id)}
                         >
                         -
                         </Button>
@@ -30,7 +37,7 @@ const CartItem = ({ item}) => {
                         <Button
                             disableElevation
                             variant= 'contained'
-                            
+                            onClick = {()=>handleRemoveFromCart(item.id)}
                         >
                         + 
                         </Button>
