@@ -8,6 +8,7 @@ import { getCookie, deleteCookie } from "../../constants/userCookie";
 import { useState } from 'react';
 
 const CartItem = ({item}) => {
+    /*
     let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
@@ -92,6 +93,7 @@ const CartItem = ({item}) => {
             </Grid>
         </Card>
     )
+    */
 }
 
 export default CartItem
