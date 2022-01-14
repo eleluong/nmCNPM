@@ -3,7 +3,10 @@ import { Card, CardMedia, CardContent, CardActions, Typography,  IconButton } fr
 import { Button } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
 import useStyles from './style'
-
+import { useEffect } from 'react';
+import * as ROUTES from '../../constants/routes/routes';
+import * as isSignined from '../../constants/isSignined';
+import { getCookie, deleteCookie } from "../../constants/userCookie";
 const Product = ({product}) => {
     const classes = useStyles();
     function titlechange(string){
@@ -12,6 +15,27 @@ const Product = ({product}) => {
         }
         return string;
     }
+    let signined = getCookie(isSignined.customer);
+    let user = getCookie('customer');
+    if (user) {
+        // console.log(typeof user);
+        // console.log(user);
+        user = JSON.parse(user);
+        //console.log(user);
+    }
+    else {
+        user = {}
+    }
+    const id = user.id;
+    const handleAddToCart=((itemId)=>{
+        const temp = {cartID: id,productID: itemId};
+        console.log(temp);
+        fetch("http://localhost:5000/cart/addToCart/",{
+            method: "PUT",
+            headers:{"Content-type":"Appilcation/json"},
+            body:JSON.stringify(temp),
+        })
+    });
     return (
         <Card className = {classes.root}>
             <CardMedia  className = {classes.media} image = {product.image} title = {product.name}/>
@@ -27,7 +51,7 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                <Button aria-label ="Add to Cart" >
+                <Button aria-label ="Add to Cart" onClick = {()=> handleAddToCart(product.id)}>
                     <AddShoppingCart/> 
                 </Button>
             </CardActions>

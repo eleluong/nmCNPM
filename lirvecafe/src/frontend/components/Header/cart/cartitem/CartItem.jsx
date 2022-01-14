@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid } from '@material-ui/core';
 import useStyles from './styles';
 import { Typography } from '@material-ui/core';
+import { useState } from 'react';
 
 const CartItem = ({item}) => {
     /*
@@ -18,19 +19,37 @@ const CartItem = ({item}) => {
     }
     const id = user.id;
     console.log(id);
+    const productID = item.id;
     const handleAddToCart=((itemID)=>{
-        const temp = {id, itemId};
+        const temp = {cartID: id,productID: itemId};
         useEffect(() => {
             fetch("http://localhost:5000/cart/addToCart/",{
                 headers:{"Content-type":"Appilcation/json"},
                 body:JSON.stringify(temp),
             })
-        }, [])
+        }, []);
         
     });
     const handleRemoveFromCart=((itemId)=>{
-
+        const temp = {cartID: id ,productID: itemId};
+        useEffect(() => {
+            fetch("http://localhost:5000/cart/deleteFromCart/",{
+                headers:{"Content-type":"Appilcation/json"},
+                body:JSON.stringify(temp),
+            })
+        }, []);
     });
+    const [data, setData] = useState();
+    useEffect(() => {
+        const getData = async ()=>{
+            const res = await (await(fetch("http://localhost:5000/product/getproductbyid",{
+            headers:{"Content-type": "Application/json"},
+            body:JSON.stringify({productID: productID}),}
+            ))).json();
+            setData(res);
+        }
+        getData();
+    }, [])
     const classes = useStyles();
     return (
         <Card className={classes.item}>
