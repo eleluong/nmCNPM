@@ -6,6 +6,7 @@ const eventController = require('./event');
 const billRouter = require('./bill');
 const customerRouter = require('./customer');
 const userRouter = require('./user');
+const usersRouter = require('./users');
 const shopeventRouter = require('./shopevent');
 
 function route(app) {
@@ -17,6 +18,7 @@ function route(app) {
     app.use('/bill', billRouter);
     app.use('/customer', customerRouter);
     app.use('/user', userRouter);
+    app.use('/users', usersRouter);
     app.use('/shopevent', shopeventRouter);
 }
 
