@@ -96,7 +96,7 @@ class ProductController{
     // GET
     async searchProduct(req, res){
         try {
-            const name = req.body.name;
+            const name = req.params.name;
             console.log(name);
 
             const snapshot = await db.collection('products').where('name', '>=', name).get();
@@ -124,8 +124,8 @@ class ProductController{
     // GET
     async checkQuantity(req, res){
         try {
-            const id = req.body.productId;
-            const stock = req.body.stock;
+            const id = req.params.productId;
+            const stock = req.params.stock;
 
             const query = db.collection('products');
             const querySnapshot = await query.get();

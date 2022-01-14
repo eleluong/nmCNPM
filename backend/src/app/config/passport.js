@@ -30,6 +30,10 @@ async function authorize(req, phone, password, done) {
         return doc.data().phone === phone;
     })
 
+    // req.session.user = user.data();
+    // req.session.save();
+    // console.log('abc', req.session.user);
+
     passport.serializeUser((user, done) => done(null, user.id));
     
     passport.deserializeUser((id, done) => {
@@ -42,12 +46,13 @@ async function authorize(req, phone, password, done) {
         return done(null, user_);
     }); 
 
-    if (! user) {
+    if (!user) {
         return done(null, false, {message: 'No user found'});
     }
 
     try {
         if (await bcrypt.compare(password, user.data().password)) {
+            
             return done(null, user);
         } else {
             return done(null, false, {message: 'Password incorrect'});
@@ -55,4 +60,6 @@ async function authorize(req, phone, password, done) {
     } catch(e) {
         return done(e);
     }
+
+    
 }

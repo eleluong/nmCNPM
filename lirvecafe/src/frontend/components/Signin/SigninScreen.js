@@ -67,7 +67,7 @@ export default function SigninScreen() {
         // setErrorMsg('');
         axios({
             method: 'POST',
-            url: 'http://localhost:5000/users/login',
+            url: 'http://localhost:5000/user/login',
             data: {
                 phone: phone,
                 password: password,

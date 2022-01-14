@@ -5,8 +5,8 @@ const customersController = require('../app/controllers/CustomerController')
 require('../app/config/passport')
 
 router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/users/login-failure',
-    successRedirect: '/users/login-success', 
+    failureRedirect: '/user/login-failure',
+    successRedirect: '/user/login-success', 
 }))
 
 router.post('/register', customersController.createCustomer)
@@ -17,12 +17,12 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/login-success', (req, res, next) => {
-    console.log(req.user);
-    res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
+    console.log('xyz', req.session.user);
+    res.send({"ID": 20194182});
 });
 
 router.get('/login-failure', (req, res, next) => {
-    console.log(req.user);
+    console.log(req.session.user);
     res.send('You entered the wrong password.');
 });
 
