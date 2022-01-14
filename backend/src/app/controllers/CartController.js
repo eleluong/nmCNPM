@@ -5,7 +5,7 @@ class CartsController {
     // GET
     async getCart(req, res) {
         try {
-            const cartId = req.body.cartId;
+            const cartId = req.params.cartId;
             
             const products = (await carts.doc(cartId).collection('productList').get()).docs;
 

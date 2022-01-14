@@ -7,10 +7,10 @@ const { FieldValue } = require('firebase-admin/firestore');
 
 
 class BillsController {
-
+    //GET
     async checkState(req, res, next) {
-        const user = req.body;
-        await carts.doc(user.id).get()
+        const user = req.params;
+        await carts.doc(user.cartId).get()
         .then(doc => {
             if(!doc.exists) {
                 res.send("Error");
@@ -103,7 +103,7 @@ class BillsController {
     }
 
     async getBillInfo(req, res, next) {
-        await bills.doc(req.body.billId).get()
+        await bills.doc(req.params.billId).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');

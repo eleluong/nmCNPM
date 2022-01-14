@@ -59,7 +59,7 @@ class StaffController {
     // GET
     async showDetail(req, res) {
         try {
-            const staffId = req.body.id;
+            const staffId = req.params.id;
 
             const query = db.collection('staff');
             const querySnapshot = await query.get();
