@@ -6,7 +6,6 @@ import useStyles from './style';
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
 import { getCookie, deleteCookie } from "../../constants/userCookie";
-
 const Product = ({product}) => {
     const classes = useStyles();
     function titlechange(string){
@@ -37,6 +36,7 @@ const Product = ({product}) => {
             data: temp,
         }).then(res=> console.log(res));
         console.log(temp);
+
     });
     return (
         <Card className = {classes.root}>
