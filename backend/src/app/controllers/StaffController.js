@@ -5,18 +5,21 @@ class StaffController {
     async createStaff(req, res) {
         try {
             const staff = req.body;
-            // console.log(staff);
+            console.log(staff);
             const query = db.collection('staff')
                             .add({
                                 name: staff.name,
+                                email: staff.email,
                                 address: staff.address,
                                 phone: staff.phone,
-                                TimeStart: staff.TimeStart,
-                                TimeEnd: staff.TimeEnd
+                                password: staff.password,
+                                // TimeStart: staff.TimeStart,
+                                // TimeEnd: staff.TimeEnd
                             });
 
             return res.status(200).json();      
         } catch (error) {
+            console.log(error);
             return res.status(500).send(error);
         }
     }

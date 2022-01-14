@@ -49,7 +49,7 @@ export default function RegisterScreen() {
                 window.location.href = ROUTES.BASE_URL_WEB;
             })
             .catch(err => {
-                // console.log(err);
+                console.log(err);
                 console.log(err.response.data);
                 // e.prevetnDefault();
                 setError(err.response.data);

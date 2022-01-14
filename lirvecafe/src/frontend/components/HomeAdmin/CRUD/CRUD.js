@@ -9,7 +9,7 @@ function CRUD(){
                 <Link to='ThemNhanVien' className={styles.AddStaff_link}> Thêm nhân viên</Link>
             </div>
             <div>
-                danh sách nhân viên
+                Danh sách nhân viên
             </div>
             <Routes>
                 <Route path='ThemNhanVien' element={<AddStaff/>}></Route>

@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./CRUD.module.css"
 import { Link } from "react-router-dom";
+import axios from "axios";
 const schema = yup.object().shape({
     name: yup
         .string()
@@ -12,6 +13,9 @@ const schema = yup.object().shape({
     phone: yup
         .string()
         .required("Vui lòng nhập số điện thoại!"),
+    address: yup
+        .string()
+        .required("Vui lòng nhập địa chỉ"),
     email: yup
         .string()
         .required("Vui lòng nhập email!"),
@@ -20,6 +24,7 @@ const schema = yup.object().shape({
         .required("Vui lòng nhập mật khẩu!")
 });
 export const AddStaff = () => {
+
     const {
         register,
         reset,
@@ -34,10 +39,31 @@ export const AddStaff = () => {
         reset({
             name: "",
             phone: "",
+            address: "",
             email: "",
-            password: ""
+            password: "",
         });
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/staff/add',
+            data: {
+                phone: data.phone,
+                password: data.password, 
+                name: data.name,
+                email: data.email,
+                address: data.address
+            }
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
         setFocus("name");
+
+        // console.log('Thêm thành công');
+        
     };
     return (
         <div className={styles.AddStaff}>
@@ -58,6 +84,13 @@ export const AddStaff = () => {
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.phone &&
                         <p className={styles.form_error}>{errors.phone?.message}</p>}
+                </div>
+                <div className={styles.field}>
+                    <label className={styles.form_label}>Địa chỉ: </label>
+                    <input className={styles.form_input} {...register("địa chỉ")} />
+                    {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
+                    {errors.address &&
+                        <p className={styles.form_error}>{errors.address?.message}</p>}
                 </div>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Email: </label>
