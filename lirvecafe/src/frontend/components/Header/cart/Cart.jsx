@@ -24,6 +24,7 @@ const Cart = () => {
         user = {}
     }
     const id = user.id;
+
     const axios = require('axios');
     const handleAddToCart=((itemId)=>{
         const temp = {cartId: id,productId: itemId};
@@ -51,6 +52,7 @@ const Cart = () => {
             const url = 'http://localhost:5000/cart/get/'+id;
             const res = await( await(fetch(url
                 ))).json();
+
             setItems(res);
         }
         getCart();

@@ -3,10 +3,12 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid } from '@materi
 import useStyles from './styles';
 import { Typography } from '@material-ui/core';
 import { useState } from 'react';
+
 import * as ROUTES from '../../../constants/routes/routes';
 import * as isSignined from '../../../constants/isSignined';
 import { getCookie, deleteCookie } from "../../../constants/userCookie";
 import { useEffect } from 'react';
+
 
 
 
@@ -24,6 +26,7 @@ const CartItem = ({item,add, remove}) => {
         user = {}
     }
     const id = user.id;
+
     const [data, setData] = useState({})
     useEffect(()=>{
         const getData = async()=>{
@@ -35,6 +38,7 @@ const CartItem = ({item,add, remove}) => {
         getData();
         console.log(data);
     },[]);
+
     const classes = useStyles();
     return (
         <Card className={classes.item}>
