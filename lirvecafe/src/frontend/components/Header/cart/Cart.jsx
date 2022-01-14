@@ -16,7 +16,6 @@ function printItem(item){
         return (
         <CartItem 
             item = {item}
-            
         />);
         
     }else {
@@ -28,22 +27,22 @@ const Cart = () => {
     const cartItems = [];
     const [items, setItems] = useState();
     let signined = getCookie(isSignined.customer);
-        let user = getCookie('customer');
-        if (user) {
-            // console.log(typeof user);
-            // console.log(user);
-            user = JSON.parse(user);
-            //console.log(user);
-        }
-        else {
-            user = {}
-        }
-        const id = user.id;
-        console.log(id);
+    let user = getCookie('customer');
+    if (user) {
+        user = JSON.parse(user);
+    }
+    else {
+        user = {}
+    }
+    const id = user.id;
+    console.log(id);
     useEffect (()=>{
         const getCart = async()=>{
             const url = 'http://localhost:5000/cart/get/'+id;
-            const res = await( await(fetch(url))).json();
+            const res = await( await(fetch(url,{
+                headers:{"Content-type":"Application/json"},
+                
+            }))).json();
             setItems(res);
         }
         getCart();
