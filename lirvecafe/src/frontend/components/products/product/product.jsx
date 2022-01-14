@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography,  IconButton } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
-import useStyles from './style'
-import { useEffect } from 'react';
+import useStyles from './style';
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
 import { getCookie, deleteCookie } from "../../constants/userCookie";
@@ -27,14 +26,17 @@ const Product = ({product}) => {
         user = {}
     }
     const id = user.id;
+    console.log(product.productId);
+    const axios = require('axios');
     const handleAddToCart=((itemId)=>{
-        const temp = {cartID: id,productID: itemId};
+        const temp = {cartId: id,productId: itemId};
+        axios({
+            method:'PUT',
+            url : "http://localhost:5000/cart/addToCart/",
+            data: temp,
+        }).then(res=> console.log(res));
         console.log(temp);
-        fetch("http://localhost:5000/cart/addToCart/",{
-            method: "PUT",
-            headers:{"Content-type":"Appilcation/json"},
-            body:JSON.stringify(temp),
-        })
+
     });
     return (
         <Card className = {classes.root}>
@@ -51,7 +53,7 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                <Button aria-label ="Add to Cart" onClick = {()=> handleAddToCart(product.id)}>
+                <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
                     <AddShoppingCart/> 
                 </Button>
             </CardActions>
