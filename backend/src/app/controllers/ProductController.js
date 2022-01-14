@@ -66,7 +66,7 @@ class ProductController{
     // DELETE
     async deleteProduct(req, res){
         try {
-            const productId = req.params.productId;
+            const productId = req.body.productId;
             console.log(typeof(productId));
 
             await db.collection('products').doc(productId).delete({});
@@ -96,7 +96,7 @@ class ProductController{
     // GET
     async searchProduct(req, res){
         try {
-            const name = req.params.name;
+            const name = req.body.name;
             console.log(name);
 
             const snapshot = await db.collection('products').where('name', '>=', name).get();
@@ -124,8 +124,8 @@ class ProductController{
     // GET
     async checkQuantity(req, res){
         try {
-            const id = req.params.productId;
-            const stock = req.params.stock;
+            const id = req.body.productId;
+            const stock = req.body.stock;
 
             const query = db.collection('products');
             const querySnapshot = await query.get();

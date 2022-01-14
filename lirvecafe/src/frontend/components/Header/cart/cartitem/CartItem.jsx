@@ -2,10 +2,6 @@ import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid } from '@material-ui/core';
 import useStyles from './styles';
 import { Typography } from '@material-ui/core';
-import * as ROUTES from '../../constants/routes/routes';
-import * as isSignined from '../../constants/isSignined';
-import { getCookie, deleteCookie } from "../../constants/userCookie";
-import { useState } from 'react';
 
 const CartItem = ({item}) => {
     /*
@@ -32,37 +28,19 @@ const CartItem = ({item}) => {
         }, [])
         
     });
-    const handleRemoveFromCart=((itemID)=>{
-        const temp = {id, itemId};
-        useEffect(() => {
-            fetch("http://localhost:5000/cart/deleteFromCart/",{
-                headers:{"Content-type":"Appilcation/json"},
-                body:JSON.stringify(temp),
-            })
-        }, [])
-    });
-    const [product, setProduct] = useState();
-    useEffect(() => {
-        const getProduct = async()=>{
-            const res = await (await(fetch("http://localhost:5000/product/getproductbyid",{
-                headers:{"Content-type":"Appilcation/json"},
-                body:JSON.stringify({}),
-            }))).json();
-            setProduct(res);
-        }
-        getProduct;
-    }, []);
+    const handleRemoveFromCart=((itemId)=>{
 
+    });
     const classes = useStyles();
     return (
         <Card className={classes.item}>
             <Grid container spacing = {1}>
                 <Grid item xs = {6}>
                     <CardContent className={classes.content}>
-                        <Typography variant='h7' >{}</Typography>
+                        <Typography variant='h7' >{item.item.title}</Typography>
                         <div>
-                            <p>Price: ${}</p>
-                            <p>Total: ${}</p>
+                            <p>Price: ${item.item.price}</p>
+                            <p>Total: ${(item.amount*item.item.price).toFixed(2)}</p>
                         </div>
                     </CardContent>
                 </Grid>
@@ -75,7 +53,7 @@ const CartItem = ({item}) => {
                         >
                         -
                         </Button>
-                        <p align = 'center'>{item.quantity}</p>
+                        <p align = 'center'>{item.amount}</p>
                         <Button
                             disableElevation
                             variant= 'contained'
@@ -87,7 +65,7 @@ const CartItem = ({item}) => {
                 </Grid>
                 <Grid item xs = {4}>
                     <CardMedia>
-                        <img className = {classes.img}  />
+                        <img className = {classes.img} src = {item.item.image} alt = {item.item.title}/>
                     </CardMedia>
                 </Grid>
             </Grid>

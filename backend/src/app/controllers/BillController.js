@@ -9,7 +9,7 @@ const { FieldValue } = require('firebase-admin/firestore');
 class BillsController {
 
     async checkState(req, res, next) {
-        const user = req.user;
+        const user = req.body;
         await carts.doc(user.id).get()
         .then(doc => {
             if(!doc.exists) {
@@ -33,7 +33,7 @@ class BillsController {
     }
 
     async createBill(req, res) {
-        const user = req.user;
+        const user = req.body;
         console.log(user);
         const productList = carts.doc(user.id).collection('productList').get();
         let total = 0;
@@ -63,7 +63,7 @@ class BillsController {
     }
 
     async deleteBill(req, res) {
-        await bills.doc(req.id).get()
+        await bills.doc(req.body.billId).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');
@@ -78,7 +78,7 @@ class BillsController {
     }
 
     async updateBill(req, res) {
-        await bills.doc(req.body.billID).get()
+        await bills.doc(req.body.billId).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');
@@ -103,7 +103,7 @@ class BillsController {
     }
 
     async getBillInfo(req, res, next) {
-        await bills.doc(req.params.id).get()
+        await bills.doc(req.body.billId).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');

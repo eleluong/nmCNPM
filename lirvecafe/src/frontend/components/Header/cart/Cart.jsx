@@ -43,16 +43,11 @@ const Cart = () => {
     useEffect (()=>{
         const getCart = async()=>{
             const url = 'http://localhost:5000/cart/get/'+id;
-            const res = await( await(fetch(url,{
-                method: 'GET',
-                headers:{"Content-Type": "Application/json"},
-                body:JSON.stringify()
-            }))).json();
+            const res = await( await(fetch(url))).json();
             setItems(res);
         }
         getCart();
     },[]);
-    
     console.log(items);
     const calculateTotal = (items) =>
     items.reduce((ack: number, item) => ack + item.amount * item.item.price, 0);
