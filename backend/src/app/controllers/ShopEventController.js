@@ -1,20 +1,12 @@
 const db = require('../models/firebaseAdmin');
-const hash = require('../config/hash');
 
-class StaffController {
+class ShopEventController {
     // POST
-    async createStaff(req, res) {
+    async createEvent(req, res) {
         try {
-            const staff = req.body;
-            // console.log(staff);
-            const query = (await db.collection('staff').get()).docs;
+            const event = req.body;
 
-            const staff_ = docs.find(doc => {
-                return doc.data().phone === staff.phone;
-            })
-
-            if (!staff) {
-                db.collection('staff')
+            await db.collection('staff')
                     .add({
                         name: staff.name,
                         address: staff.address,
@@ -23,10 +15,8 @@ class StaffController {
                         TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
-                return res.status(200).json('success');
-            } else {
-                return res.status(200).json('existed phone'); 
-            }               
+
+            return res.status(200).json('success');
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -112,4 +102,4 @@ class StaffController {
     }
 }
 
-module.exports = new StaffController();
+module.exports = new ShopEventController();

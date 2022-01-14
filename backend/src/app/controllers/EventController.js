@@ -23,7 +23,7 @@ class EventController {
     // GET
     async checkId(req, res) {
         try {
-            const customerId = req.params.customerId;
+            const customerId = req.body.customerId;
 
             const query = db.collection('customers');
             const querySnapshot = await query.get();
