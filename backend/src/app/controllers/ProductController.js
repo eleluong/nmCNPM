@@ -66,7 +66,7 @@ class ProductController{
     // DELETE
     async deleteProduct(req, res){
         try {
-            const productId = req.params.productId;
+            const productId = req.body.productId;
             console.log(typeof(productId));
 
             await db.collection('products').doc(productId).delete({});

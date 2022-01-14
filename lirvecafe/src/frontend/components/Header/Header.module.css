@@ -4,6 +4,7 @@
     width: 100%;
     height: 100px;
     background-image: linear-gradient(0, #4da8f8,#1a94ff);
+    z-index: 100;
 }
 .navbar {
     height: 40px;

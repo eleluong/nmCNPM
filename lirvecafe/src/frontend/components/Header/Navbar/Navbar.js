@@ -1,12 +1,10 @@
-import styles from "../Header.module.css"
-import styless from "../../HeaderStaff/HeaderStaffAdmin.module.css"
-import { Link } from "react-router-dom"
-import * as ROUTES from '../../constants/routes/routes'
-import * as isSignined from '../../constants/isSignined'
-import { useState } from "react"
-
-
-import { getCookie, deleteCookie } from "../../constants/userCookie"
+import styles from "../Header.module.css";
+import styless from "../../HeaderStaff/HeaderStaffAdmin.module.css";
+import { Link } from "react-router-dom";
+import * as ROUTES from '../../constants/routes/routes';
+import * as isSignined from '../../constants/isSignined';
+import { useState } from "react";
+import { getCookie, deleteCookie } from "../../constants/userCookie";
 function Navbar() {
     //let [user, setUser] = useState(getCookie('userInfo'));
 

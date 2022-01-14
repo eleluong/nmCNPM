@@ -1,4 +1,5 @@
 const db = require('../models/firebaseAdmin');
+const hash = require('../config/hash');
 
 class StaffController {
     // POST
@@ -17,7 +18,24 @@ class StaffController {
                                 // TimeEnd: staff.TimeEnd
                             });
 
-            return res.status(200).json();      
+            const staff_ = docs.find(doc => {
+                return doc.data().phone === staff.phone;
+            })
+
+            if (!staff) {
+                db.collection('staff')
+                    .add({
+                        name: staff.name,
+                        address: staff.address,
+                        phone: staff.phone,
+                        TimeStart: staff.TimeStart,
+                        TimeEnd: staff.TimeEnd,
+                        password: hash.hash(staff.password)
+                    });
+                return res.status(200).json('success');
+            } else {
+                return res.status(200).json('existed phone'); 
+            }               
         } catch (error) {
             console.log(error);
             return res.status(500).send(error);
@@ -61,6 +79,7 @@ class StaffController {
                 return doc.id === staffId;
             })
             staff.data().staffId = staff.id;
+            delete staff.data().password;
 
             return res.status(200).send(staff.data());
         } catch (error) {
@@ -70,7 +89,7 @@ class StaffController {
     // DELETE
     async deleteStaff(req, res) {
         try {
-            const staffId = req.params.id;
+            const staffId = req.body.id;
 
             await db.collection('staff').doc(staffId).delete({});
 
@@ -92,7 +111,8 @@ class StaffController {
                         name: staff.name,
                         address: staff.address,
                         TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd
+                        TimeEnd: staff.TimeEnd,
+                        password: hash.hash(staff.password)
                     });
 
             return res.status(200).json();
