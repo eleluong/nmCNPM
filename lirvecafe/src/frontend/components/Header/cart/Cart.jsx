@@ -2,7 +2,7 @@ import React from 'react';
 import CartItem from './cartitem/CartItem';
 import useStyles from './styles'
 import { useState } from 'react';
-import { Drawer } from '@material-ui/core';
+import { Button, Drawer } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import { useEffect } from 'react';
@@ -68,7 +68,11 @@ const Cart = () => {
             </div>
             <Drawer anchor = 'right' open = {cartOpen} onClose={()=> setCartOpen(false)}>
                 <div className = {classes.cart} align = 'center'>
-                    <h2 align ='center'>Your shopping cart</h2>
+                    
+                    <div>
+                        <h2>Your shopping cart</h2>
+                        <Button>Checkout</Button>
+                    </div>
                     {items.map(item=> (
                         <CartItem 
                             item = {item}
