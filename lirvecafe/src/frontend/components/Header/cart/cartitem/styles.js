@@ -10,12 +10,12 @@ export default makeStyles((theme)=>({
     buttons:{
         maxHeight: '130px',
         maxWidth: '100px',
-        paddingTop : '10px',
+        paddingTop : '24px',
         flexDirection:'column',
     },
     content:{
         paddingLeft: '5px',
-        paddingTop : '5px',
+        paddingTop : '40px',
         paddingBottom: '5px',
         minHeight: '140px',
         maxHeight: '140px',
