@@ -1,7 +1,11 @@
 import React from 'react';
 import useStyles from './styles';
 import BillItem from './billItem/billItem';
-
+import { useEffect } from 'react';
+import * as ROUTES from '../constants/routes/routes';
+import * as isSignined from '../constants/isSignined';
+import { getCookie, deleteCookie } from "../constants/userCookie";
+import { useState } from 'react';
 const Bill = ( ) => {
     const [items, setItems] = useState([]);
     const [change, setChange] = useState(false);
@@ -53,11 +57,10 @@ const Bill = ( ) => {
         <div> 
             <div className = {classes.cart}>
                 <div>
-                    {cartItems.map(item =>(
+                    {items.map(item =>(
                         <BillItem item = {item} addToCart = {handleAddToCart} removeFromCart = {handleRemoveFromCart}/>
                     ))}
                 </div>
-                <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
             </div>
         </div>
     )
