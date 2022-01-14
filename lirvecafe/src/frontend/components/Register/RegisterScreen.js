@@ -22,38 +22,51 @@ export default function RegisterScreen() {
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
-    const handleRegister = async (e) => {
-        await axios({
-            method: 'POST',
-            url: 'http://localhost:5000/users/register',
-            data: {
-                phone: phone,
-                password: password, 
-                name: name,
-                email: email,
-                address: address,
-            }
-        })
-            .then(res => {
-                console.log(res);
-                alert('Thành công');
+    const handleRegister = (e) => {
+        if(!phone || !password || !name || !email || !address) {
+            setError('Bạn nhập thiếu một số trường thông tin! Nhập lại!');
+        }
+        else if (password.length <= 6) {
+            setError('Mật khẩu quá yếu, xin hãy nhập mật khẩu lớn hơn 6 ký tự!')
+        }
+        else {
+            setError('');
+            axios({
+                method: 'POST',
+                url: 'http://localhost:5000/users/register',
+                data: {
+                    phone: phone,
+                    password: password, 
+                    name: name,
+                    email: email,
+                    address: address,
+                }
+            })
+            .then(res => { 
+                console.log(res.data);
+                //e.preventDefault();
+                alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
                 window.location.href = ROUTES.BASE_URL_WEB;
-                e.preventDefault();
             })
-            .catch(error => {
-                console.log(error);
+            .catch(err => {
+                // console.log(err);
+                console.log(err.response.data);
+                // e.prevetnDefault();
+                setError(err.response.data);
             })
-        // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
-       
+        }
+            // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
+        // console.log(e)
+    //    e.preventDefaut();
     }
 
     return (
         <div className={styles.register}>
             <Link to="/" className={styles.home}> Lirve Cafe</Link>
-            <form className={styles.registerform} onSubmit={handleRegister}>
+            <div className={styles.registerform}>
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng ký</h1>
-                    {error && <span>{error}</span>}
+                    {error && <span style={{color: 'red'}}>{error}</span>}
                 </div>
 
                 <div className={styles.form_div1}>
@@ -122,7 +135,7 @@ export default function RegisterScreen() {
 
                 <div className={styles.form_div}>
                     <label/>
-                    <button className={`${styles.form_btn} ${styles.primary}`} type="submit">
+                    <button className={`${styles.form_btn} ${styles.primary}`} onClick={handleRegister}>
                         Đăng ký
                     </button>
                 </div>
@@ -133,7 +146,7 @@ export default function RegisterScreen() {
                         <Link to={ROUTES.SIGNIN}>Đăng nhập</Link>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

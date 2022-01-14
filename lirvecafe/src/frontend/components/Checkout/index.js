@@ -12,6 +12,10 @@ import { setName, setPhone, setEmail, setAddress, setForm } from "../store/actio
 
 import styles from "./Checkout.module.css"
 
+////////////////////////////////////////////////////////////////
+import { getCookie, deleteCookie } from "../constants/userCookie"
+
+
 
 function Checkout (){
     
@@ -26,6 +30,25 @@ function Checkout (){
                 dispatch(setForm(users[0]))
             })
     }, [])
+
+
+    console.log('start');
+    let user = getCookie('customer');
+    if (user) {
+        console.log(typeof user);
+        console.log(user);
+        user = JSON.parse(user);
+        console.log(user);
+    }
+    else {
+        user = {}
+    }
+    const ID = user.id;
+    console.log(ID);
+    console.log('end');
+
+
+
 
     return (
         <div className={clsx(styles.checkout)}>

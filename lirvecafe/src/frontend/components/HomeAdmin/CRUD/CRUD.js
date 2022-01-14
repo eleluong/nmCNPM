@@ -1,6 +1,20 @@
+import { Routes,Route,Link } from "react-router-dom"
+import { AddStaff } from "./AddStaff"
+import styles from "./CRUD.module.css"
 function CRUD(){
     return(
-        <h1>Quản lí nhân viên</h1>
+        <div className={styles.CRUD}>
+            <div className={styles.HeaderCRUD}>
+                <h1 className={styles.HeaderCRUD_text}>Danh sách nhân viên</h1>
+                <Link to='ThemNhanVien' className={styles.AddStaff_link}> Thêm nhân viên</Link>
+            </div>
+            <div>
+                danh sách nhân viên
+            </div>
+            <Routes>
+                <Route path='ThemNhanVien' element={<AddStaff/>}></Route>
+            </Routes>
+        </div>
     )
 }
 

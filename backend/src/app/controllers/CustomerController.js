@@ -7,7 +7,7 @@ class CustomersController {
 
     async createCustomer(req, res) {
         // let phone = req.body.phone;
-        // await customers.where('phone', '==', `${phone}`).get()
+        // await customers.where('phone', '==', ${phone}).get()
         // .then(user => {
         //     if(user.empty) {
         //         const password = hash.hash(req.body.password);
@@ -45,9 +45,9 @@ class CustomersController {
                 email: req.body.email,
                 address: req.body.address
             });
+            res.status(200).send('Đăng ký thành công');
         }
-        console.log('Em yêu Hust');
-        return res.sendStatus(200);
+        else res.status(409).send('Số điện thoại đăng ký đã tồn tại');
     }
 
     async updateCustomer(req, res) {

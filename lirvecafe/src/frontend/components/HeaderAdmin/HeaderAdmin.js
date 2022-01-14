@@ -29,7 +29,9 @@ function HeaderStaff(){
     else {
         admin = {}
     }
-    
+    //ID cần fetch thông tin
+    const ID = admin.id;
+    console.log(ID);
     const adminSignout = () => {
         deleteCookie(isSignined.admin);
         deleteCookie('admin');
@@ -41,7 +43,7 @@ function HeaderStaff(){
                 <Link to="/admin" onClick={() => setState('CRUD')} className={styles.navbar_home}> Lirve Coffe</Link>
                 <li className={styles.navbar_user} >
                     <i className={`${styles.navbar_user_icon} fas fa-user`}></i>
-                    <span className={styles.navbar_user_name}>ID: {admin.ID}</span>
+                    <span className={styles.navbar_user_name}>ID: {admin.id}</span>
                     <ul className={styles.navbar_user_menu}>
                         <li className={styles.navbar_user_item}>
                             <Link to="/admin" className={styles.navbar_user_item_link}>Tài khoản của tôi</Link>

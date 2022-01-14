@@ -8,7 +8,7 @@ function HomeStaff() {
             <HeaderAdmin/>
             <Routes>
                 <Route path="/" element={<CRUD/>}></Route>
-                <Route path="/CRUD" element={<CRUD/>}></Route>
+                <Route path="/CRUD/*" element={<CRUD/>}></Route>
                 <Route path="/Report" element={<Report/>}></Route>
             </Routes>
         </div>

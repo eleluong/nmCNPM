@@ -5,7 +5,10 @@ import { useState } from 'react';
 import { Drawer } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
-
+import { useEffect } from 'react';
+import * as ROUTES from '../../constants/routes/routes';
+import * as isSignined from '../../constants/isSignined';
+import { getCookie, deleteCookie } from "../../constants/userCookie";
 
 function printItem(item){
     if (item.amount > 0){
@@ -22,10 +25,33 @@ function printItem(item){
     }
 }
 const Cart = () => {
+    const cartItems = [];
+    const [items, setItems] = useState();
+    let signined = getCookie(isSignined.customer);
+        let user = getCookie('customer');
+        if (user) {
+            // console.log(typeof user);
+            // console.log(user);
+            user = JSON.parse(user);
+            //console.log(user);
+        }
+        else {
+            user = {}
+        }
+        const id = user.id;
+        console.log(id);
+    useEffect (()=>{
+        const getCart = async()=>{
+            const url = 'http://localhost:5000/cart/get/'+id;
+            const res = await( await(fetch(url))).json();
+            setItems(res);
+        }
+        getCart();
+    },[]);
+    console.log(items);
     const calculateTotal = (items) =>
     items.reduce((ack: number, item) => ack + item.amount * item.item.price, 0);
     const [cartOpen, setCartOpen] = useState(false);
-    const cartItems = [];
     const classes = useStyles();
     return (
         <div>
