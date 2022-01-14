@@ -6,14 +6,12 @@ class ShopEventController {
         try {
             const event = req.body;
 
-            await db.collection('staff')
+            await db.collection('shopevents')
                     .add({
-                        name: staff.name,
-                        address: staff.address,
-                        phone: staff.phone,
-                        TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd,
-                        password: hash.hash(staff.password)
+                        name: event.name,
+                        number: event.number,
+                        phone: event.phone,
+                        time: event.time,
                     });
 
             return res.status(200).json('success');
@@ -24,18 +22,17 @@ class ShopEventController {
     // GET
     async showAll(req, res) {
         try {
-            const query = db.collection('staff');
+            const query = db.collection('shopevents');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var items = docs.map(function(staff) {
+            var items = docs.map(function(event) {
                 return {
-                    staffId: staff.id,
-                    name: staff.data().name,
-                    address: staff.data().address,
-                    phone: staff.data().phone,
-                    TimeStart: staff.data().TimeStart,
-                    TimeEnd: staff.data().TimeEnd
+                    id: event.id,
+                    name: event.data().name,
+                    number: event.data().number,
+                    phone: event.data().phone,
+                    time: event.data().time,
                 }
             });
 
@@ -46,32 +43,12 @@ class ShopEventController {
             return res.status(500).send(error);
         }
     }
-    // GET
-    async showDetail(req, res) {
-        try {
-            const staffId = req.body.id;
-
-            const query = db.collection('staff');
-            const querySnapshot = await query.get();
-            const docs = querySnapshot.docs;
-
-            var staff = docs.find(function(doc) {
-                return doc.id === staffId;
-            })
-            staff.data().staffId = staff.id;
-            delete staff.data().password;
-
-            return res.status(200).send(staff.data());
-        } catch (error) {
-            return res.status(500).send(error);
-        }
-    }
     // DELETE
-    async deleteStaff(req, res) {
+    async deleteShopEvent(req, res) {
         try {
-            const staffId = req.body.id;
+            const eventId = req.body.id;
 
-            await db.collection('staff').doc(staffId).delete({});
+            await db.collection('staff').doc(eventId).delete({});
 
             return res.status(200).json();
         } catch (error) {
@@ -79,20 +56,18 @@ class ShopEventController {
         }
     }
     // PUT
-    async updateStaff(req, res) {
+    async updateShopEvent(req, res) {
         try {
-            const staff = req.body;
+            const event = req.body;
             //console.log(staff);
 
-            await db.collection('staff')
-                    .doc(staff.id)
+            await db.collection('shopevents')
+                    .doc(event.id)
                     .update({
-                        phone: staff.phone,
-                        name: staff.name,
-                        address: staff.address,
-                        TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd,
-                        password: hash.hash(staff.password)
+                        name: event.name,
+                        number: event.number,
+                        phone: event.phone,
+                        time: event.time,
                     });
 
             return res.status(200).json();
