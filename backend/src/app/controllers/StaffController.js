@@ -7,37 +7,44 @@ class StaffController {
         try {
             const staff = req.body;
             console.log(staff);
-            const query = db.collection('staff')
-                            .add({
-                                name: staff.name,
-                                email: staff.email,
-                                address: staff.address,
-                                phone: staff.phone,
-                                password: staff.password,
-                                // TimeStart: staff.TimeStart,
-                                // TimeEnd: staff.TimeEnd
-                            });
+            const query = (await db.collection('staff').get()).docs;
+            // const query = db.collection('staff')
+            //                 .add({
+            //                     name: staff.name,
+            //                     email: staff.email,
+            //                     address: staff.address,
+            //                     phone: staff.phone,
+            //                     password: staff.password,
+            //                     // TimeStart: staff.TimeStart,
+            //                     // TimeEnd: staff.TimeEnd
+            //                 });
 
-            const staff_ = docs.find(doc => {
+            const staff_ = query.find(doc => {
                 return doc.data().phone === staff.phone;
             })
 
-            if (!staff) {
+            if (!staff_) {
                 db.collection('staff')
                     .add({
                         name: staff.name,
                         address: staff.address,
                         phone: staff.phone,
-                        TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd,
+                        email: staff.email,
+                        // TimeStart: staff.TimeStart,
+                        // TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
-                return res.status(200).json('success');
+                return res.status(200).json({
+                    id: 1,
+                    message: 'Thêm thành công'});
             } else {
-                return res.status(200).json('existed phone'); 
+                return res.status(200).json({
+                    id: 2,
+                    message: 'Số điện thoại đã tồn tại!'}); 
             }               
         } catch (error) {
             console.log(error);
+            console.log('Lỗi')
             return res.status(500).send(error);
         }
     }
@@ -50,12 +57,13 @@ class StaffController {
 
             var items = docs.map(function(staff) {
                 return {
-                    staffId: staff.id,
+                    id: staff.id,
                     name: staff.data().name,
+                    email: staff.data().email,
                     address: staff.data().address,
                     phone: staff.data().phone,
-                    TimeStart: staff.data().TimeStart,
-                    TimeEnd: staff.data().TimeEnd
+                    // TimeStart: staff.data().TimeStart,
+                    // TimeEnd: staff.data().TimeEnd
                 }
             });
 
@@ -109,9 +117,11 @@ class StaffController {
                     .update({
                         phone: staff.phone,
                         name: staff.name,
+                        email: staff.email,
                         address: staff.address,
-                        TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd,
+
+                        // TimeStart: staff.TimeStart,
+                        // TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
 

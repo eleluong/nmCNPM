@@ -13,7 +13,8 @@
 }
 .AddStaff{
     position: absolute;
-    top: 100px;
+    /* top: 100px; */
+    top: 140px;
     left: 400px;
 }
 .AddStaff_link{
@@ -57,7 +58,7 @@
 }
 .form_heading{
     margin: 24px;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 
 }
 .form_heading_text{
@@ -77,8 +78,10 @@
     font-size: 1rem;
 }
 .form_input{
-    height: 8px;
-    width: 576px;
+    /* height: 8px; */
+    /* width: 576px; */
+    height: 24px;
+    width: 550px;
     padding: 8px 12px;
     border: 1px solid #b3b3b3;
     border-radius: 2px;
@@ -86,8 +89,15 @@
     font-size: 0.8rem;
     word-wrap: break-word;
 }
+.form_message {
+    color: green;
+    font-size: 16px;
+    font-weight: 600;
+}
 .form_error{
     color:red;
+    font-size: 14px;
+    padding-top: 2px;
 }
 .form_submit{
     outline: none;
