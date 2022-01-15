@@ -1,6 +1,6 @@
 import './GlobalStyle.css'
 
-function GlobalStyle ( {children} ){
+function GlobalStyle({children}) {
     return children
 }
 

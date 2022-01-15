@@ -1,33 +1,39 @@
-.CRUD{
+.CRUD {
     /* width: 50%; */
 }
-.HeaderCRUD{
+
+.HeaderCRUD {
     display: flex;
     justify-content: space-around;
-    background-color:rgb(32, 32, 32);
+    background-color: rgb(32, 32, 32);
 }
-.HeaderCRUD_text{
+
+.HeaderCRUD_text {
     color: #fff;
     margin: 8px 0px;
     font-size: 1.2rem;
 }
-.AddStaff{
+
+.AddStaff {
     position: absolute;
     top: 100px;
     left: 400px;
 }
-.AddStaff_link{
+
+.AddStaff_link {
     text-decoration: none;
-    color:#fff;
+    color: #fff;
     font-size: 1rem;
     margin: 8px 4px;
     padding: 4px 4px;
     background-color: #1a94ff;
     border-radius: 2px;
 }
-.AddStaff_link:hover{
+
+.AddStaff_link:hover {
     opacity: 0.8;
 }
+
 .form {
     position: absolute;
     width: 600px;
@@ -38,9 +44,10 @@
     background: #f1f1f1;
     border-radius: 2px;
     align-self: center;
-    box-shadow: 0 2px 5px 0 rgba(51,62,73,.1);
+    box-shadow: 0 2px 5px 0 rgba(51, 62, 73, .1);
 }
-.form_exit{
+
+.form_exit {
     position: absolute;
     text-decoration: none;
     justify-items: center;
@@ -48,48 +55,55 @@
     font-size: 1.8rem;
     height: 32px;
     width: 32px;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
 }
-.form_exit:hover{
+
+.form_exit:hover {
     background-color: rgb(252, 25, 25);
     color: #fff;
 }
-.form_heading{
+
+.form_heading {
     margin: 24px;
     font-size: 1.4rem;
 
 }
-.form_heading_text{
+
+.form_heading_text {
     font-size: 1.4rem;
 }
 
-.field{
+.field {
     margin: 12px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.form_label{
+
+.form_label {
     font-weight: 600;
     padding-bottom: 6px;
     line-height: 1.2rem;
     font-size: 1rem;
 }
-.form_input{
+
+.form_input {
     height: 8px;
     width: 576px;
     padding: 8px 12px;
     border: 1px solid #b3b3b3;
     border-radius: 2px;
-    outline:none;
+    outline: none;
     font-size: 0.8rem;
     word-wrap: break-word;
 }
-.form_error{
-    color:red;
+
+.form_error {
+    color: red;
 }
-.form_submit{
+
+.form_submit {
     outline: none;
     background-color: #39a0fb;
     margin-top: 8px;
@@ -102,6 +116,7 @@
     border-radius: 6px;
     cursor: pointer;
 }
-.form_submit:hover{
+
+.form_submit:hover {
     opacity: 0.8;
 }

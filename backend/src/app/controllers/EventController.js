@@ -7,19 +7,20 @@ class EventController {
             const event = req.body;
 
             await db.collection('events')
-                    .add({
-                        time: event.time,
-                        customerId: event.customerId,
-                        phone: event.phone,
-                        name: event.name,
-                        description: event.description
-                    });
-            
+                .add({
+                    time: event.time,
+                    customerId: event.customerId,
+                    phone: event.phone,
+                    name: event.name,
+                    description: event.description
+                });
+
             return res.status(200);
-        } catch(error) {
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // GET
     async checkId(req, res) {
         try {
@@ -32,19 +33,20 @@ class EventController {
             const result = docs.find(doc => {
                 return doc.id === customerId
             });
-            
+
             if (result === undefined) return res.status(200).send('False');
             return res.status(200).send('True');
-        } catch(error) {
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // PUT
     async pointAccumulate(req, res) {
         try {
 
-        } catch(error) {
-            
+        } catch (error) {
+
         }
     }
 }

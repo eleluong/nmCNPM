@@ -6,7 +6,7 @@ require('../app/config/passport')
 
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/user/login-failure',
-    successRedirect: '/user/login-success', 
+    successRedirect: '/user/login-success',
 }))
 
 router.post('/register', customersController.createCustomer)

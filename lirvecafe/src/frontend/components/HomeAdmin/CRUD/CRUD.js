@@ -1,8 +1,9 @@
-import { Routes,Route,Link } from "react-router-dom"
-import { AddStaff } from "./AddStaff"
+import {Routes, Route, Link} from "react-router-dom"
+import {AddStaff} from "./AddStaff"
 import styles from "./CRUD.module.css"
-function CRUD(){
-    return(
+
+function CRUD() {
+    return (
         <div className={styles.CRUD}>
             <div className={styles.HeaderCRUD}>
                 <h1 className={styles.HeaderCRUD_text}>Danh sách nhân viên</h1>

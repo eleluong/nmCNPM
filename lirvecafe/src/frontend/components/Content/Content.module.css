@@ -1,4 +1,4 @@
-.content{
+.content {
     background-image: url(https://images.wallpaperscraft.com/image/single/coffee_book_glasses_140830_3840x2160.jpg);
     /* linear-gradient(0, rgba(255,255,1,0.5), rgba(253, 150, 248, 0.5)), */
     background-size: 100%;
@@ -6,7 +6,7 @@
     top: 100px;
     bottom: 100px;
     margin-top: 100px;
-    color:white;
+    color: white;
     display: block;
     height: 1000px;
 }

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { useEffect, useReducer } from "react";
-import { useStore } from "../store"
+import {useEffect, useReducer} from "react";
+import {useStore} from "../store"
 
 import CheckoutHeading from '../CheckoutHeading'
 import Info from "../Info";
@@ -8,25 +8,24 @@ import InputBlock from "../InputBlock"
 import InfoFooter from "../InfoFooter"
 import InfoHeader from "../InfoHeader"
 
-import { setName, setPhone, setEmail, setAddress, setForm } from "../store/actions";
+import {setName, setPhone, setEmail, setAddress, setForm} from "../store/actions";
 
 import styles from "./Checkout.module.css"
 
 ////////////////////////////////////////////////////////////////
-import { getCookie, deleteCookie } from "../constants/userCookie"
+import {getCookie, deleteCookie} from "../constants/userCookie"
 
 
+function Checkout() {
 
-function Checkout (){
-    
     const [state, dispatch] = useStore()
 
-    const { phone, email, name, address } = state
-    
+    const {phone, email, name, address} = state
+
     useEffect(() => {
         fetch('http://localhost:3000/user')
             .then(response => response.json())
-            .then (users => {
+            .then(users => {
                 dispatch(setForm(users[0]))
             })
     }, [])
@@ -39,8 +38,7 @@ function Checkout (){
         console.log(user);
         user = JSON.parse(user);
         console.log(user);
-    }
-    else {
+    } else {
         user = {}
     }
     const ID = user.id;
@@ -48,22 +46,24 @@ function Checkout (){
     console.log('end');
 
 
-
-
     return (
         <div className={clsx(styles.checkout)}>
-            <CheckoutHeading content="Lirve Cafe" />
+            <CheckoutHeading content="Lirve Cafe"/>
             <Info>
-                <InfoHeader content="Thông tin giao hàng" />
-                <InputBlock type="text" label="Họ tên" content="name" value={name} action= {setName} rules={['require']} />
-                <InputBlock type="text" label="Phone" content="phone" value={phone} action= {setPhone} rules={['require', 'phone']} />
-                <InputBlock type="text" label="Địa chỉ" content="address" value={address} action= {setAddress} rules={['require']} />
-                <InputBlock type="text" label="Email" content="email" value={email} action= {setEmail} rules={['require', 'email']} />
-                <InfoFooter 
+                <InfoHeader content="Thông tin giao hàng"/>
+                <InputBlock type="text" label="Họ tên" content="name" value={name} action={setName}
+                            rules={['require']}/>
+                <InputBlock type="text" label="Phone" content="phone" value={phone} action={setPhone}
+                            rules={['require', 'phone']}/>
+                <InputBlock type="text" label="Địa chỉ" content="address" value={address} action={setAddress}
+                            rules={['require']}/>
+                <InputBlock type="text" label="Email" content="email" value={email} action={setEmail}
+                            rules={['require', 'email']}/>
+                <InfoFooter
                     linkData={{
                         link: "https://www.google.com.vn/",
                         label: "Giỏ hàng",
-                    }} 
+                    }}
                     textBtn="Thanh toán"
                 />
             </Info>

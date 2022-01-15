@@ -5,6 +5,7 @@ import Orders from "./Orders/Orders"
 import CreateEvent from "./CreateEvent/CreateEvent"
 import Events from "./Events/Events"
 import Product from "./Products/Product"
+
 function HomeStaff() {
     return (
         <div>
@@ -20,4 +21,5 @@ function HomeStaff() {
         </div>
     )
 }
+
 export default HomeStaff
