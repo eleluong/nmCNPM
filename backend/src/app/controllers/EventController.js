@@ -15,7 +15,7 @@ class EventController {
                         description: event.description
                     });
             
-            return res.status(200).json();
+            return res.status(200);
         } catch(error) {
             return res.status(500).send(error);
         }
@@ -23,7 +23,7 @@ class EventController {
     // GET
     async checkId(req, res) {
         try {
-            const customerId = req.body.customerId;
+            const customerId = req.params.customerId;
 
             const query = db.collection('customers');
             const querySnapshot = await query.get();

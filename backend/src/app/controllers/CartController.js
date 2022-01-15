@@ -1,11 +1,11 @@
 const db = require('../models/firebaseAdmin');
 const carts = db.collection('carts');
 
-class CartsController {
+class CartController {
     // GET
     async getCart(req, res) {
         try {
-            const cartId = req.body.cartId;
+            const cartId = req.params.cartId;
             
             const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
@@ -18,7 +18,7 @@ class CartsController {
 
             return res.status(200).send(items);
         } catch(error) {
-            return res.sendStatus(500);
+            return res.status(500);
         }
     }
     //PUT
@@ -46,7 +46,7 @@ class CartsController {
                  .delete({});
         }
 
-        return res.sendStatus(200);
+        return res.status(200);
     }
     //PUT
     async addToCart(req, res) {
@@ -73,7 +73,7 @@ class CartsController {
                  });
         }
 
-        return res.sendStatus(200);
+        return res.status(200);
         //const id = req.session.passport.user;
         // const id = req.body.customerId;
         // let doc = carts.doc(id).collection('productList').doc(req.body.id);
@@ -109,4 +109,4 @@ class CartsController {
     }
 }
 
-module.exports = new CartsController;
+module.exports = new CartController;

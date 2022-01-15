@@ -76,10 +76,10 @@ class CustomersController {
     }
 
     async getUserInfo(req, res, next) {
-        await customers.doc(req.body.id).get()
+        await customers.doc(req.params.id).get()
         .then(doc => {
             if(!doc.exists) {
-                res.send('damn door');
+                res.send('not exist this user id');
             }
             res.send(doc.data());
         })

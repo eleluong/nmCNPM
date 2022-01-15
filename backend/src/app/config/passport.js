@@ -15,20 +15,20 @@ async function authorize(req, phone, password, done) {
     console.log('Auth');
     var query
     if (req.body.role == 1) {
-        query = db.collection('customers')
+        query = db.collection('customers');
     }
     if (req.body.role == 2) {
-        query = db.collection('staff')
+        query = db.collection('staff');
     }
     if (req.body.role == 3) {
-        query = db.collection('admin')
+        query = db.collection('admin');
     }
 
     const docs = (await query.get()).docs;
 
     const user = docs.find(doc => {
         return doc.data().phone === phone;
-    })
+    });
 
     passport.serializeUser((user, done) => done(null, user.id));
     
@@ -42,12 +42,15 @@ async function authorize(req, phone, password, done) {
         return done(null, user_);
     }); 
 
-    if (! user) {
+    req.flash('id', user.id);
+
+    if (!user) {
         return done(null, false, {message: 'No user found'});
     }
 
     try {
         if (await bcrypt.compare(password, user.data().password)) {
+            
             return done(null, user);
         } else {
             return done(null, false, {message: 'Password incorrect'});
@@ -55,4 +58,6 @@ async function authorize(req, phone, password, done) {
     } catch(e) {
         return done(e);
     }
+
+    
 }

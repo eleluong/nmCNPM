@@ -35,7 +35,7 @@ class ReportController {
                         siteCost: report.siteCost
                     });
                     
-            return res.status(200).json();
+            return res.status(200);
         } catch(error) {
             return res.status(500).send(error);
         }

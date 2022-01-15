@@ -17,13 +17,11 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/login-success', (req, res, next) => {
-    console.log(req.user);
-    res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
+    return res.send({"ID": 20194182});
 });
 
 router.get('/login-failure', (req, res, next) => {
-    console.log(req.user);
-    res.send('You entered the wrong password.');
+    return res.status(400).json({error: "Phone or password is incorrect"});
 });
 
 module.exports = router;

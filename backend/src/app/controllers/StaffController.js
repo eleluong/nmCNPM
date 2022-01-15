@@ -25,7 +25,7 @@ class StaffController {
                     });
                 return res.status(200).json('success');
             } else {
-                return res.status(200).json('existed phone'); 
+                return res.status(400).json({error: "Phone or password is incorrect"}); 
             }               
         } catch (error) {
             return res.status(500).send(error);
@@ -59,7 +59,7 @@ class StaffController {
     // GET
     async showDetail(req, res) {
         try {
-            const staffId = req.body.id;
+            const staffId = req.params.id;
 
             const query = db.collection('staff');
             const querySnapshot = await query.get();
@@ -83,7 +83,7 @@ class StaffController {
 
             await db.collection('staff').doc(staffId).delete({});
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -105,7 +105,7 @@ class StaffController {
                         password: hash.hash(staff.password)
                     });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
