@@ -7,18 +7,19 @@ class ShopEventController {
             const event = req.body;
 
             await db.collection('shopevents')
-                    .add({
-                        name: event.name,
-                        number: event.number,
-                        phone: event.phone,
-                        time: event.time,
-                    });
+                .add({
+                    name: event.name,
+                    number: event.number,
+                    phone: event.phone,
+                    time: event.time,
+                });
 
-            return res.status(200).json('success');
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // GET
     async showAll(req, res) {
         try {
@@ -26,7 +27,7 @@ class ShopEventController {
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var items = docs.map(function(event) {
+            var items = docs.map(function (event) {
                 return {
                     id: event.id,
                     name: event.data().name,
@@ -43,18 +44,20 @@ class ShopEventController {
             return res.status(500).send(error);
         }
     }
+
     // DELETE
     async deleteShopEvent(req, res) {
         try {
             const eventId = req.body.id;
 
-            await db.collection('staff').doc(eventId).delete({});
+            await db.collection('shopevents').doc(eventId).delete({});
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // PUT
     async updateShopEvent(req, res) {
         try {
@@ -62,15 +65,15 @@ class ShopEventController {
             //console.log(staff);
 
             await db.collection('shopevents')
-                    .doc(event.id)
-                    .update({
-                        name: event.name,
-                        number: event.number,
-                        phone: event.phone,
-                        time: event.time,
-                    });
+                .doc(event.id)
+                .update({
+                    name: event.name,
+                    number: event.number,
+                    phone: event.phone,
+                    time: event.time,
+                });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }

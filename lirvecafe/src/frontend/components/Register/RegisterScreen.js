@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styles from './RegisterScreen.module.css'
 import * as ROUTES from '../constants/routes/routes'
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
 export default function RegisterScreen() {
 
     const eye = "far fa-eye";
@@ -20,28 +21,27 @@ export default function RegisterScreen() {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [error, setError] = useState('');
-    
+
     const navigate = useNavigate();
     const handleRegister = (e) => {
-        if(!phone || !password || !name || !email || !address) {
+        if (!phone || !password || !name || !email || !address) {
             setError('Bạn nhập thiếu một số trường thông tin! Nhập lại!');
-        }
-        else if (password.length <= 6) {
+        } else if (password.length <= 6) {
             setError('Mật khẩu quá yếu, xin hãy nhập mật khẩu lớn hơn 6 ký tự!')
-        }
-        else {
+        } else {
             setError('');
             axios({
                 method: 'POST',
                 url: 'http://localhost:5000/users/register',
                 data: {
                     phone: phone,
-                    password: password, 
+                    password: password,
                     name: name,
                     email: email,
                     address: address,
                 }
             })
+<<<<<<< HEAD
             .then(res => { 
                 console.log(res.data);
                 //e.preventDefault();
@@ -54,10 +54,24 @@ export default function RegisterScreen() {
                 // e.prevetnDefault();
                 setError(err.response.data);
             })
+=======
+                .then(res => {
+                    console.log(res.data);
+                    //e.preventDefault();
+                    alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
+                    window.location.href = ROUTES.BASE_URL_WEB;
+                })
+                .catch(err => {
+                    // console.log(err);
+                    console.log(err.response.data);
+                    // e.prevetnDefault();
+                    setError(err.response.data);
+                })
+>>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
         }
-            // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
+        // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
         // console.log(e)
-    //    e.preventDefaut();
+        //    e.preventDefaut();
     }
 
     return (
@@ -73,63 +87,63 @@ export default function RegisterScreen() {
                     <div className={styles.form_div}>
                         <label className={styles.form_label} htmlFor="name">Tên</label>
                         <input className={styles.form_input}
-                            type="text" 
-                            id="name" 
-                            placeholder="Tên"
-                            required
-                            onChange={(e) => setName(e.target.value)}
+                               type="text"
+                               id="name"
+                               placeholder="Tên"
+                               required
+                               onChange={(e) => setName(e.target.value)}
                         ></input>
                     </div>
 
                     <div className={styles.form_div}>
                         <label className={styles.form_label} htmlFor="phonenumber">SĐT</label>
                         <input className={styles.form_input}
-                            type="text" 
-                            id="phone" 
-                            placeholder="Số điện thoại"
-                            required
-                            onChange={(e) => setPhone(e.target.value)}
+                               type="text"
+                               id="phone"
+                               placeholder="Số điện thoại"
+                               required
+                               onChange={(e) => setPhone(e.target.value)}
                         ></input>
                     </div>
-                    
+
                 </div>
-                
+
                 <div className={styles.form_div}>
-                        <label className={styles.form_label} htmlFor="email">Email</label>
-                        <input className={styles.form_input}
-                            type="email" 
-                            id="email" 
-                            placeholder="Email"
-                            required
-                            onChange={(e) => setEmail(e.target.value)}
-                        ></input>
+                    <label className={styles.form_label} htmlFor="email">Email</label>
+                    <input className={styles.form_input}
+                           type="email"
+                           id="email"
+                           placeholder="Email"
+                           required
+                           onChange={(e) => setEmail(e.target.value)}
+                    ></input>
                 </div>
 
                 <div className={styles.form_div}>
                     <label className={styles.form_label} htmlFor="address">Địa chỉ</label>
                     <input className={styles.form_input}
-                        type="text" 
-                        id="address" 
-                        placeholder="Địa chỉ"
-                        required
-                        onChange={(e) => setAddress(e.target.value)}
+                           type="text"
+                           id="address"
+                           placeholder="Địa chỉ"
+                           required
+                           onChange={(e) => setAddress(e.target.value)}
                     ></input>
                 </div>
 
-               
 
                 <div className={styles.form_div}>
                     <label className={styles.form_label} htmlFor="password">Mật khẩu</label>
                     <div className={styles.custome_input_password}>
-                        <input 
+                        <input
                             className={styles.form_input}
                             type={isShowPassword ? "text" : "password"}
-                            id="password" 
+                            id="password"
                             placeholder="Mật khẩu"
                             required
                             onChange={(e) => setPassword(e.target.value)}
-                            ></input>
-                        <span onClick={handleShowHidePassword}><i className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
+                        ></input>
+                        <span onClick={handleShowHidePassword}><i
+                            className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
                     </div>
                 </div>
 

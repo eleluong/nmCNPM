@@ -1,18 +1,18 @@
-.infoFooter{
+.infoFooter {
     margin-top: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.linkBack{
+.linkBack {
     margin-left: 20px;
     font-size: 14px;
     color: #338dbc;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
-.submitBtn{
+.submitBtn {
     background: #338dbc;
     padding: 16px 70px;
     font-size: 16px;
@@ -22,7 +22,7 @@
     transition: all 0.1s ease;
 }
 
-.submitBtn:hover{
+.submitBtn:hover {
     cursor: pointer;
     opacity: 0.8;
 

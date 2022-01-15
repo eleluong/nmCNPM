@@ -1,11 +1,11 @@
 import clsx from "clsx"
-import { useReducer, useState } from "react"
-import { Link } from "react-router-dom";
+import {useReducer, useState} from "react"
+import {Link} from "react-router-dom";
 import styles from "./HeaderStaffAdmin.module.css"
 
 import * as ROUTES from '../../components/constants/routes/routes'
 import * as isSignined from '../constants/isSignined'
-import { deleteCookie, setCookie, getCookie } from '../constants/userCookie'
+import {deleteCookie, setCookie, getCookie} from '../constants/userCookie'
 
 function HeaderStaff() {
     const [state, setState] = useState('CreateOrder');
@@ -20,19 +20,18 @@ function HeaderStaff() {
     deleteCookie(isSignined.admin);
     deleteCookie(isSignined.customer);
     let signined = getCookie(isSignined.staff);
-    if(!signined) {
+    if (!signined) {
         window.location.href = ROUTES.BASE_URL_WEB;
     }
     let staffInfo = getCookie('staff');
-    if(staffInfo) {
+    if (staffInfo) {
         staffInfo = JSON.parse(staffInfo);
-    }
-    else {
+    } else {
         staffInfo = {};
     }
-    
+
     const ID = staffInfo.id;
-    console.log(ID);
+    // console.log(ID);
     const staffSignout = () => {
         deleteCookie(isSignined.staff);
         deleteCookie('staff');
@@ -41,8 +40,9 @@ function HeaderStaff() {
     return (
         <div>
             <nav className={styles.navbar_staff}>
-                <Link to="/staff" onClick={() => setState('CreateOrder')} className={styles.navbar_home}> Lirve Coffe</Link>
-                <li className={styles.navbar_user} >
+                <Link to="/staff" onClick={() => setState('CreateOrder')} className={styles.navbar_home}> Lirve
+                    Coffe</Link>
+                <li className={styles.navbar_user}>
                     <i className={`${styles.navbar_user_icon} fas fa-user`}></i>
                     <span className={styles.navbar_user_name}>ID: {staffInfo.id}</span>
                     <ul className={styles.navbar_user_menu}>
@@ -55,15 +55,18 @@ function HeaderStaff() {
                     </ul>
                 </li>
             </nav>
-            <div className={styles.tabs} >
-                <Link to="CreateOrder" onClick={() => setState('CreateOrder')} className={isActive('CreateOrder')}>Tạo đơn hàng</Link>
+            <div className={styles.tabs}>
+                <Link to="CreateOrder" onClick={() => setState('CreateOrder')} className={isActive('CreateOrder')}>Tạo
+                    đơn hàng</Link>
                 <Link to="Orders" onClick={() => setState('Orders')} className={isActive('Orders')}>Đơn hàng</Link>
-                <Link to="Drinks" onClick={() => setState('Drinks')} className={isActive('Drinks')}>Đồ uống</Link>
-                <Link to="Book" onClick={() => setState('Book')} className={isActive('Book')}>Sách</Link>
-                <Link to="CreateEvent" onClick={() => setState('CreateEvent')} className={isActive('CreateEvent')}>Tạo sự kiện</Link>
+                <Link to="Products" onClick={() => setState('Products')} className={isActive('Products')}>Sản
+                    phẩm</Link>
+                <Link to="CreateEvent" onClick={() => setState('CreateEvent')} className={isActive('CreateEvent')}>Tạo
+                    sự kiện</Link>
                 <Link to="Events" onClick={() => setState('Events')} className={isActive('Events')}>Sự kiện</Link>
             </div>
         </div>
     )
 }
+
 export default HeaderStaff

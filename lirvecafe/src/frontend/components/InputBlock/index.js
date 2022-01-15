@@ -1,18 +1,18 @@
 import clsx from 'clsx'
 
 import styles from './InputBlock.module.css'
-import { useStore } from '../store'
+import {useStore} from '../store'
 
-function InputBlock({ type, label, content, value, action, rules }) {
+function InputBlock({type, label, content, value, action, rules}) {
 
     const dispatch = useStore()[1]
 
     let errorMessage;
 
-    
-    function checkRules () {
+
+    function checkRules() {
         rules.forEach(rule => {
-            if(!errorMessage){
+            if (!errorMessage) {
                 console.log(rule);
                 errorMessage = checkRule(rule)
             }
@@ -34,7 +34,8 @@ function InputBlock({ type, label, content, value, action, rules }) {
             case 'phone':
                 if (!/(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/g.test(value))
                     return "Số điện thoại không hợp lệ"
-            default: return undefined
+            default:
+                return undefined
         }
     }
 
@@ -42,7 +43,7 @@ function InputBlock({ type, label, content, value, action, rules }) {
         <div className={styles.inputBlock}>
             <label className={styles.blockLabel} htmlFor={content}>{label}</label>
             <input className={styles.blockInput} type={type} name="" id={content} value={value}
-                onChange={e => dispatch(action(e.target.value))}
+                   onChange={e => dispatch(action(e.target.value))}
             />
             <span className={clsx(styles.blockError)}>{errorMessage}</span>
         </div>

@@ -38,16 +38,22 @@ class StaffController {
                     id: 1,
                     message: 'Thêm thành công'});
             } else {
+<<<<<<< HEAD
                 return res.status(200).json({
                     id: 2,
                     message: 'Số điện thoại đã tồn tại!'}); 
             }               
+=======
+                return res.status(400).json({error: "Phone or password is incorrect"});
+            }
+>>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
         } catch (error) {
             console.log(error);
             console.log('Lỗi')
             return res.status(500).send(error);
         }
     }
+
     // GET
     async showAll(req, res) {
         try {
@@ -55,7 +61,7 @@ class StaffController {
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var items = docs.map(function(staff) {
+            var items = docs.map(function (staff) {
                 return {
                     id: staff.id,
                     name: staff.data().name,
@@ -74,6 +80,7 @@ class StaffController {
             return res.status(500).send(error);
         }
     }
+
     // GET
     async showDetail(req, res) {
         try {
@@ -83,7 +90,7 @@ class StaffController {
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var staff = docs.find(function(doc) {
+            var staff = docs.find(function (doc) {
                 return doc.id === staffId;
             })
             staff.data().staffId = staff.id;
@@ -94,6 +101,7 @@ class StaffController {
             return res.status(500).send(error);
         }
     }
+
     // DELETE
     async deleteStaff(req, res) {
         try {
@@ -101,11 +109,12 @@ class StaffController {
 
             await db.collection('staff').doc(staffId).delete({});
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // PUT
     async updateStaff(req, res) {
         try {
@@ -113,6 +122,7 @@ class StaffController {
             //console.log(staff);
 
             await db.collection('staff')
+<<<<<<< HEAD
                     .doc(staff.id)
                     .update({
                         phone: staff.phone,
@@ -124,8 +134,19 @@ class StaffController {
                         // TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
+=======
+                .doc(staff.id)
+                .update({
+                    phone: staff.phone,
+                    name: staff.name,
+                    address: staff.address,
+                    TimeStart: staff.TimeStart,
+                    TimeEnd: staff.TimeEnd,
+                    password: hash.hash(staff.password)
+                });
+>>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }

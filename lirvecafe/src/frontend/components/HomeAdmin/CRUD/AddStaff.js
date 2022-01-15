@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { set, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -5,6 +6,15 @@ import * as yup from "yup";
 import styles from "./CRUD.module.css"
 import { Link } from "react-router-dom";
 import axios from "axios";
+=======
+import {useForm} from "react-hook-form";
+import {useRef} from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import styles from "./CRUD.module.css"
+import {Link} from "react-router-dom";
+
+>>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
 const schema = yup.object().shape({
     name: yup
         .string()
@@ -21,7 +31,7 @@ const schema = yup.object().shape({
         .required("Vui lòng nhập email!"),
     password: yup
         .string()
-        .required("Vui lòng nhập mật khẩu!")
+        .required("Vui lòng nhập mật khẩu!"),
 });
 export const AddStaff = () => {
 
@@ -30,8 +40,8 @@ export const AddStaff = () => {
         reset,
         setFocus,
         handleSubmit,
-        formState: { errors }
-    } = useForm({ resolver: yupResolver(schema) });
+        formState: {errors}
+    } = useForm({resolver: yupResolver(schema)});
     const inputRef = useRef();
     const [msg, setMsg] = useState('');
     const onSubmit = (data) => {
@@ -84,10 +94,15 @@ export const AddStaff = () => {
             <div className={styles.form} >
                 <Link to="/admin/CRUD" className={styles.form_exit}>&times;</Link>
                 <h1 className={styles.form_heading}>Điền các thông tin cần thiết để thêm nhân viên</h1>
+<<<<<<< HEAD
                 {msg && (<h3 className={styles.form_message}>{msg}</h3>)}
+=======
+
+>>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
                 <div className={styles.field}>
                     <label className={styles.form_label}>Tên nhân viên: </label>
-                    <input ref={inputRef} className={styles.form_input} placeholder="VD: Nguyễn Văn Biển" {...register("name")} />
+                    <input ref={inputRef} className={styles.form_input}
+                           placeholder="VD: Nguyễn Văn Biển" {...register("name")} />
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.name &&
                         <p className={styles.form_error}>{errors.name?.message}</p>}
@@ -120,6 +135,7 @@ export const AddStaff = () => {
                     {errors.password &&
                         <p className={styles.form_error}>{errors.password?.message}</p>}
                 </div>
+
                 <div className={styles.field_submit}>
                     <button className={styles.form_submit} onClick={handleSubmit(onSubmit)} type="submit">Submit</button>
                 </div>

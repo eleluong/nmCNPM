@@ -1,9 +1,9 @@
-import reducer, { initState } from "./reducer"
-import { useReducer } from "react"
+import reducer, {initState} from "./reducer"
+import {useReducer} from "react"
 
 import Context from "./Context"
 
-function FormProvider({ children }) {
+function FormProvider({children}) {
 
     const [state, dispatch] = useReducer(reducer, initState)
 

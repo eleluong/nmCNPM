@@ -1,14 +1,15 @@
 const db = require('../models/firebaseAdmin');
 
-class ProductController{
+class ProductController {
     //GET
-    async getProducts(req, res){
+    async getProducts(req, res) {
         try {
+            console.log('\n'+req.session.cookie+'\n');
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
-            
-            var items = docs.map(function(product) {
+
+            var items = docs.map(function (product) {
                 return {
                     productId: product.id,
                     name: product.data().name,
@@ -26,75 +27,80 @@ class ProductController{
             return res.status(500).send(error);
         }
     }
+
     // PUT
-    async setProductStock(req, res){
+    async setProductStock(req, res) {
         try {
             const stock = req.body.stock;
             const productId = req.body.productId;
 
             await db.collection('products')
-                    .doc(productId)
-                    .update({
-                        stock: stock
-                    });
+                .doc(productId)
+                .update({
+                    stock: stock
+                });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // POST
-    async addProduct(req, res){
+    async addProduct(req, res) {
         try {
             const product = req.body;
 
             await db.collection('products')
-                    .add({
-                        name: product.name,
-                        price: product.price,
-                        image: product.image,
-                        description: product.description,
-                        stock: product.stock,
-                        type: product.type
-                    });
+                .add({
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    description: product.description,
+                    stock: product.stock,
+                    type: product.type
+                });
 
-            return res.status(200).json();
-        } catch(error){
+            return res.status(200);
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // DELETE
-    async deleteProduct(req, res){
+    async deleteProduct(req, res) {
         try {
             const productId = req.body.productId;
-            console.log(typeof(productId));
+            console.log(typeof (productId));
 
             await db.collection('products').doc(productId).delete({});
 
-            return res.status(200).json();
-        } catch(error) {
+            return res.status(200);
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // PUT
-    async updateProductType(req, res){
+    async updateProductType(req, res) {
         try {
             const type = req.body.type;
             const productId = req.body.id;
 
             await db.collection('products')
-                    .doc(productId)
-                    .update({
-                        type: type
-                    });
+                .doc(productId)
+                .update({
+                    type: type
+                });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // GET
-    async searchProduct(req, res){
+    async searchProduct(req, res) {
         try {
             const name = req.params.name;
             console.log(name);
@@ -106,23 +112,24 @@ class ProductController{
             snapshot.forEach(doc => {
                 let tmp = {}
                 tmp.productId = doc.id,
-                tmp.name = doc.data().name,
-                tmp.price = doc.data().price,
-                tmp.image = doc.data().image,
-                tmp.description = doc.data().description,
-                tmp.stock = doc.data().stock,
-                tmp.type = doc.data().type
+                    tmp.name = doc.data().name,
+                    tmp.price = doc.data().price,
+                    tmp.image = doc.data().image,
+                    tmp.description = doc.data().description,
+                    tmp.stock = doc.data().stock,
+                    tmp.type = doc.data().type
                 products.push(tmp);
             });
 
             //console.log(product);
             return res.status(200).send(products);
-        } catch(error) {
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // GET
-    async checkQuantity(req, res){
+    async checkQuantity(req, res) {
         try {
             const id = req.params.productId;
             const stock = req.params.stock;
@@ -131,7 +138,7 @@ class ProductController{
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var product = docs.find(function(doc) {
+            var product = docs.find(function (doc) {
                 return doc.data().productId === id;
             })
 
@@ -140,7 +147,7 @@ class ProductController{
             } else {
                 return res.status(200).send('False');
             }
-        } catch(error) {
+        } catch (error) {
             return res.status(500).send(error);
         }
     }
@@ -149,14 +156,13 @@ class ProductController{
         try {
             const id = req.params.id;
             await db.collection('products').doc(id).get()
-            .then(product => {
-                res.send(product.data());
-            })
-            .catch(error => {
-                console.log(error);
-            }) 
-        }
-        catch (err) {
+                .then(product => {
+                    res.send(product.data());
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        } catch (err) {
             console.log(err);
         }
     }
