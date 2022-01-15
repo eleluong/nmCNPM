@@ -79,7 +79,7 @@ class CustomersController {
         await customers.doc(req.params.id).get()
         .then(doc => {
             if(!doc.exists) {
-                res.send('damn door');
+                res.send('not exist this user id');
             }
             res.send(doc.data());
         })

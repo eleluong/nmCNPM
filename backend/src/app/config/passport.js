@@ -15,24 +15,20 @@ async function authorize(req, phone, password, done) {
     console.log('Auth');
     var query
     if (req.body.role == 1) {
-        query = db.collection('customers')
+        query = db.collection('customers');
     }
     if (req.body.role == 2) {
-        query = db.collection('staff')
+        query = db.collection('staff');
     }
     if (req.body.role == 3) {
-        query = db.collection('admin')
+        query = db.collection('admin');
     }
 
     const docs = (await query.get()).docs;
 
     const user = docs.find(doc => {
         return doc.data().phone === phone;
-    })
-
-    // req.session.user = user.data();
-    // req.session.save();
-    // console.log('abc', req.session.user);
+    });
 
     passport.serializeUser((user, done) => done(null, user.id));
     

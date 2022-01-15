@@ -48,7 +48,7 @@ class ShopEventController {
         try {
             const eventId = req.body.id;
 
-            await db.collection('staff').doc(eventId).delete({});
+            await db.collection('shopevents').doc(eventId).delete({});
 
             return res.status(200).json();
         } catch (error) {
