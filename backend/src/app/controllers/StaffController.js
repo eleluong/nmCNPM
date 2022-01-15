@@ -25,12 +25,13 @@ class StaffController {
                     });
                 return res.status(200).json('success');
             } else {
-                return res.status(400).json({error: "Phone or password is incorrect"}); 
-            }               
+                return res.status(400).json({error: "Phone or password is incorrect"});
+            }
         } catch (error) {
             return res.status(500).send(error);
         }
     }
+
     // GET
     async showAll(req, res) {
         try {
@@ -38,7 +39,7 @@ class StaffController {
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var items = docs.map(function(staff) {
+            var items = docs.map(function (staff) {
                 return {
                     staffId: staff.id,
                     name: staff.data().name,
@@ -56,6 +57,7 @@ class StaffController {
             return res.status(500).send(error);
         }
     }
+
     // GET
     async showDetail(req, res) {
         try {
@@ -65,7 +67,7 @@ class StaffController {
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
 
-            var staff = docs.find(function(doc) {
+            var staff = docs.find(function (doc) {
                 return doc.id === staffId;
             })
             staff.data().staffId = staff.id;
@@ -76,6 +78,7 @@ class StaffController {
             return res.status(500).send(error);
         }
     }
+
     // DELETE
     async deleteStaff(req, res) {
         try {
@@ -88,6 +91,7 @@ class StaffController {
             return res.status(500).send(error);
         }
     }
+
     // PUT
     async updateStaff(req, res) {
         try {
@@ -95,15 +99,15 @@ class StaffController {
             //console.log(staff);
 
             await db.collection('staff')
-                    .doc(staff.id)
-                    .update({
-                        phone: staff.phone,
-                        name: staff.name,
-                        address: staff.address,
-                        TimeStart: staff.TimeStart,
-                        TimeEnd: staff.TimeEnd,
-                        password: hash.hash(staff.password)
-                    });
+                .doc(staff.id)
+                .update({
+                    phone: staff.phone,
+                    name: staff.name,
+                    address: staff.address,
+                    TimeStart: staff.TimeStart,
+                    TimeEnd: staff.TimeEnd,
+                    password: hash.hash(staff.password)
+                });
 
             return res.status(200);
         } catch (error) {

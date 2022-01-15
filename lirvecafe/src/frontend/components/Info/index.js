@@ -1,11 +1,11 @@
 import clsx from "clsx";
 
-import styles from'./Info.module.css'
+import styles from './Info.module.css'
 
 
-function Info({ children }) {
+function Info({children}) {
     return (
-        <div className = {clsx(styles.info)}>
+        <div className={clsx(styles.info)}>
             {children}
         </div>
     )

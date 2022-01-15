@@ -1,7 +1,8 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from './CreateEvent.module.css'
+
 const schema = yup.object().shape({
     name: yup
         .string()
@@ -17,24 +18,27 @@ const schema = yup.object().shape({
         .string()
         .required("Vui lòng nhập thời gian diễn ra sự kiện!")
 });
+
 function CreateEvent() {
     const {
         register,
         reset,
         setFocus,
         handleSubmit,
-        formState: { errors }
-    } = useForm({ resolver: yupResolver(schema) });
+        formState: {errors}
+    } = useForm({resolver: yupResolver(schema)});
     var eventsAPI = 'http://localhost:5000/shopevent/add'
+
     function CreateEvent(data) {
         fetch(eventsAPI, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-              },
+            },
             body: JSON.stringify(data),
-        })   
+        })
     }
+
     const onSubmit = (data) => {
         CreateEvent(data);
         reset({
@@ -72,7 +76,8 @@ function CreateEvent() {
                 </div>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Thời gian: </label>
-                    <input className={styles.form_input} placeholder="VD: 17h-19h Thứ 6 ngày 1/7" {...register("time")} />
+                    <input className={styles.form_input}
+                           placeholder="VD: 17h-19h Thứ 6 ngày 1/7" {...register("time")} />
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.time &&
                         <p className={styles.form_error}>{errors.time?.message}</p>}
@@ -84,4 +89,5 @@ function CreateEvent() {
         </div>
     );
 }
+
 export default CreateEvent

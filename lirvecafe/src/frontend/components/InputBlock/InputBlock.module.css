@@ -1,8 +1,8 @@
-.inputBlock{
+.inputBlock {
     margin-bottom: 16px;
 }
 
-.blockLabel{
+.blockLabel {
     display: block;
     font-size: 14px;
     color: #333;
@@ -10,7 +10,7 @@
     margin-bottom: 2px;
 }
 
-.blockInput{
+.blockInput {
     width: 100%;
     font-size: 14px;
     padding: 11px 12px;
@@ -19,7 +19,7 @@
     transition: all 0.1s ease;
 }
 
-.blockInput:focus-visible{
+.blockInput:focus-visible {
     outline: 2px solid #338dbc;
     border: 1px solid transparent;
 }

@@ -11,8 +11,9 @@ function Home() {
             <Content/>
             <Products/>
             <Bill/>
-            <Footer />
+            <Footer/>
         </div>
     )
 }
+
 export default Home

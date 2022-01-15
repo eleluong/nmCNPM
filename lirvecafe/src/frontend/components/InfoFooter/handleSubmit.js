@@ -1,5 +1,4 @@
-
-export default function handleSubmit(state){
+export default function handleSubmit(state) {
 
     const {id, ...data} = state;
 
@@ -10,9 +9,9 @@ export default function handleSubmit(state){
         },
         body: JSON.stringify(data),
     })
-        // .then(response => response.json())
-        // .then(state => {
-        //     console.log(state);
-        // })
+    // .then(response => response.json())
+    // .then(state => {
+    //     console.log(state);
+    // })
 
 }

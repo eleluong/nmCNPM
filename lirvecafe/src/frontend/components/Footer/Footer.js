@@ -1,6 +1,7 @@
 import styles from "./Footer.module.css"
-function Footer(){
-    return(
+
+function Footer() {
+    return (
         <div className={styles.footer}>
             <div className={styles.footer_row}>
                 <i className={`${styles.phone_icon} fas fa-phone-square-alt`}></i>
@@ -10,4 +11,5 @@ function Footer(){
         </div>
     )
 }
+
 export default Footer

@@ -6,10 +6,10 @@ class StaffCartController {
     async getCart(req, res) {
         try {
             const cartId = req.params.staffId;
-            
+
             const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
-            var items = products.map(function(product) {
+            var items = products.map(function (product) {
                 return {
                     productId: product.id,
                     quantity: product.data().quantity
@@ -17,16 +17,17 @@ class StaffCartController {
             });
 
             return res.status(200).send(items);
-        } catch(error) {
+        } catch (error) {
             return res.sendStatus(500);
         }
     }
+
     //PUT
     async deleteFromCart(req, res) {
         //const id = req.session.passport.user;
         const productId = req.body.productId;
         const cartId = req.body.staffId;
-        
+
         const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
         const deletingProduct = products.find(product => {
@@ -36,23 +37,24 @@ class StaffCartController {
         let quantity = deletingProduct.data().quantity;
         if (quantity > 1) {
             carts.doc(cartId)
-                 .collection('productList').doc(deletingProduct.id)
-                 .set({
-                     quantity: quantity - 1
-                 });
+                .collection('productList').doc(deletingProduct.id)
+                .set({
+                    quantity: quantity - 1
+                });
         } else {
             carts.doc(cartId)
-                 .collection('productList').doc(deletingProduct.id)
-                 .delete({});
+                .collection('productList').doc(deletingProduct.id)
+                .delete({});
         }
 
         return res.status(200);
     }
+
     //PUT
     async addToCart(req, res) {
         const productId = req.body.productId;
         const cartId = req.body.staffId;
-        
+
         const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
         const addingProduct = products.find(product => {
@@ -61,16 +63,16 @@ class StaffCartController {
 
         if (addingProduct) {
             carts.doc(cartId)
-                 .collection('productList').doc(productId)
-                 .set({
-                     quantity: addingProduct.data().quantity + 1
-                 });
+                .collection('productList').doc(productId)
+                .set({
+                    quantity: addingProduct.data().quantity + 1
+                });
         } else {
             carts.doc(cartId)
-                 .collection('productList').doc(productId)
-                 .set({
-                     quantity: 1
-                 });
+                .collection('productList').doc(productId)
+                .set({
+                    quantity: 1
+                });
         }
 
         return res.status(200);
