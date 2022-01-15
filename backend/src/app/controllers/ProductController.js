@@ -39,7 +39,7 @@ class ProductController{
                         stock: stock
                     });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -59,7 +59,7 @@ class ProductController{
                         type: product.type
                     });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch(error){
             return res.status(500).send(error);
         }
@@ -72,7 +72,7 @@ class ProductController{
 
             await db.collection('products').doc(productId).delete({});
 
-            return res.status(200).json();
+            return res.status(200);
         } catch(error) {
             return res.status(500).send(error);
         }
@@ -89,7 +89,7 @@ class ProductController{
                         type: type
                     });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }

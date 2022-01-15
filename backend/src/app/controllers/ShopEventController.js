@@ -14,7 +14,7 @@ class ShopEventController {
                         time: event.time,
                     });
 
-            return res.status(200).json('success');
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -50,7 +50,7 @@ class ShopEventController {
 
             await db.collection('shopevents').doc(eventId).delete({});
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -70,7 +70,7 @@ class ShopEventController {
                         time: event.time,
                     });
 
-            return res.status(200).json();
+            return res.status(200);
         } catch (error) {
             return res.status(500).send(error);
         }

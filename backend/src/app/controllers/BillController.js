@@ -46,7 +46,7 @@ class BillsController {
         })
         .then(bill => {
             for(const product of productList) {
-                total += product.number * product.price;
+                total += product.data().number * product.data().price;
                 bill.collection(productList).doc(product.id).set({
                     number: product.number,
                 })
