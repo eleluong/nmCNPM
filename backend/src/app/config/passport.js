@@ -42,6 +42,8 @@ async function authorize(req, phone, password, done) {
         return done(null, user_);
     }); 
 
+    req.flash('id', user.id);
+
     if (!user) {
         return done(null, false, {message: 'No user found'});
     }
