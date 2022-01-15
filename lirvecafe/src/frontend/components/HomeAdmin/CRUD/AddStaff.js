@@ -17,7 +17,7 @@ const schema = yup.object().shape({
         .required("Vui lòng nhập email!"),
     password: yup
         .string()
-        .required("Vui lòng nhập mật khẩu!")
+        .required("Vui lòng nhập mật khẩu!"),
 });
 export const AddStaff = () => {
     const {
@@ -73,6 +73,7 @@ export const AddStaff = () => {
                     {errors.password &&
                         <p className={styles.form_error}>{errors.password?.message}</p>}
                 </div>
+                
                 <div className={styles.field_submit}>
                     <button className={styles.form_submit} type="submit">Submit</button>
                 </div>

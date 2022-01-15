@@ -42,14 +42,14 @@ function Navbar() {
                 </>) : (
                     <li className={styless.navbar_user} >
                         <i className={`${styless.navbar_user_icon} fas fa-user`}></i>
-                        <span className={styless.navbar_user_name}>ID: {user.id}</span>
+                        <span className={styless.navbar_user_name}>{user.name}</span>
                         <ul className={styless.navbar_user_menu}>
                             {/* <li className={styles.navbar_user_item}>
                                     <span>ID: {userObj.ID}</span>
                                 </li> */}
-                            <li className={styless.navbar_user_item}>
+                            {/* <li className={styless.navbar_user_item}>
                                 <span className={styless.navbar_user_item_link}>{user.name}</span>
-                            </li>
+                            </li> */}
                             <li className={styless.navbar_user_item}>
                                 <Link to="/" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
                             </li>

@@ -5,8 +5,8 @@ const customersController = require('../app/controllers/CustomerController')
 require('../app/config/passport')
 
 router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/users/login-failure',
-    successRedirect: '/users/login-success', 
+    failureRedirect: '/user/login-failure',
+    successRedirect: '/user/login-success', 
 }))
 
 router.post('/register', customersController.createCustomer)

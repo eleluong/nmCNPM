@@ -47,7 +47,7 @@
     right:0;
     border-radius: 2px;
     background-color: white;
-    width: 120px;
+    width: 160px;
     list-style: none;
     box-shadow: 0 1px 2px #e0e0e0;
     display: none;
@@ -89,7 +89,7 @@
     color: black;
     background-color: #fff;
     text-decoration: none;
-    width: 170px;
+    width: 200px;
     height: 35px;
     margin: 8px 8px;
     font-size: 1.2rem;

@@ -32,7 +32,7 @@ function HeaderStaff() {
     }
     
     const ID = staffInfo.id;
-    console.log(ID);
+    // console.log(ID);
     const staffSignout = () => {
         deleteCookie(isSignined.staff);
         deleteCookie('staff');
@@ -58,8 +58,7 @@ function HeaderStaff() {
             <div className={styles.tabs} >
                 <Link to="CreateOrder" onClick={() => setState('CreateOrder')} className={isActive('CreateOrder')}>Tạo đơn hàng</Link>
                 <Link to="Orders" onClick={() => setState('Orders')} className={isActive('Orders')}>Đơn hàng</Link>
-                <Link to="Drinks" onClick={() => setState('Drinks')} className={isActive('Drinks')}>Đồ uống</Link>
-                <Link to="Book" onClick={() => setState('Book')} className={isActive('Book')}>Sách</Link>
+                <Link to="Products" onClick={() => setState('Products')} className={isActive('Products')}>Sản phẩm</Link>
                 <Link to="CreateEvent" onClick={() => setState('CreateEvent')} className={isActive('CreateEvent')}>Tạo sự kiện</Link>
                 <Link to="Events" onClick={() => setState('Events')} className={isActive('Events')}>Sự kiện</Link>
             </div>

@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from './CreateEvent.module.css'
@@ -26,10 +25,18 @@ function CreateEvent() {
         handleSubmit,
         formState: { errors }
     } = useForm({ resolver: yupResolver(schema) });
-    const inputRef = useRef();
-
+    var eventsAPI = 'http://localhost:5000/shopevent/add'
+    function CreateEvent(data) {
+        fetch(eventsAPI, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(data),
+        })   
+    }
     const onSubmit = (data) => {
-        console.log(data);
+        CreateEvent(data);
         reset({
             name: "",
             phone: "",
@@ -44,21 +51,21 @@ function CreateEvent() {
                 <h1 className={styles.form_heading}>Điền các thông tin cần thiết để tạo sự kiện</h1>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Tên khách hàng: </label>
-                    <input ref={inputRef} className={styles.form_input} placeholder="VD: Nguyễn Văn Biển" {...register("name")}/>
+                    <input className={styles.form_input} placeholder="VD: Nguyễn Văn Biển" {...register("name")} />
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.name &&
                         <p className={styles.form_error}>{errors.name?.message}</p>}
                 </div>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Số điện thoại: </label>
-                    <input className={styles.form_input} {...register("phone")} />
+                    <input className={styles.form_input} placeholder="VD: 0123456789" {...register("phone")} />
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.phone &&
                         <p className={styles.form_error}>{errors.phone?.message}</p>}
                 </div>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Số lượng người tham gia: </label>
-                    <input className={styles.form_input} {...register("number")} />
+                    <input className={styles.form_input} placeholder="VD: 5" {...register("number")} />
                     {/* Nếu có lỗi thì hiển thị nó ra cho người dùng */}
                     {errors.number &&
                         <p className={styles.form_error}>{errors.number?.message}</p>}
