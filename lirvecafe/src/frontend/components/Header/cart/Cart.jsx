@@ -46,17 +46,19 @@ const Cart = () => {
         console.log(temp);
         setChange(true);
     });
-    useEffect(() => {
-        const getCart = async () => {
-            const url = 'http://localhost:5000/cart/get/' + id;
-            const res = await (await (fetch(url
-            ))).json();
-
+    useEffect (()=>{
+        const getCart = async()=>{
+            const url = 'http://localhost:5000/cart/get/'+id;
+            const res = await( await(fetch(url
+                ))).json();
             setItems(res);
         }
-        getCart();
-        setChange(false);
-    }, [cartOpen, change]);
+        if(signined){
+            getCart();
+            setChange(false);
+        }
+    },[cartOpen, change]);
+
     console.log(items);
 
     const classes = useStyles();
@@ -83,10 +85,7 @@ const Cart = () => {
                     ))}
                 </div>
             </Drawer>
-
         </div>
-
-
     )
 }
 

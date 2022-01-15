@@ -55,9 +55,12 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                <Button aria-label="Add to Cart" onClick={() => handleAddToCart(product.productId)}>
-                    <AddShoppingCart/>
-                </Button>
+                {signined?(
+                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
+                        <AddShoppingCart/> 
+                    </Button>
+                ):(<></>)}
+
             </CardActions>
         </Card>
     )
