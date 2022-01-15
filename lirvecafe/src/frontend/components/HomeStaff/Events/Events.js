@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
 import styles from "./Events.module.css"
 
 function Events() {
@@ -13,6 +13,7 @@ function Events() {
         };
         getEvents();
     }, []);
+
     function handleDeleteEvent(event) {
         var eventsDeleteAPI = 'http://localhost:5000/shopevent/delete';
         var e = document.getElementById(event.id);
@@ -26,7 +27,7 @@ function Events() {
             },
             body: JSON.stringify(event)
         })
-        .then(res => res.json())
+            .then(res => res.json())
     }
 
     // console.log(events);
@@ -50,7 +51,7 @@ function Events() {
                             <TableRow
                                 id={event.id}
                                 key={event.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
                                     {event.name}
@@ -59,7 +60,8 @@ function Events() {
                                 <TableCell align="right">{event.number}</TableCell>
                                 <TableCell align="right">{event.time}</TableCell>
                                 <TableCell align="right">
-                                    <button className={styles.btn_delete} onClick={() => handleDeleteEvent(event)}>Hủy</button>
+                                    <button className={styles.btn_delete} onClick={() => handleDeleteEvent(event)}>Hủy
+                                    </button>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -10,7 +10,9 @@ function Home() {
             <Content/>
             <Products/>
             <Footer />
+
         </div>
     )
 }
+
 export default Home

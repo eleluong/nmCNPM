@@ -1,9 +1,9 @@
 import Context from './Context'
 
-import { useContext } from 'react'
+import {useContext} from 'react'
 
 
-export function useStore (){
+export function useStore() {
     return useContext(Context)
 }
 

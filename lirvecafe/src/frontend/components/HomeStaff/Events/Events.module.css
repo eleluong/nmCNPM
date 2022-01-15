@@ -1,18 +1,21 @@
-.events{
+.events {
     display: flex;
     height: calc(100vh - 91px);
 }
-.side_bar{
+
+.side_bar {
     width: 290px;
     background-color: #1a94ff;
     font-size: 25px;
     text-align: center;
-    padding: calc((100vh - 116px)/2) 0;
+    padding: calc((100vh - 116px) / 2) 0;
 }
-.item{
+
+.item {
     align-items: center;
 }
-.btn_delete{
+
+.btn_delete {
     background-color: #1a94ff;
     color: #fff;
     border-radius: 2px;
@@ -20,6 +23,7 @@
     cursor: pointer;
     border: 0px;
 }
-.btn_delete:hover{
+
+.btn_delete:hover {
     opacity: 0.8;
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import CartItem from './cartitem/CartItem';
 import useStyles from './styles'
-import { useState } from 'react';
-import { Button, Drawer } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { ShoppingCart } from '@material-ui/icons';
-import { useEffect } from 'react';
+import {useState} from 'react';
+import {Button, Drawer} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
+import {ShoppingCart} from '@material-ui/icons';
+import {useEffect} from 'react';
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
-import { getCookie, deleteCookie } from "../../constants/userCookie";
+import {getCookie, deleteCookie} from "../../constants/userCookie";
 
 
 const Cart = () => {
@@ -19,31 +19,30 @@ const Cart = () => {
     let user = getCookie('customer');
     if (user) {
         user = JSON.parse(user);
-    }
-    else {
+    } else {
         user = {}
     }
     const id = user.id;
 
     const axios = require('axios');
-    const handleAddToCart=((itemId)=>{
-        const temp = {cartId: id,productId: itemId};
+    const handleAddToCart = ((itemId) => {
+        const temp = {cartId: id, productId: itemId};
         axios({
-            method:'PUT',
-            url : "http://localhost:5000/cart/addToCart/",
+            method: 'PUT',
+            url: "http://localhost:5000/cart/addToCart/",
             data: temp,
-        }).then(res=> console.log(res));
+        }).then(res => console.log(res));
         console.log(temp);
         setChange(true);
-        
+
     });
-    const handleRemoveFromCart=((itemId)=>{
-        const temp = {cartId: id,productId: itemId};
+    const handleRemoveFromCart = ((itemId) => {
+        const temp = {cartId: id, productId: itemId};
         axios({
-            method:'PUT',
-            url : "http://localhost:5000/cart/deleteFromCart/",
+            method: 'PUT',
+            url: "http://localhost:5000/cart/deleteFromCart/",
             data: temp,
-        }).then(res=> console.log(res));
+        }).then(res => console.log(res));
         console.log(temp);
         setChange(true);
     });
@@ -59,30 +58,31 @@ const Cart = () => {
             setChange(false);
         }
     },[cartOpen, change]);
+
     console.log(items);
-    
+
     const classes = useStyles();
     return (
         <div>
             <div>
-                <IconButton onClick={()=>setCartOpen(true)}>
+                <IconButton onClick={() => setCartOpen(true)}>
                     <ShoppingCart/>
                 </IconButton>
             </div>
-            <Drawer anchor = 'right' open = {cartOpen} onClose={()=> setCartOpen(false)}>
-                <div className = {classes.cart} align = 'center'>
-                    
+            <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                <div className={classes.cart} align='center'>
+
                     <div>
                         <h2>Your shopping cart</h2>
                         <Button>Checkout</Button>
                     </div>
-                    {items.map(item=> (
-                        <CartItem 
-                            item = {item}
-                            add = {handleAddToCart}
-                            remove= {handleRemoveFromCart}
+                    {items.map(item => (
+                        <CartItem
+                            item={item}
+                            add={handleAddToCart}
+                            remove={handleRemoveFromCart}
                         />
-                    ))}  
+                    ))}
                 </div>
             </Drawer>
         </div>

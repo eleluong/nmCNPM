@@ -1,6 +1,7 @@
-import styles from'./CreateOrder.module.css'
+import styles from './CreateOrder.module.css'
+
 function CreateOrder() {
-    return(
+    return (
         <h1 className={styles.CreateOrder}> Tạo Đơn Hàng</h1>
     )
 
