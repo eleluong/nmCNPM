@@ -4,7 +4,7 @@ class ProductController{
     //GET
     async getProducts(req, res){
         try {
-            // console.log('\n'+req.session.user+'\n');
+            console.log('\n'+req.session.cookie+'\n');
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
