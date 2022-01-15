@@ -1,8 +1,9 @@
 .blah {
-    position:absolute;
+    position: absolute;
     top: 0; /*[wherever you want it]*/
-    left:160; /*[wherever you want it]*/
-  }
+    left: 160; /*[wherever you want it]*/
+}
+
 .nuh {
-font-size: 1px;
+    font-size: 1px;
 }

@@ -1,4 +1,4 @@
-import { SET_NAME, SET_PHONE, SET_EMAIL, SET_ADDRESS, SET_FORM } from "./constants";
+import {SET_NAME, SET_PHONE, SET_EMAIL, SET_ADDRESS, SET_FORM} from "./constants";
 
 export function setName(payload) {
     return {

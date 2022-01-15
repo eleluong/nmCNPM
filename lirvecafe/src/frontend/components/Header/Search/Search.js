@@ -1,4 +1,5 @@
 import styles from "../Header.module.css"
+
 function Search() {
     return (
         <div className={styles.search}>
@@ -9,4 +10,5 @@ function Search() {
         </div>
     )
 }
+
 export default Search

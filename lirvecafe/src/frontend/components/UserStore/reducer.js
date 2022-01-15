@@ -1,4 +1,4 @@
-import { SET_NAME, SET_PHONE, SET_EMAIL, SET_ADDRESS, SET_FORM } from "./constants"
+import {SET_NAME, SET_PHONE, SET_EMAIL, SET_ADDRESS, SET_FORM} from "./constants"
 
 
 export const initState = {
@@ -9,8 +9,8 @@ export const initState = {
     email: '',
 }
 
-export default function reducer (state, action){
-    switch (action.type){
+export default function reducer(state, action) {
+    switch (action.type) {
         case SET_NAME:
             return {
                 ...state,
