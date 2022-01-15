@@ -52,11 +52,12 @@ const Cart = () => {
             const url = 'http://localhost:5000/cart/get/'+id;
             const res = await( await(fetch(url
                 ))).json();
-
             setItems(res);
         }
-        getCart();
-        setChange(false);
+        if(signined){
+            getCart();
+            setChange(false);
+        }
     },[cartOpen, change]);
     console.log(items);
     
@@ -84,10 +85,7 @@ const Cart = () => {
                     ))}  
                 </div>
             </Drawer>
-            
         </div>
-      
-        
     )
 }
 

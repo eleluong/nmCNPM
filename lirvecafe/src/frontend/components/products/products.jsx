@@ -19,7 +19,7 @@ const Products = () => {
     },[]);
     console.log(products);
     return(
-        <div >
+        <div className={classes.root}>
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
                     <Grid item key = {product.id} xs = {4} sm = {4} lg = {2}>
