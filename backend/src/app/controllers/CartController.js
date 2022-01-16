@@ -123,7 +123,7 @@ class CartController {
                 return total + product.data().quantity*product.data().price;
             }, 0); 
 
-            return res.status(200).send(sum);
+            return res.status(200).json(sum);
         } catch(error) {
             return res.status(500);
         }
