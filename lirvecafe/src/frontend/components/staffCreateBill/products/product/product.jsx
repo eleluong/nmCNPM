@@ -3,9 +3,9 @@ import {Card, CardMedia, CardContent, CardActions, Typography, IconButton} from 
 import {Button} from '@material-ui/core';
 import {AddShoppingCart} from '@material-ui/icons';
 import useStyles from './style';
-import * as ROUTES from '../../constants/routes/routes';
-import * as isSignined from '../../constants/isSignined';
-import {getCookie, deleteCookie} from "../../constants/userCookie";
+import * as ROUTES from '../../../constants/routes/routes';
+import * as isSignined from '../../../constants/isSignined';
+import {getCookie, deleteCookie} from "../../../constants/userCookie";
 
 const Product = ({product}) => {
     const classes = useStyles();
@@ -55,11 +55,11 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                {signined?(
-                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
-                        <AddShoppingCart/> 
-                    </Button>
-                ):(<></>)}
+                
+                <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
+                    <AddShoppingCart/> 
+                </Button>
+                
 
             </CardActions>
         </Card>

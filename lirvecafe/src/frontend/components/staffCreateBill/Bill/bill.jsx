@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 const Bill = () => {
     const [items, setItems] = useState([]);
-    const [change, setChange] = useState(0);
+    const [change, setChange] = useState(false);
     let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
@@ -27,7 +27,7 @@ const Bill = () => {
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
-        setChange(change+1);
+        setChange(true);
 
     });
     const handleRemoveFromCart = ((itemId) => {
@@ -38,11 +38,11 @@ const Bill = () => {
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
-        setChange(change+1);
+        setChange(true);
     });
     useEffect(() => {
         const getCart = async () => {
-            const url = 'http://localhost:5000/cart/get/' + id;
+            const url = 'http://localhost:5000/staffcart/get/' + id;
             const res = await (await (fetch(url
             ))).json();
             setItems(res);
@@ -53,16 +53,26 @@ const Bill = () => {
     console.log(items);
 
     const classes = useStyles();
+
+    const item1 = {
+        
+    }
+
     return (
-        <div>
-            <div className={classes.cart}>
-                <div>
-                    {items.map(item => (
-                        <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
-                    ))}
-                </div>
+        <div className={classes.cart}>
+            
+            {items.map(item => (
+                <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+            ))}
+
+            <div className={classes.total}>
+                <span>Tổng thanh toán:</span>
+                <span>{
+                    
+                }</span>
             </div>
         </div>
+
     )
 }
 
