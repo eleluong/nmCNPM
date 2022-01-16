@@ -53,7 +53,8 @@ class StaffCartController {
     //PUT
     async addToCart(req, res) {
         const productId = req.body.productId;
-        const cartId = req.body.staffId;
+        const cartId = req.body.cartId;
+        const price = req.body.price
 
         const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
@@ -64,14 +65,15 @@ class StaffCartController {
         if (addingProduct) {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
-                .set({
+                .update({
                     quantity: addingProduct.data().quantity + 1
                 });
         } else {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
                 .set({
-                    quantity: 1
+                    quantity: 1,
+                    price: price,
                 });
         }
 
