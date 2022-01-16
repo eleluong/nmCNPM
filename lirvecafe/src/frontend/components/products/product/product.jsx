@@ -28,7 +28,7 @@ const Product = ({product}) => {
         user = {}
     }
     const id = user.id;
-    console.log(product.productId);
+    // console.log(product.productId);
     const axios = require('axios');
     const handleAddToCart = ((itemId) => {
         const temp = {cartId: id, productId: itemId};
