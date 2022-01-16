@@ -65,8 +65,8 @@ const Cart = () => {
     return (
         <div>
             <div>
-                <IconButton onClick={() => setCartOpen(true)}>
-                    <ShoppingCart/>
+                <IconButton onClick={() => setCartOpen(true)} >
+                    <ShoppingCart style ={{'font-size': '2rem'}} />
                 </IconButton>
             </div>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
