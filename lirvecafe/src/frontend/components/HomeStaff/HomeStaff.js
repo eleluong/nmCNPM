@@ -4,7 +4,7 @@ import CreateOrder from "./CreateOrder/CreateOrder"
 import Orders from "./Orders/Orders"
 import CreateEvent from "./CreateEvent/CreateEvent"
 import Events from "./Events/Events"
-import Product from "./Products/Product"
+import Product from "./Products/Products"
 
 function HomeStaff() {
     return (
@@ -12,11 +12,11 @@ function HomeStaff() {
             <HeaderStaff/>
             <Routes>
                 <Route path="/" element={<CreateOrder/>}></Route>
-                <Route path="CreateOrder" element={<CreateOrder/>}></Route>
-                <Route path="Orders" element={<Orders/>}></Route>
-                <Route path="Products" element={<Product/>}></Route>
-                <Route path="CreateEvent" element={<CreateEvent/>}></Route>
-                <Route path="Events" element={<Events/>}></Route>
+                <Route path="/CreateOrder" element={<CreateOrder/>}></Route>
+                <Route path="/Orders" element={<Orders/>}></Route>
+                <Route path="/Products/*" element={<Product/>}></Route>
+                <Route path="/CreateEvent" element={<CreateEvent/>}></Route>
+                <Route path="/Events" element={<Events/>}></Route>
             </Routes>
         </div>
     )
