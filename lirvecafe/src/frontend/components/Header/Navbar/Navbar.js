@@ -3,8 +3,9 @@ import styless from "../../HeaderStaff/HeaderStaffAdmin.module.css";
 import {Link} from "react-router-dom";
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
-import {useState} from "react";
-import {getCookie, deleteCookie} from "../../constants/userCookie";
+import { useState } from "react";
+import { getCookie, deleteCookie } from "../../constants/userCookie";
+import axios from "axios";
 
 function Navbar() {
     //let [user, setUser] = useState(getCookie('userInfo'));
@@ -28,6 +29,11 @@ function Navbar() {
     // console.log(user);
 
     const handleSignout = () => {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:5000/user/logout'
+        })
+
         window.location.href = `${ROUTES.BASE_URL_WEB}`;
         deleteCookie(isSignined.customer);
     }
