@@ -20,57 +20,67 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
         user = {}
     }
     const id = user.id;
-    const [data, setData] = useState({})
-    useEffect(() => {
-        const getData = async () => {
-            const url = "http://localhost:5000/product/get_by_id/" + item.productId;
-            const res = await (await (fetch(url
-            ))).json();
-            setData(res);
-        }
-        getData();
-        console.log(data);
-    }, []);
+    const [data, setData] = useState({
+        name: 'Product Name',
+        price: 100,
+        image: "https://cf.shopee.vn/file/a569e7181216cd0ae2a0f94941902cfa",
+    })
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         const url = "http://localhost:5000/product/get_by_id/" + item.productId;
+    //         const res = await (await (fetch(url
+    //         ))).json();
+    //         setData(res);
+    //     }
+    //     getData();
+    //     console.log(data);
+    // }, []);
+
+
 
     const classes = useStyles();
     return (
-        <Card className={classes.item}>
-            <Grid container spacing={1}>
+        <div className={classes.item}>
+            <Grid item xs={3}>
+                <CardMedia>
+                    <img className={classes.img} src={data.image} alt={data.name}/>
+                </CardMedia>
+            </Grid>
+            <Grid container spacing={0} className={classes.contentWrapper}>
                 <Grid item xs={6}>
                     <CardContent className={classes.content}>
-                        <Typography variant='h7'>{data.name}</Typography>
-                        <div>
+                        <Typography variant='h7' className={classes.productName}>{data.name}</Typography>
+                        <div className={classes.productInfo}>
                             <p>Price: ${data.price}</p>
-                            <p>Total: ${(item.quantity * data.price).toFixed(2)}</p>
+                            <p style={{marginTop: '4px'}}>Quantity: {item.quantity}10</p>
                         </div>
                     </CardContent>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <CardActions className={classes.buttons}>
-                        <Button
+                        {/* <Button
                             disableElevation
                             variant='contained'
                             onClick={() => removeFromCart(item.id)}
                         >
                             -
-                        </Button>
-                        <p align='center'>{item.quantity}</p>
-                        <Button
+                        </Button> */}
+                        <p style={{
+                            paddingTop: '4px',
+                            color: '#4b4b4b',
+                            fontWeight: '500'
+                        }}>{(item.quantity * data.price).toFixed(2) && '$2429'}</p>
+                        {/* <Button
                             disableElevation
                             variant='contained'
                             onClick={() => addToCart(item.id)}
                         >
                             +
-                        </Button>
+                        </Button> */}
                     </CardActions>
                 </Grid>
-                <Grid item xs={4}>
-                    <CardMedia>
-                        <img className={classes.img} src={data.image} alt={data.name}/>
-                    </CardMedia>
-                </Grid>
             </Grid>
-        </Card>
+        </div>
     )
 }
 

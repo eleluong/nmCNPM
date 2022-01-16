@@ -53,16 +53,23 @@ const Bill = () => {
     console.log(items);
 
     const classes = useStyles();
+
+    const item1 = {
+        
+    }
+
     return (
-        <div>
-            <div className={classes.cart}>
-                <div>
-                    {items.map(item => (
-                        <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
-                    ))}
-                </div>
-            </div>
+        <div className={classes.cart}>
+            
+            {items.map(item => (
+                <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+            ))}
+                <BillItem item={item1} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+                <BillItem item={item1} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+
+            
         </div>
+
     )
 }
 
