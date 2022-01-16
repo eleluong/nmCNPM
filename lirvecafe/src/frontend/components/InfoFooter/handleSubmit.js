@@ -2,7 +2,10 @@ export default function handleSubmit(state) {
 
     const {id, ...data} = state;
 
-    fetch('http://localhost:3000/bill', {
+    console.log('state: ', state);
+
+
+    fetch('http://localhost:5000/bills', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -7,6 +7,5 @@ export default makeStyles((theme) => ({
         minWidth: '600px',
         maxHeight: '100%',
         backgroundColor: '#f0ffff',
-
     }
 }));

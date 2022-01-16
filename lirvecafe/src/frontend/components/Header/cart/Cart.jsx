@@ -65,8 +65,8 @@ const Cart = () => {
     return (
         <div>
             <div>
-                <IconButton onClick={() => setCartOpen(true)}>
-                    <ShoppingCart/>
+                <IconButton onClick={() => setCartOpen(true)} >
+                    <ShoppingCart style ={{'font-size': '2rem'}} />
                 </IconButton>
             </div>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
@@ -74,7 +74,9 @@ const Cart = () => {
 
                     <div>
                         <h2>Your shopping cart</h2>
-                        <Button>Checkout</Button>
+                        <Button
+                            onClick={() => window.location.href = '/checkout'}
+                        >Checkout</Button>
                     </div>
                     {items.map(item => (
                         <CartItem
