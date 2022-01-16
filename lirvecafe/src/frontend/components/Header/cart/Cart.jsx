@@ -40,7 +40,7 @@ const Cart = () => {
         const temp = {cartId: id, productId: itemId};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/cart/deleteFromCart/",
+            url: "http://localhost:5000/cart/deleteFromCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
@@ -78,6 +78,7 @@ const Cart = () => {
                     </div>
                     {items.map(item => (
                         <CartItem
+                        key={item.id}
                             item={item}
                             add={handleAddToCart}
                             remove={handleRemoveFromCart}

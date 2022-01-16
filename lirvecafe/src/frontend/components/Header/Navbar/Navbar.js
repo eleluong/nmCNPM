@@ -33,7 +33,7 @@ function Navbar() {
     }
     return (
         <nav className={styles.navbar}>
-            <Link to="/" className={styles.navbar_home}> Lirve Coffe</Link>
+            <Link to={ROUTES.HOME} className={styles.navbar_home}> Lirve Coffe</Link>
 
             <ul className={styles.navbar_list}>
                 {!signined ? (<>
