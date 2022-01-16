@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import {Routes, Route,  Link, useNavigate} from "react-router-dom"
 import AddStaff from "./AddStaff"
 import styles from "./CRUD.module.css"
-import ListStaff from "./ListStaff"
-import './ListStaff.css';
+
 import UpdateStaff from "./UpdateStaff";
 import DeleteStaff from "./DeleteStaff";
 import SuccessForm from "./SuccessFrom";
@@ -72,29 +71,32 @@ function CRUD(){
             {isOpenEdit && <UpdateStaff  setFlagSuccess={setIsSuccess} staff={JSON.parse(staffEditInfo)} closeModal = {setIsOpenEdit}></UpdateStaff>}
             {isOpenDelete && <DeleteStaff setFlagSuccess={setIsSuccess} staff={JSON.parse(staffDeleteInfo)} closeModal = {setIsOpenDelete}></DeleteStaff>}
             {isSuccess && <SuccessForm setFlagSuccess={setIsSuccess} success={successMsg} isUpdated={isUpdated} setChange={setIsUpdated}></SuccessForm>}
-            <div className='staffs'>
-                <table className='staff_table'>
+            <div className={styles.staffs}>
+                <table className={styles.staff_table}>
                 <tbody>
-                    <tr className='staff_head_tr'>
-                        <th className='head_list'>ID</th>
-                        <th className='head_list'>Tên</th>
-                        <th className='head_list'>SĐT</th>
-                        <th className='head_list'>Email</th>
-                        <th className='head_list'>Địa chỉ</th>
-                        <th className='head_list'>Hành động</th>
+                    <tr className={styles.staff_head_tr}>
+                        <th className={styles.head_list}>ID</th>
+                        <th className={styles.head_list}>Tên</th>
+                        <th className={styles.head_list}>SĐT</th>
+                        <th className={styles.head_list}>Email</th>
+                        <th className={styles.head_list}>Địa chỉ</th>
+                        <th className={styles.head_list}>Hành động</th>
                     </tr>
                     {staffs.map((staff, index) => (
-                        <tr key={index} title="Double Click để xem thông tin"className='staff_tr'>
-                            <th className='list'>{staff.id}</th>
-                            <th className='list'>{staff.name}</th>
-                            <th className='list'>{staff.phone}</th>
-                            <th className='list'>{staff.email}</th>
-                            <th className='list'>{staff.address}</th>
-                            <th title="Chọn sửa, xóa"className='list ud_staff list'>
+                        <tr key={index} className={styles.staff_tr}>
+                            <th className={styles.list}>{staff.id}</th>
+                            <th className={styles.list}>{staff.name}</th>
+                            <th className={styles.list}>{staff.phone}</th>
+                            <th className={styles.list}>{staff.address}</th>
+                            <th className={styles.list}>{staff.email}</th>
+                            <th title="Chọn sửa, xóa"className={styles.list}>
+                                <div className={styles.ud_staff}> 
+
                                 {/* <span className='icon_button' onClick={() => handleUpdate(staff)}><button title="Sửa" className="fas fa-edit icon_button_update">Sửa</button></span>
                                 <span className='icon_button' onClick={() => handleDelete(staff)}><button title="xóa" className="fas fa-trash-alt icon_button_delete">Xóa</button></span> */}
-                                <span className='icon_button' onClick={() => handleUpdate(staff)}><i title="Sửa" className="fas fa-edit icon_button_update"></i></span>
-                                <span className='icon_button' onClick={() => handleDelete(staff)}><i title="xóa" className="fas fa-trash-alt icon_button_delete"></i></span>
+                                    <span className={styles.icon_button} onClick={() => handleUpdate(staff)}><i title="Sửa" className={`${styles.icon_button_update} ${icon_update}`}></i></span>
+                                    <span className={styles.icon_button} onClick={() => handleDelete(staff)}><i title="Xóa" className={`${styles.icon_button_delete} ${icon_delete}`}></i></span>
+                                </div>
                             </th>
                             {/* Thay ở code chính */}
                             {/* <th title="Chọn sửa, xóa"className='list ud_staff'>
