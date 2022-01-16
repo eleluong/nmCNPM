@@ -17,9 +17,10 @@ const Products = () => {
             console.log(res);
         };
         getProduct();
-    }, []);
+    },[]);
     console.log(products);
     return(
+      
         <div className={classes.root}>
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
@@ -29,7 +30,6 @@ const Products = () => {
                 ))}
             </Grid>
         </div>
-
 
     )
 

@@ -64,14 +64,15 @@ class CartController {
         if (addingProduct) {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
-                .set({
+                .update({
                     quantity: addingProduct.data().quantity + 1
                 });
         } else {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
                 .set({
-                    quantity: 1
+                    quantity: 1,
+                    price: addingProduct.data().price
                 });
         }
 
