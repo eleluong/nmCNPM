@@ -40,23 +40,25 @@ const Cart = () => {
         const temp = {cartId: id, productId: itemId};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/cart/deleteFromCart/",
+            url: "http://localhost:5000/cart/deleteFromCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
         setChange(true);
     });
-    useEffect(() => {
-        const getCart = async () => {
-            const url = 'http://localhost:5000/cart/get/' + id;
-            const res = await (await (fetch(url
-            ))).json();
-
+    useEffect (()=>{
+        const getCart = async()=>{
+            const url = 'http://localhost:5000/cart/get/'+id;
+            const res = await( await(fetch(url
+                ))).json();
             setItems(res);
         }
-        getCart();
-        setChange(false);
-    }, [cartOpen, change]);
+        if(signined){
+            getCart();
+            setChange(false);
+        }
+    },[cartOpen, change]);
+
     console.log(items);
 
     const classes = useStyles();
@@ -76,6 +78,7 @@ const Cart = () => {
                     </div>
                     {items.map(item => (
                         <CartItem
+                        key={item.id}
                             item={item}
                             add={handleAddToCart}
                             remove={handleRemoveFromCart}
@@ -83,10 +86,7 @@ const Cart = () => {
                     ))}
                 </div>
             </Drawer>
-
         </div>
-
-
     )
 }
 

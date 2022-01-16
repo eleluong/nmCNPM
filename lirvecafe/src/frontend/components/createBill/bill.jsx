@@ -53,16 +53,26 @@ const Bill = () => {
     console.log(items);
 
     const classes = useStyles();
+
+    const item1 = {
+        
+    }
+
     return (
-        <div>
-            <div className={classes.cart}>
-                <div>
-                    {items.map(item => (
-                        <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
-                    ))}
-                </div>
+        <div className={classes.cart}>
+            
+            {items.map(item => (
+                <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+            ))}
+
+            <div className={classes.total}>
+                <span>Tổng thanh toán:</span>
+                <span>{
+                    
+                }</span>
             </div>
         </div>
+
     )
 }
 
