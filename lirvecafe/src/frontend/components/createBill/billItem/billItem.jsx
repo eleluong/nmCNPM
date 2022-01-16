@@ -9,7 +9,7 @@ import {getCookie, deleteCookie} from "../../constants/userCookie";
 import {useState} from 'react';
 
 const BillItem = ({item, addToCart, removeFromCart}) => {
-    let signined = getCookie(isSignined.customer);
+    // let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
         // console.log(typeof user);
@@ -21,20 +21,20 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
     }
     const id = user.id;
     const [data, setData] = useState({
-        name: 'Product Name',
-        price: 100,
-        image: "https://cf.shopee.vn/file/a569e7181216cd0ae2a0f94941902cfa",
+        // name: 'Product Name',
+        // price: 100,
+        // image: "https://cf.shopee.vn/file/a569e7181216cd0ae2a0f94941902cfa",
     })
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         const url = "http://localhost:5000/product/get_by_id/" + item.productId;
-    //         const res = await (await (fetch(url
-    //         ))).json();
-    //         setData(res);
-    //     }
-    //     getData();
-    //     console.log(data);
-    // }, []);
+    useEffect(() => {
+        const getData = async () => {
+            const url = "http://localhost:5000/product/get_by_id/" + item.productId;
+            const res = await (await (fetch(url
+            ))).json();
+            setData(res);
+        }
+        getData();
+        console.log(data);
+    }, []);
 
 
 
@@ -52,7 +52,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                         <Typography variant='h7' className={classes.productName}>{data.name}</Typography>
                         <div className={classes.productInfo}>
                             <p>Price: ${data.price}</p>
-                            <p style={{marginTop: '4px'}}>Quantity: {item.quantity}10</p>
+                            <p style={{marginTop: '4px'}}>Quantity: {item.quantity}</p>
                         </div>
                     </CardContent>
                 </Grid>
@@ -69,7 +69,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                             paddingTop: '4px',
                             color: '#4b4b4b',
                             fontWeight: '500'
-                        }}>{(item.quantity * data.price).toFixed(2) && '$2429'}</p>
+                        }}>${item.quantity * data.price}</p>
                         {/* <Button
                             disableElevation
                             variant='contained'

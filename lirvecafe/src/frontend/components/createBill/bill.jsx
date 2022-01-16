@@ -64,10 +64,13 @@ const Bill = () => {
             {items.map(item => (
                 <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
             ))}
-                <BillItem item={item1} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
-                <BillItem item={item1} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
 
-            
+            <div className={classes.total}>
+                <span>Tổng thanh toán:</span>
+                <span>{
+                    
+                }</span>
+            </div>
         </div>
 
     )

@@ -31,11 +31,16 @@ function Checkout() {
     }
     const ID = user.id;
 
+    console.log('ID: ', ID);
+
     useEffect(() => {
         fetch('http://localhost:5000/customer/getInfo/' + ID)
             .then(response => response.json())
-            .then(users => {
-                dispatch(setForm(users[0]))
+            .then(user => {
+                // console.log(user);
+                const { password, ...info } = user
+                // console.log(info);
+                dispatch(setForm(info))
             })
     }, [])
 
