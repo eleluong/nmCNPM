@@ -1,6 +1,18 @@
 .infoHeader {
     font-size: 16px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-weight: 500;
+}
+
+.infoSubHeader{
+    margin-bottom: 26px;
+    font-size: 12px;
+
+}
+
+.infoSublink{
+    font-size: 12px;
+    color: #338dbc;
+    text-decoration: none;
 }
