@@ -1,44 +1,51 @@
-
-.HeaderCRUD {
+.products {
+    /* display: flex; */
+    height: calc(100vh - 91px);
+}
+.header{
     display: flex;
-    justify-content: space-around;
-    background-color: rgb(32, 32, 32);
+    background: #e3dbdb;
+    justify-content: space-between;
 }
-
-.HeaderCRUD_text {
-    color: #fff;
-    margin: 8px 0px;
-    font-size: 1.2rem;
+.label{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 12px 40px;
 }
-
-.AddStaff {
-    position: absolute;
-    top: 100px;
-    left: 400px;
-}
-
-.AddStaff_link {
+.AddProduct_link {
     text-decoration: none;
     color: #fff;
-    font-size: 1rem;
-    margin: 8px 4px;
-    padding: 4px 4px;
+    margin: 10px 160px;
+    padding: 5px 16px;
     background-color: #1a94ff;
     border-radius: 2px;
 }
-
-.AddStaff_link:hover {
+.AddProduct_link:hover{
+    cursor: pointer;
     opacity: 0.8;
+}
+.img{
+    width: 100px;
+    height: 70px;
+}
+.btn_delete {
+    background-color: #1a94ff;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
 }
 
 .form {
     position: absolute;
+    top: 150px;
+    left: 400px;
     width: 600px;
     min-height: 100px;
     padding: 32px 24px;
-    padding-top: 0px;
     text-align: center;
-    background: #f1f1f1;
+    background: #e3dbdb;
     border-radius: 2px;
     align-self: center;
     box-shadow: 0 2px 5px 0 rgba(51, 62, 73, .1);
@@ -55,20 +62,13 @@
     top: 0;
     right: 0;
 }
-
 .form_exit:hover {
     background-color: rgb(252, 25, 25);
     color: #fff;
 }
-
 .form_heading {
-    margin: 24px;
     font-size: 1.4rem;
 
-}
-
-.form_heading_text {
-    font-size: 1.4rem;
 }
 
 .field {
@@ -87,8 +87,8 @@
 
 .form_input {
     height: 8px;
-    width: 576px;
-    padding: 8px 12px;
+    width: 560px;
+    padding: 16px 12px;
     border: 1px solid #b3b3b3;
     border-radius: 2px;
     outline: none;
