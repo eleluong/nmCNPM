@@ -85,9 +85,9 @@ export default function SigninScreen() {
                 setCookie(isSignined[username], 'true', 1);
             })
             .catch(error => {
-                console.log(error.response.data);
+                console.log(error);
                 // console.log("sai mật khẩu")
-                setErrorMsg(error.response.data);
+                // setErrorMsg(error.response.data);
             })
         //Test
         // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);

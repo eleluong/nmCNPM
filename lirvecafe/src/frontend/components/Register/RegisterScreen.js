@@ -41,7 +41,6 @@ export default function RegisterScreen() {
                     address: address,
                 }
             })
-<<<<<<< HEAD
             .then(res => { 
                 console.log(res.data);
                 //e.preventDefault();
@@ -54,20 +53,6 @@ export default function RegisterScreen() {
                 // e.prevetnDefault();
                 setError(err.response.data);
             })
-=======
-                .then(res => {
-                    console.log(res.data);
-                    //e.preventDefault();
-                    alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
-                    window.location.href = ROUTES.BASE_URL_WEB;
-                })
-                .catch(err => {
-                    // console.log(err);
-                    console.log(err.response.data);
-                    // e.prevetnDefault();
-                    setError(err.response.data);
-                })
->>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
         }
         // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
         // console.log(e)

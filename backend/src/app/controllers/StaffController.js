@@ -38,15 +38,10 @@ class StaffController {
                     id: 1,
                     message: 'Thêm thành công'});
             } else {
-<<<<<<< HEAD
                 return res.status(200).json({
                     id: 2,
                     message: 'Số điện thoại đã tồn tại!'}); 
             }               
-=======
-                return res.status(400).json({error: "Phone or password is incorrect"});
-            }
->>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
         } catch (error) {
             console.log(error);
             console.log('Lỗi')
@@ -122,7 +117,6 @@ class StaffController {
             //console.log(staff);
 
             await db.collection('staff')
-<<<<<<< HEAD
                     .doc(staff.id)
                     .update({
                         phone: staff.phone,
@@ -134,17 +128,6 @@ class StaffController {
                         // TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
-=======
-                .doc(staff.id)
-                .update({
-                    phone: staff.phone,
-                    name: staff.name,
-                    address: staff.address,
-                    TimeStart: staff.TimeStart,
-                    TimeEnd: staff.TimeEnd,
-                    password: hash.hash(staff.password)
-                });
->>>>>>> c8c83c98b420c8b28d2fb3a6f0e667e2c21f7b89
 
             return res.status(200);
         } catch (error) {
