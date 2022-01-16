@@ -1,6 +1,6 @@
 import React from 'react'
 import Products from './products/products';
-import Bill from './bill/bill';
+import Bill from './Bill/bill.jsx';
 const StaffCreateBill = () => {
     return (
         <div>

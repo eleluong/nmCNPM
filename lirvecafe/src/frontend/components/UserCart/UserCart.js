@@ -3,10 +3,13 @@ import User from "../User/User";
 import styles from "./UserCart.css"
 import "../../css/bootstrap.min.css";
 import "../../css/bootstrap.css";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header'
 
 const UserInfor = () => {
     return (
         <Fragment>
+            <Header />
             <User></User>
 
             <div class="div-content">
@@ -87,6 +90,8 @@ const UserInfor = () => {
                     <label class="custom-control-label" for="inform_me">Thông báo cho tôi nếu có sản phẩm mới!</label>
                 </div>
             </div>
+
+        
 
         </Fragment>
     )
