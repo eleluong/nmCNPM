@@ -40,7 +40,7 @@ const Cart = () => {
         const temp = {cartId: id, productId: itemId};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/cart/deleteFromCart/",
+            url: "http://localhost:5000/cart/deleteFromCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
@@ -65,8 +65,8 @@ const Cart = () => {
     return (
         <div>
             <div>
-                <IconButton onClick={() => setCartOpen(true)}>
-                    <ShoppingCart/>
+                <IconButton onClick={() => setCartOpen(true)} >
+                    <ShoppingCart style ={{'font-size': '2rem'}} />
                 </IconButton>
             </div>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
@@ -80,6 +80,7 @@ const Cart = () => {
                     </div>
                     {items.map(item => (
                         <CartItem
+                        key={item.id}
                             item={item}
                             add={handleAddToCart}
                             remove={handleRemoveFromCart}

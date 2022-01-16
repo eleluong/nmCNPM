@@ -54,6 +54,7 @@ class CartController {
     async addToCart(req, res) {
         const productId = req.body.productId;
         const cartId = req.body.cartId;
+        const price = req.body.price;
 
         const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
@@ -64,14 +65,15 @@ class CartController {
         if (addingProduct) {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
-                .set({
+                .update({
                     quantity: addingProduct.data().quantity + 1
                 });
         } else {
             carts.doc(cartId)
                 .collection('productList').doc(productId)
                 .set({
-                    quantity: 1
+                    quantity: 1,
+                    price: price
                 });
         }
 
@@ -108,6 +110,23 @@ class CartController {
         //     console.error('err', err);
         //     res.status(400).json({ error: err.message });
         // })
+    }
+
+    //GET
+    async getTotal(req, res) {
+        try {
+            const cartId = req.params.cartId;
+
+            const products = (await carts.doc(cartId).collection('productList').get()).docs;
+
+            const sum = products.reduce((total, product) => {
+                return total + product.data().quantity*product.data().price;
+            }, 0); 
+
+            return res.status(200).json(sum);
+        } catch(error) {
+            return res.status(500);
+        }
     }
 }
 
