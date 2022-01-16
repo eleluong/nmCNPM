@@ -8,17 +8,6 @@ class StaffController {
             const staff = req.body;
             console.log(staff);
             const query = (await db.collection('staff').get()).docs;
-            // const query = db.collection('staff')
-            //                 .add({
-            //                     name: staff.name,
-            //                     email: staff.email,
-            //                     address: staff.address,
-            //                     phone: staff.phone,
-            //                     password: staff.password,
-            //                     // TimeStart: staff.TimeStart,
-            //                     // TimeEnd: staff.TimeEnd
-            //                 });
-
             const staff_ = query.find(doc => {
                 return doc.data().phone === staff.phone;
             })
@@ -101,10 +90,10 @@ class StaffController {
     async deleteStaff(req, res) {
         try {
             const staffId = req.body.id;
-
+            console.log(staffId);
             await db.collection('staff').doc(staffId).delete({});
 
-            return res.status(200);
+            return res.status(200).send("Xóa thành công");
         } catch (error) {
             return res.status(500).send(error);
         }
@@ -113,23 +102,35 @@ class StaffController {
     // PUT
     async updateStaff(req, res) {
         try {
+            
             const staff = req.body;
             //console.log(staff);
-
-            await db.collection('staff')
+            const query = (await db.collection('staff').get()).docs;
+            const staff_ = query.find(doc => {
+                return (doc.data().phone === staff.phone && doc.id !== staff.id);
+            })
+            if(!staff_) {
+                await db.collection('staff')
                     .doc(staff.id)
                     .update({
                         phone: staff.phone,
                         name: staff.name,
                         email: staff.email,
                         address: staff.address,
-
-                        // TimeStart: staff.TimeStart,
-                        // TimeEnd: staff.TimeEnd,
                         password: hash.hash(staff.password)
                     });
+                    return res.status(200).json({
+                        id: 1,
+                        message: 'Sửa đổi thành công'});
+            }
+            else {
+                return res.status(200).json({
+                    id: 2,
+                    message: 'Số điện thoại đã tồn tại, nhập số điện thoại khác!'});
+            }
+            
 
-            return res.status(200);
+            
         } catch (error) {
             return res.status(500).send(error);
         }

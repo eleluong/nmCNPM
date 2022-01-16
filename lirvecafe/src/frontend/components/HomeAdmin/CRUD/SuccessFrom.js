@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./CRUD.module.css"
 // import styles from "./UpdateStaff.module.css"
 function SuccessForm(props) {
-    console.log(props);
+    // console.log(props);
     
     // const submitSucessForm = () => {
     //     alert("xóa thành công!")
@@ -23,7 +23,7 @@ function SuccessForm(props) {
                
                 
                 <div className={styles.field_submit}>
-                    <button onClick={() => props.setFlagSuccess(false)} className={styles.form_submit} type="submit">OK</button>
+                    <button onClick={() => {props.setFlagSuccess(false); props.setChange(!props.isUpdated)}} className={styles.form_submit} type="submit">OK</button>
                 </div>
             </div>
         </div>

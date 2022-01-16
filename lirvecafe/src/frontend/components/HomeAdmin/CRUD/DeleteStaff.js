@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./CRUD.module.css"
+import axios from "axios";
 // import styles from "./UpdateStaff.module.css"
 function DeleteStaff(props) {
     // console.log(props);
     const staffInfo = props.staff;
-    console.log(staffInfo);
+    // console.log(staffInfo);
     
     // const currentInfo = {
     //     id: staffInfo.id,
@@ -17,11 +18,28 @@ function DeleteStaff(props) {
 
     const handleDeleteStaffInfo = () => {
         //Hàm Xóa-API tương ứng ID lấy từ staffInfo
+        axios({
+            method: 'DELETE',
+            url: 'http://localhost:5000/staff/delete',
+            data: {
+                id: staffInfo.id,
+            }
+        })
+        .then(res => {
+            // console.log(res.status);
+            if(res.status === 200) {
+                props.closeModal(false);
+                props.setFlagSuccess(true);
+            }
+            
+        }) 
+        .catch(error => {
+            console.log(error);
+        })
         //Xóa thất bại
         //Xóa thành công
         // alert("xóa thành công!");
-        props.closeModal(false);
-        props.setFlagSuccess(true);
+        
     }
     return (
         <div className={styles.DeleteStaff}>

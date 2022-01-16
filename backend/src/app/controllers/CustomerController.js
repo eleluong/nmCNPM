@@ -45,6 +45,7 @@ class CustomersController {
                 email: req.body.email,
                 address: req.body.address
             });
+            console.log('\n Thành công \n');
             res.status(200).send('Đăng ký thành công');
         } else res.status(409).send('Số điện thoại đăng ký đã tồn tại');
     }

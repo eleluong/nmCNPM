@@ -21,10 +21,11 @@ const schema = yup.object().shape({
         .required("Vui lòng nhập email!"),
     password: yup
         .string()
-        .required("Vui lòng nhập mật khẩu!"),
+        .required("Vui lòng nhập mật khẩu!")
+        .min(7, "Mật khẩu phải có nhiều hơn 6 ký tự")
 });
-export const AddStaff = () => {
-
+export default function AddStaff (props) {
+    // console.log(props);
     const {
         register,
         reset,
@@ -34,9 +35,11 @@ export const AddStaff = () => {
     } = useForm({resolver: yupResolver(schema)});
     const inputRef = useRef();
     const [msg, setMsg] = useState('');
+    const [err, setErr] = useState('');
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         setMsg('');
+        setErr('');
         axios({
             method: 'POST',
             url: 'http://localhost:5000/staff/add',
@@ -60,9 +63,10 @@ export const AddStaff = () => {
                         password: "",
                     });
                     setMsg(res.data.message);
+                    props.setChange(!props.isAdded);
                 }
                 else if (res.data.id === 2) {
-                    setMsg(res.data.message);
+                    setErr(res.data.message);
                     console.log(res.data.message);
                 }
             }
@@ -85,6 +89,7 @@ export const AddStaff = () => {
                 <Link to="/admin/CRUD" className={styles.form_exit}>&times;</Link>
                 <h1 className={styles.form_heading}>Điền các thông tin cần thiết để thêm nhân viên</h1>
                 {msg && (<h3 className={styles.form_message}>{msg}</h3>)}
+                {err && (<h3 className={styles.form_error}>{err}</h3>)}
                 <div className={styles.field}>
                     <label className={styles.form_label}>Tên nhân viên: </label>
                     <input ref={inputRef} className={styles.form_input}

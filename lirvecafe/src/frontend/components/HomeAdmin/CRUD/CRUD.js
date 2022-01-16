@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {Routes, Route,  Link, useNavigate} from "react-router-dom"
-import {AddStaff} from "./AddStaff"
+import AddStaff from "./AddStaff"
 import styles from "./CRUD.module.css"
 import ListStaff from "./ListStaff"
 import './ListStaff.css';
@@ -15,6 +15,9 @@ function CRUD(){
     const [isOpenDelete, setIsOpenDelete] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [successMsg, setSuccessMsg]= useState('');
+    //Các biến xét để render gọi API get all ít hơn
+    const [isAdded, setIsAdded] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
     const handleDelete = (staff) => {
         // navigate('/CRUD/deletestaff');
         console.log(staff);
@@ -58,17 +61,17 @@ function CRUD(){
             setStaffs(res);
         };
         getStaffs();
-    }, []);
+    }, [isAdded, isUpdated]);
     console.log(staffs);
     return(
         <div className={styles.CRUD}>
             <div className={styles.HeaderCRUD}>
                 <h1 className={styles.HeaderCRUD_text}>Danh sách nhân viên</h1>
-                <Link to='ThemNhanVien' className={styles.AddStaff_link}> Thêm nhân viên</Link>
+                <Link to='ThemNhanVien' className={styles.AddStaff_link}> +Thêm nhân viên</Link>
             </div>
-            {isOpenEdit && <UpdateStaff  setFlagSuccess={setIsSuccess} staff={JSON.parse(staffEditInfo)} closeModal = {setIsOpenEdit} ></UpdateStaff>}
+            {isOpenEdit && <UpdateStaff  setFlagSuccess={setIsSuccess} staff={JSON.parse(staffEditInfo)} closeModal = {setIsOpenEdit}></UpdateStaff>}
             {isOpenDelete && <DeleteStaff setFlagSuccess={setIsSuccess} staff={JSON.parse(staffDeleteInfo)} closeModal = {setIsOpenDelete}></DeleteStaff>}
-            {isSuccess && <SuccessForm setFlagSuccess={setIsSuccess} success={successMsg}></SuccessForm>}
+            {isSuccess && <SuccessForm setFlagSuccess={setIsSuccess} success={successMsg} isUpdated={isUpdated} setChange={setIsUpdated}></SuccessForm>}
             <div className='staffs'>
                 <table className='staff_table'>
                 <tbody>
@@ -113,9 +116,9 @@ function CRUD(){
             </div> */}
             
             <Routes>
-                <Route path='ThemNhanVien' element={<AddStaff/>}></Route>
-                <Route path='/deletestaff' element={<AddStaff/>}></Route>
-                <Route path='/updatestaff' element={<AddStaff/>}></Route>
+                <Route path='ThemNhanVien' element={<AddStaff setChange = {setIsAdded} isAdded={isAdded}></AddStaff>}></Route>
+                {/* <Route path='/deletestaff' element={<AddStaff/>}></Route>
+                <Route path='/updatestaff' element={<AddStaff/>}></Route> */}
             </Routes> 
         </div>
         

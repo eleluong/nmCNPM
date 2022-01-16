@@ -22,7 +22,7 @@ router.post('/register', (req, res) => { customersController.createCustomer })
 
 router.get('/logout', (req, res) => {
     req.session.destroy((req, res) => {
-        return res.status(200);
+        // return res.status(200);
     });
 });
 

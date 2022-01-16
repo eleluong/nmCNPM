@@ -32,7 +32,7 @@ export default function RegisterScreen() {
             setError('');
             axios({
                 method: 'POST',
-                url: 'http://localhost:5000/users/register',
+                url: 'http://localhost:5000/customer/add',
                 data: {
                     phone: phone,
                     password: password,
@@ -41,18 +41,18 @@ export default function RegisterScreen() {
                     address: address,
                 }
             })
-            .then(res => { 
-                console.log(res.data);
-                //e.preventDefault();
-                alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
-                window.location.href = ROUTES.BASE_URL_WEB;
-            })
-            .catch(err => {
-                console.log(err);
-                console.log(err.response.data);
-                // e.prevetnDefault();
-                setError(err.response.data);
-            })
+                .then(res => {
+                    console.log(res);
+                    //e.preventDefault();
+                    alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
+                    window.location.href = ROUTES.BASE_URL_WEB;
+                })
+                .catch(err => {
+                    // console.log(err);
+                    console.log(err.response.data);
+                    // e.prevetnDefault();
+                    setError(err.response.data);
+                })
         }
         // console.error('Đăng ký thành công, quay trở lại trang chủ để đăng nhập');
         // console.log(e)

@@ -14,22 +14,22 @@ const Products = () => {
             const url = "http://localhost:5000/product/get_all";
             const res = await (await fetch(url)).json();
             setProducts(res);
+            console.log(res);
         };
         getProduct();
-    }, []);
+    },[]);
     console.log(products);
     return(
+      
         <div className={classes.root}>
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
                     <Grid item key = {product.id} xs = {4} sm = {4} lg = {2}>
                         <Product product = {product} />
-
                     </Grid>
                 ))}
             </Grid>
         </div>
-
 
     )
 
