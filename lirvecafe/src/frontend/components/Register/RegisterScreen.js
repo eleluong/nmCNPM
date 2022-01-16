@@ -32,7 +32,7 @@ export default function RegisterScreen() {
             setError('');
             axios({
                 method: 'POST',
-                url: 'http://localhost:5000/users/register',
+                url: 'http://localhost:5000/customer/add',
                 data: {
                     phone: phone,
                     password: password,
@@ -42,7 +42,7 @@ export default function RegisterScreen() {
                 }
             })
                 .then(res => {
-                    console.log(res.data);
+                    console.log(res);
                     //e.preventDefault();
                     alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
                     window.location.href = ROUTES.BASE_URL_WEB;
