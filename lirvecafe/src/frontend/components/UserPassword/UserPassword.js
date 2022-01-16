@@ -10,6 +10,9 @@ import reducer, {initState} from "../UserStore/reducer";
 import User from "../User/User";
 import "../../css/bootstrap.min.css";
 import "../../css/bootstrap.css";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header'
+
 
 const UserPassword = () => {
 
@@ -27,6 +30,7 @@ const UserPassword = () => {
 
     return (
         <Fragment>
+            <Header></Header>
             <User></User>
             <div class="div-content">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"

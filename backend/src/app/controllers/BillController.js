@@ -52,7 +52,7 @@ class BillsController {
     }
 
     async getBillbyState(req, res) {
-        const state = parseInt(req.params.state);
+        const state = parseInt(req.body.state);
         await bills.where('state', '==', state).get()
         .then(billList => {
             let array = [];
@@ -71,22 +71,25 @@ class BillsController {
     }
 
     async createBill(req, res) {
-        const user = req.body;
+        console.log('asdfsadfsadf')
+        const user = req.body.id;
         console.log(user);
-        const productList = carts.doc(user.id).collection('productList').get();
+        const productList = (await carts.doc(user).collection('productList').get()).docs;
+        console.log(productList);
         let total = 0;
         await bills.add({
-            phone: user.phone,
-            shippingAddress: user.address,
+            name: req.body.name,
+            phone: req.body.phone,
+            shippingAddress: req.body.address,
             state: 0,
             staffID: "",
             time: FieldValue.serverTimestamp(),
         })
         .then(bill => {
             for(const product of productList) {
-                total += product.number * product.price;
-                bill.collection(productList).doc(product.id).set({
-                    number: product.number,
+                total += product.quantity * product.price;
+                bill.collection('productList').doc(product.id).set({
+                    number: product.data().quantity,
                 })
             }
             bill.update({
@@ -100,7 +103,7 @@ class BillsController {
     }
 
     async deleteBill(req, res) {
-        await bills.doc(req.body.id).get()
+        await bills.doc(req.id).get()
         .then(bill => {
             if(!bill.exists) {
                 res.send('Bill not found');
