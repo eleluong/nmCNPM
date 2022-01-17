@@ -1,0 +1,39 @@
+.orders {
+    /* display: flex; */
+    height: calc(100vh - 91px);
+}
+.header{
+    display: flex;
+    background: #e3dbdb;
+    justify-content: space-between;
+}
+.label{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 12px 40px;
+}
+
+.tabs{
+    top: 91px;
+    position: absolute;
+    color: #0384f5;
+    width: 100%;
+}
+
+.tabs_list{
+    background-color: #e2e3e3;
+    margin-left: 40px;
+}
+
+.btn_delete {
+    background-color: #1a94ff;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
+}
+
+.btn_delete:hover {
+    opacity: 0.8;
+}
