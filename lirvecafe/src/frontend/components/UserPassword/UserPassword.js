@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {useStore} from "../UserStore"
+import {useState} from "react"
 import {useEffect, useReducer} from "react";
 import {setName, setPhone, setEmail, setAddress, setForm} from "../UserStore/actions";
 import {useContext} from "react"
@@ -15,6 +15,10 @@ import Header from '../Header/Header'
 
 
 const UserPassword = () => {
+
+    const [password, setPassword] = useState('')
+    const [rePassword, setRePassword] = useState('')
+
 
     // const [state, dispatch] = useStore()
 
@@ -33,49 +37,47 @@ const UserPassword = () => {
             <Header></Header>
             <User></User>
             <div class="div-content">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-                      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
-
-                <div class="col-lg-14">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mật khẩu cũ</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="password" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mật khẩu mới</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="password" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Nhập lại mật khẩu mới</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="password" class="form-control"/>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-9 text-secondary">
-                                    <button type="button" class="button-7">Lưu thay đổi</button>
-                                    &nbsp;                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+			
+			<div class="col-lg-14">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Mật khẩu cũ</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="password" class="form-control" value={password} placeholder="Mật khẩu cũ" />
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Mật khẩu mới</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="password" class="form-control" value={rePassword} placeholder="Mật khẩu mới" />
+								</div>
+							</div>
+							{/* <div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Nhập lại mật khẩu mới</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="password" class="form-control" />
+								</div>
+							</div> */}
+							
+							
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+                                <button type="button" class="button-7">Lưu thay đổi</button>&nbsp;								</div>
+							</div>
+						</div>
+					</div>
+     
+      
+            </div>
             </div>
 
 
