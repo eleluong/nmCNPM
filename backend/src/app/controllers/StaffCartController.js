@@ -106,6 +106,7 @@ class StaffCartController {
                 bill.collection(productList).doc(product.id).set({
                     number: product.number,
                 })
+                product.ref.delete();
             }
             bill.update({
                 total: total,
