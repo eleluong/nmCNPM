@@ -62,8 +62,6 @@ class ShopEventController {
     async updateShopEvent(req, res) {
         try {
             const event = req.body;
-            //console.log(staff);
-
             await db.collection('shopevents')
                 .doc(event.id)
                 .update({

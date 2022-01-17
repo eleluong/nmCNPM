@@ -1,10 +1,13 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import UpdateEvent from './UpdateEvent';
 import styles from "./Events.module.css"
-
 function Events() {
     const [events, setEvents] = useState([]);
+    const [event, setEvent] = useState([]);
+    const [change, setChange] = useState(0);
+    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
     useEffect(() => {
         const getEvents = async () => {
             var eventsAPI = 'http://localhost:5000/shopevent/get_all';
@@ -12,7 +15,7 @@ function Events() {
             setEvents(res);
         };
         getEvents();
-    }, []);
+    }, [change]);
 
     function handleDeleteEvent(event) {
         var eventsDeleteAPI = 'http://localhost:5000/shopevent/delete';
@@ -29,12 +32,16 @@ function Events() {
         })
             .then(res => res.json())
     }
-
+    function handleUpdateEvent(event) {
+        setIsOpenUpdate(true);
+        setEvent(event);
+    }
     // console.log(events);
 
     return (
         <div className={styles.events}>
             <h1 className={styles.side_bar}>Danh sách sự kiện</h1>
+            {isOpenUpdate && <UpdateEvent event={event} isOpen = {setIsOpenUpdate} change={change} isChange = {setChange}></UpdateEvent>}
             <TableContainer component={Paper}>
                 <Table aria-label="a dense table">
                     <TableHead>
@@ -51,7 +58,7 @@ function Events() {
                             <TableRow
                                 id={event.id}
                                 key={event.id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
                                     {event.name}
@@ -60,8 +67,8 @@ function Events() {
                                 <TableCell align="right">{event.number}</TableCell>
                                 <TableCell align="right">{event.time}</TableCell>
                                 <TableCell align="right">
-                                    <button className={styles.btn_delete} onClick={() => handleDeleteEvent(event)}>Hủy
-                                    </button>
+                                    <button className={styles.btn_update} onClick={() => handleUpdateEvent(event)}>Sửa</button>
+                                    <button className={styles.btn_delete} onClick={() => handleDeleteEvent(event)}>Hủy</button>
                                 </TableCell>
                             </TableRow>
                         ))}

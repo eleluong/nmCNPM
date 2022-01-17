@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Box, Tab } from '@material-ui/core';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab'
 import { getCookie } from '../../constants/userCookie';
 import styles from "./Orders.module.css"

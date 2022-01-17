@@ -2,7 +2,9 @@
     background: #fff;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 90vh;
+    top: 100px;
 }
 
 .form {
@@ -12,7 +14,6 @@
     text-align: center;
     background: #f1f1f1;
     border-radius: 2px;
-    margin: 24px;
     align-self: center;
     box-shadow: 0 2px 5px 0 rgba(51, 62, 73, .1);
 }
