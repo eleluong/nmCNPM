@@ -53,7 +53,7 @@ const Product = ({product}) => {
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
                 <Typography>
-                    {product.price}$
+                    {product.price}Đ
                 </Typography>
                 {signined?(
                     <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId, product.price)} >
