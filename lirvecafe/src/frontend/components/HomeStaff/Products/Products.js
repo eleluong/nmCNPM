@@ -3,9 +3,12 @@ import { Routes, Route, Link } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import styles from "./Products.module.css"
 import AddProduct from './AddProduct';
+import NotifyConfirm from './NotifyConfirm';
 
 function Products() {
     const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState([]);
+    const [isOpen, setIsOpen] = useState(['false']);
     useEffect(() => {
         const getProduct = async () => {
             const url = "http://localhost:5000/product/get_all";
@@ -14,6 +17,9 @@ function Products() {
         };
         getProduct();
     }, []);
+    function handleConfirmDelete(product){
+        setIsOpen("true");
+    }
     function handleDeleteProduct(product) {
         var ProductsDeleteAPI = 'http://localhost:5000/product/delete';
         var e = document.getElementById(product.productId);
@@ -32,6 +38,7 @@ function Products() {
 
     return (
         <div className={styles.products}>
+            <NotifyConfirm isOpen={isOpen} />
             <div className={styles.header}>
                 <h1 className={styles.label}>Danh sách sản phẩm</h1>
                 <Link to='ThemSanPham' className={styles.AddProduct_link}> Thêm sản phẩm</Link>
@@ -64,7 +71,7 @@ function Products() {
                                 <TableCell align="center">{product.price}</TableCell>
                                 <TableCell align="center">{product.stock}</TableCell>
                                 <TableCell align="center">
-                                    <button className={styles.btn_delete} onClick={() => handleDeleteProduct(product)}>Xóa
+                                    <button className={styles.btn_delete} onClick={() => handleConfirmDelete(product)}>Xóa
                                     </button>
                                 </TableCell>
                             </TableRow>

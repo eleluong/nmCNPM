@@ -65,7 +65,7 @@ const Cart = () => {
     return (
         <div>
             <div>
-                <IconButton onClick={() => setCartOpen(true)} >
+                <IconButton onClick={() => setCartOpen(true)} style={{'position': 'inherit'}}>
                     <ShoppingCart style ={{'font-size': '2rem'}} />
                 </IconButton>
             </div>
