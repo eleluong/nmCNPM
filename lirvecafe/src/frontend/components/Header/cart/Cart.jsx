@@ -6,9 +6,8 @@ import {Button, Drawer} from '@material-ui/core';
 import {IconButton} from '@material-ui/core';
 import {ShoppingCart} from '@material-ui/icons';
 import {useEffect} from 'react';
-import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
-import {getCookie, deleteCookie} from "../../constants/userCookie";
+import {getCookie} from "../../constants/userCookie";
 
 
 const Cart = () => {
@@ -24,65 +23,61 @@ const Cart = () => {
     }
     const id = user.id;
 
-    const axios = require('axios');
-    const handleAddToCart = ((itemId, productprice) => {
-        const temp = {cartId: id, productId: itemId, price: productprice};
-        axios({
+    const handleAddToCart =  (async (itemId) => {
+        const temp = {cartId: id, productId: itemId};
+        const url = "http://localhost:5000/cart/addToCart/";
+        await fetch(url, {
             method: 'PUT',
-            url: "http://localhost:5000/cart/addToCart/",
-            data: temp,
-        }).then(res => console.log(res));
-        console.log(temp);
-        setChange(true);
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(temp),
+        })
+        .then(res => setChange(true));
 
     });
-    const handleRemoveFromCart = ((itemId) => {
+    const handleRemoveFromCart = (async (itemId) => {
         const temp = {cartId: id, productId: itemId};
-        axios({
+        const url = "http://localhost:5000/cart/deleteFromCart/";
+        await fetch(url, {
             method: 'PUT',
-            url: "http://localhost:5000/cart/deleteFromCart",
-            data: temp,
-        }).then(res => console.log(res));
-        console.log(temp);
-        setChange(true);
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(temp),
+        })
+        .then(res => setChange(true));        ;
     });
+
     useEffect (()=>{
         const getCart = async()=>{
             const url = 'http://localhost:5000/cart/get/'+id;
-            const res = await( await(fetch(url
-                ))).json();
-            setItems(res);
+            await(await(fetch(url)))
+            .json()
+            .then(res => setItems(res))
+            .then(() => setChange(false));
         }
-        if(signined){
-            getCart();
-            setChange(false);
-        }
+            getCart()
+        
     },[cartOpen, change]);
 
-    console.log(items);
+    // console.log(items);
 
     const classes = useStyles();
     return (
         <div>
             <div>
-            {signined?(
-                    <IconButton onClick={() => setCartOpen(true)} style ={{'position': 'inherit'}}>
-                        <ShoppingCart style ={{'font-size': '2rem'}} />
-                    </IconButton>
-                    ):(<></>)}
+                <IconButton onClick={() => setCartOpen(true)}>
+                    <ShoppingCart/>
+                </IconButton>
             </div>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                 <div className={classes.cart} align='center'>
 
                     <div>
                         <h2>Your shopping cart</h2>
-                        <Button
-                            onClick={() => window.location.href = '/checkout'}
-                        >Checkout</Button>
                     </div>
+                    <Button
+                        onClick={() => window.location.href = '/checkout'}
+                    >Checkout</Button>
                     {items.map(item => (
                         <CartItem
-                        key={item.id}
                             item={item}
                             add={handleAddToCart}
                             remove={handleRemoveFromCart}
