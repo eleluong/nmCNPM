@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
         maxWidth: '90%',
         justifyContent: 'center',
         marginBottom: '20px',
-
+        position: 'sticky',
     },
     buttons: {
         maxHeight: '130px',

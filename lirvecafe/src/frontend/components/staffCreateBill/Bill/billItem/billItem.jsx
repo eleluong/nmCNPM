@@ -40,7 +40,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.item}>
+        <div className={classes.item} >
             <Grid item xs={3}>
                 <CardMedia>
                     <img className={classes.img} src={data.image} alt={data.name}/>
@@ -51,7 +51,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                     <CardContent className={classes.content}>
                         <Typography variant='h7' className={classes.productName}>{data.name}</Typography>
                         <div className={classes.productInfo}>
-                            <p>Price: ${data.price}</p>
+                            <p>Price: {data.price}đ</p>
                             <p style={{marginTop: '4px'}}>Quantity: {item.quantity}</p>
                         </div>
                     </CardContent>
@@ -69,7 +69,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                             paddingTop: '4px', 
                             color: '#4b4b4b',
                             fontWeight: '500'
-                        }}>${item.quantity * data.price}</p>
+                        }}>{item.quantity * data.price}đ</p>
                         <Button
                             disableElevation
                             variant='contained'
