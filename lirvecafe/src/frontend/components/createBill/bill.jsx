@@ -57,9 +57,17 @@ const Bill = () => {
 
     const classes = useStyles();
 
-    const item1 = {
-        
-    }
+    const [total, setTotal] = useState();
+
+    useEffect(() => {
+        fetch('http://localhost:5000/cart/get_total/' + id)
+            .then(response => response.json())
+            .then(total => {
+                console.log(total);
+                setTotal(total);
+            })
+    }, [])
+
 
     return (
         <div className={classes.cart}>
@@ -69,10 +77,8 @@ const Bill = () => {
             ))}
 
             <div className={classes.total}>
-                <span>Tổng thanh toán:</span>
-                <span>{
-                    
-                }</span>
+                <span className={classes.totalText}>Tổng cộng:</span>
+                <span className={classes.totalPrice}>{total || ' $280,000'}</span>
             </div>
         </div>
 

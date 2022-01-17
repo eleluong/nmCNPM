@@ -15,4 +15,23 @@ export default makeStyles((theme) => ({
         borderLeft: '1px solid #ededed'
 
     },
+    total: {
+        paddingTop: '50px',
+        marginTop: '50px',
+        borderTop: '1px solid #ededed',
+        display: 'flex',
+        justifyContent: 'space-between',
+
+    },
+    totalText: {
+        fontSize: "18px",
+        fontWeight: 500,
+        color: '#4b4b4b',
+    },
+    totalPrice: {
+        fontSize: '26px',
+        fontWeight: 500,
+        color: '#4b4b4b',
+        paddingRight: '70px',
+    }
 }));

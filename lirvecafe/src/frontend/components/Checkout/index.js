@@ -67,7 +67,7 @@ function Checkout() {
                             link: "./",
                             label: "Giỏ hàng",
                         }}
-                        textBtn="Thanh toán"
+                        textBtn="Đặt hàng"
                     />
                 </Info>
             </div>
