@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
     buttons: {
         maxHeight: '130px',
         maxWidth: '100px',
-        paddingTop: '10px',
+        padding: '0',
         flexDirection: 'column',
     },
     content: {
