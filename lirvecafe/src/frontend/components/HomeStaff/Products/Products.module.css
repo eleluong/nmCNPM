@@ -36,6 +36,20 @@
     cursor: pointer;
     border: 0px;
 }
+.btn_delete:hover {
+    opacity: 0.8;
+}
+.btn_update{
+    background-color: #ecd718;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
+}
+.btn_update:hover {
+    opacity: 0.8;
+}
 
 .form {
     position: absolute;

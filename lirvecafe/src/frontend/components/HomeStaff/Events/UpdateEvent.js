@@ -57,7 +57,7 @@ function UpdateEvent({ event, isOpen, change, isChange }) {
     return (
         <div className={styles.main}>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <h1 className={styles.form_heading}>Điền các thông tin cần thiết để tạo sự kiện</h1>
+                <h1 className={styles.form_heading}>Chỉnh sửa thông tin sự kiện</h1>
                 <div className={styles.field}>
                     <label className={styles.form_label}>Tên khách hàng: </label>
                     <input className={styles.form_input} placeholder="VD: Nguyễn Văn Biển" {...register("name")}

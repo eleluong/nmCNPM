@@ -4,6 +4,7 @@ import { TabContext, TabList, TabPanel } from '@material-ui/lab'
 import styles from "./Products.module.css"
 import AddProduct from './AddProduct';
 import ProductList from './ProductList'
+import { SettingsPowerRounded } from '@material-ui/icons';
 function Products() {
     const [products, setProducts] = useState([]);
     const [value, setValue] = useState('1');
@@ -51,9 +52,9 @@ function Products() {
         })
             .then(res => res.json())
     }
-    function handleUpdateProduct() {
-
-    }
+    // function handleUpdateProduct() {
+    //     setIsOpen(true);
+    // }
     return (
         <div className={styles.products}>
             <div className={styles.tabs}>
@@ -68,18 +69,22 @@ function Products() {
                         </Box>
                         <TabPanel value="1">
                             <ProductList
+                                change={change}
+                                IsChange={setChange}
                                 type={drink}
                                 products={products}
                                 remove={handleDeleteProduct}
-                                update={handleUpdateProduct}
+                            // update={handleUpdateProduct}
                             />
                         </TabPanel>
                         <TabPanel value="2">
                             <ProductList
+                                change={change}
+                                IsChange={setChange}
                                 type={book}
                                 products={products}
                                 remove={handleDeleteProduct}
-                                update={handleUpdateProduct}
+                            // update={handleUpdateProduct}
                             />
                         </TabPanel>
                         <TabPanel value="3">
