@@ -62,7 +62,7 @@ export default function Orders() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: { staffID: staff.id, billId: id }
+            body: JSON.stringify({ staffID: staff.id, billId: id })
         })
             .then(res => setChange(change + 1));
     }

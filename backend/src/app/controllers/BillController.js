@@ -134,13 +134,13 @@ class BillsController {
                     res.send('Bill not found');
                 }
                 if (bill.data().state == 0) {
-                    bill.update({
+                    bill.ref.update({
                         staffID: req.body.staffID,
                         state: 1,
                     })
                 }
                 if (bill.data().state == 1) {
-                    bill.update({
+                    bill.ref.update({
                         state: 2,
                     })
                 }

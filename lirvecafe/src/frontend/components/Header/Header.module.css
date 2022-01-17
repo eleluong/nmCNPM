@@ -28,6 +28,7 @@
     padding-right: 20px;
     list-style: none;
     justify-content: space-around;
+    z-index: 200;
 }
 
 .navbar_item {
