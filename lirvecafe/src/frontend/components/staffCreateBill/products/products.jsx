@@ -7,7 +7,7 @@ import {useState} from "react";
 import {getCookie, deleteCookie} from "../../constants/userCookie"
 
 
-const Products = () => {
+const Products = ({handleAdd}) => {
     const classes = useStyles();
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -19,13 +19,12 @@ const Products = () => {
         };
         getProduct();
     }, []);
-    console.log(products);
     return(
         <div className={classes.root}>
             <Grid container justify= "center" spacing = {4}>
                 {products.map((product) =>(
                     <Grid item key = {product.id} xs = {4} sm = {4} lg = {2}>
-                        <Product product = {product} />
+                        <Product product = {product} handleAdd = {handleAdd} />
                     </Grid>
                 ))}
             </Grid>

@@ -7,7 +7,7 @@ router.get('/get_by_customerId/:id', billController.getBillByCustomerID);
 // router.get('/get_by_state/:state', billController.getBillbyState);
 router.get('/get_by_state/:state', billController.getBillbyState);
 router.post('/add', billController.createBill);
-router.delete('/delete', billController.deleteBill);
+router.delete('/delete/:id', billController.deleteBill);
 router.put('/update', billController.updateBill);
 router.get('/:id', billController.getBillByCustomerID);
 

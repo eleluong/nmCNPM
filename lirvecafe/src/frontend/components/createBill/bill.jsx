@@ -78,7 +78,7 @@ const Bill = () => {
 
             <div className={classes.total}>
                 <span className={classes.totalText}>Tổng cộng:</span>
-                <span className={classes.totalPrice}>{total || ' $280,000'}</span>
+                <span className={classes.totalPrice}>{total || ' 280,000'}VNĐ</span>
             </div>
         </div>
 

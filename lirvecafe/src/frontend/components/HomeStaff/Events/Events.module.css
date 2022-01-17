@@ -1,14 +1,12 @@
 .events {
-    display: flex;
-    height: calc(100vh - 91px);
+    /* height: calc(100vh - 91px); */
 }
 
 .side_bar {
-    width: 290px;
     background-color: #dcdcdd;
     font-size: 25px;
     text-align: center;
-    padding: calc((100vh - 116px) / 2) 0;
+    padding: 12px 0;
 }
 
 .item {
@@ -25,5 +23,16 @@
 }
 
 .btn_delete:hover {
+    opacity: 0.8;
+}
+.btn_update{
+    background-color: #ecd718;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
+}
+.btn_update:hover {
     opacity: 0.8;
 }
