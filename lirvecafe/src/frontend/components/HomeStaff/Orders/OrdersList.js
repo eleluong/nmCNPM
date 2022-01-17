@@ -19,8 +19,8 @@ const OrdersList = ({ orders, remove, update }) => {
                 <TableBody>
                     {orders.map((order) => (
                         <TableRow
-                            id={order.id}
-                            key={order.id}
+                            id={order.billId}
+                            key={order.billId}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
