@@ -58,25 +58,25 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                 </Grid>
                 <Grid item xs={3}>
                     <CardActions className={classes.buttons}>
-                        {/* <Button
+                        <Button
                             disableElevation
                             variant='contained'
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => removeFromCart(item.productId)}
                         >
                             -
-                        </Button> */}
+                        </Button>
                         <p style={{
-                            paddingTop: '4px',
+                            paddingTop: '4px', 
                             color: '#4b4b4b',
                             fontWeight: '500'
                         }}>${item.quantity * data.price}</p>
-                        {/* <Button
+                        <Button
                             disableElevation
                             variant='contained'
-                            onClick={() => addToCart(item.id, data.price)}
+                            onClick={() => addToCart(item.productId, data.price)}
                         >
                             +
-                        </Button> */}
+                        </Button>
                     </CardActions>
                 </Grid>
             </Grid>

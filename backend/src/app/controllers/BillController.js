@@ -33,36 +33,41 @@ class BillsController {
     }
 
     async getBillByCustomerID(req, res) {
-        const user = req.params.id;
-        const billList = (await bills.where('userId', '==', user).get()).docs;
-        let array = billList.map(bill => {
-            console.log(bill.data())
-            const data = bill.data();
-            return {
-                billId: bill.id,
-                customerId: data.customerId,
-                address: data.address,
-                phone: data.phone,
-                total: data.total,
-            }
+        const user = req.body.id;
+        await bills.where('userID', '==', user).get().
+        then(billList => {
+            let array = [];
+            billList.forEach(bill => {
+                data = bill.data();
+                array.push({
+                    billId: data.id,
+                    customerId: data.customerId,
+                    address: data.address,
+                    phone: data.phone,
+                    total: data.total,
+                })
+            })
+            res.json(array);
         })
-        res.json(array);
     }
 
     async getBillbyState(req, res) {
         const state = parseInt(req.body.state);
-        const billList = (await bills.where('state', '==', state).get()).docs;
-        let array = billList.map(bill => {
-            data = bill.data();
-            return {
-                billId: bill.id,
-                customerId: data.customerId,
-                address: data.address,
-                phone: data.phone,
-                total: data.total,
-            }
+        await bills.where('state', '==', state).get()
+        .then(billList => {
+            let array = [];
+            billList.forEach(bill => {
+                data = bill.data();
+                array.push({
+                    billId: data.id,
+                    customerId: data.customerId,
+                    address: data.address,
+                    phone: data.phone,
+                    total: data.total,
+                })
+            })
+            res.json(array);
         })
-        res.json(array);
     }
 
     async createBill(req, res) {
@@ -73,7 +78,6 @@ class BillsController {
         console.log(productList);
         let total = 0;
         await bills.add({
-            userId: user,
             name: req.body.name,
             phone: req.body.phone,
             shippingAddress: req.body.address,
@@ -87,7 +91,9 @@ class BillsController {
                 bill.collection('productList').doc(product.id).set({
                     number: product.data().quantity,
                 })
+                product.ref.delete();
             }
+            
             bill.update({
                 total: total,
             })

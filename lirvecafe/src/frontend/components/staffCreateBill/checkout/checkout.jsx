@@ -25,6 +25,7 @@ const Checkout = () => {
     const classes = useStyles();
     const p = null;
     const a = null;
+    
     return (
         <div className={classes.checkout}>
             <div className={classes.checkoutForm}>

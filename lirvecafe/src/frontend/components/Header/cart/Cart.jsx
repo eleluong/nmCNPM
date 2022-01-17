@@ -75,7 +75,7 @@ const Cart = () => {
                     </div>
                     <Button
                         onClick={() => window.location.href = '/checkout'}
-                    >Checkout</Button>
+                        >Checkout</Button>
                     {items.map(item => (
                         <CartItem
                             item={item}
