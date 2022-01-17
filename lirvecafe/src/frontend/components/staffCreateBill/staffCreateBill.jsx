@@ -1,17 +1,21 @@
 import React from 'react'
 import Products from './products/products';
-<<<<<<< HEAD
-import Bill from './Bill/bill';
-=======
+import Bill from './bill/bill.jsx';
+import Checkout from './checkout/checkout';
+import { Grid } from '@material-ui/core';
 
-import Bill from './Bill/bill.jsx';
-
->>>>>>> f260c4d738d5c01ed47ec8e766be2160db0d2385
 const StaffCreateBill = () => {
     return (
         <div>
-            <Products/>
-            {/* <Bill/> */}
+            <Grid container>
+                <Grid item xs = "6">
+                    <Products/>
+                </Grid>
+                <Grid items xs = "6">
+                    <Bill/>
+                    <Checkout/>
+                </Grid>
+            </Grid>
         </div>
     )
 }
