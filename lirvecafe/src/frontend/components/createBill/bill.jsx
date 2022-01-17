@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 const Bill = () => {
     const [items, setItems] = useState([]);
-    const [change, setChange] = useState(false);
+    const [change, setChange] = useState(0);
     let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
@@ -19,26 +19,30 @@ const Bill = () => {
     }
     const id = user.id;
     const axios = require('axios');
-    const handleAddToCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+    const handleAddToCart = ((itemId, price) => {
+        const temp = {cartId: user.id, productId: itemId, price: price};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/cart/addToCart/",
+            url: "http://localhost:5000/cart/addToCart",
             data: temp,
-        }).then(res => console.log(res));
+        }).then(res => {
+            setChange(change+1);
+            console.log(res);
+        });
         console.log(temp);
-        setChange(true);
 
     });
     const handleRemoveFromCart = ((itemId) => {
         const temp = {cartId: id, productId: itemId};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/cart/deleteFromCart/",
+            url: "http://localhost:5000/cart/deleteFromCart",
             data: temp,
-        }).then(res => console.log(res));
+        }).then(res => {
+            setChange(change+1);
+            console.log(res);
+        });
         console.log(temp);
-        setChange(true);
     });
     useEffect(() => {
         const getCart = async () => {
@@ -48,7 +52,6 @@ const Bill = () => {
             setItems(res);
         }
         getCart();
-        setChange(false);
     }, [change]);
     console.log(items);
 

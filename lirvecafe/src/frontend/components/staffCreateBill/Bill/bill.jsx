@@ -9,8 +9,7 @@ import {useState} from 'react';
 
 const Bill = () => {
     const [items, setItems] = useState([]);
-    const [change, setChange] = useState(false);
-    let signined = getCookie(isSignined.customer);
+    const [change, setChange] = useState(0);
     let user = getCookie('staff');
     if (user) {
         user = JSON.parse(user);
@@ -21,25 +20,29 @@ const Bill = () => {
     console.log(user);
     const axios = require('axios');
     const handleAddToCart = ((itemId, price) => {
-        const temp = {cartId: user.id, productId: itemId, price: price};
+        const temp = {staffId: user.id, productId: itemId, price: price};
         axios({
             method: 'PUT',
             url: "http://localhost:5000/staffcart/addToCart",
             data: temp,
-        }).then(res => console.log(res));
+        }).then(res => {
+            setChange(change+1);
+            console.log(res);
+        });
         console.log(temp);
-        setChange(true);
 
     });
     const handleRemoveFromCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+        const temp = {staffId: id, productId: itemId};
         axios({
             method: 'PUT',
             url: "http://localhost:5000/staffcart/deleteFromCart",
             data: temp,
-        }).then(res => console.log(res));
+        }).then(res => {
+            setChange(change+1);
+            console.log(res);
+        });
         console.log(temp);
-        setChange(true);
     });
     useEffect(() => {
         const getCart = async () => {
@@ -55,10 +58,6 @@ const Bill = () => {
     console.log(items);
 
     const classes = useStyles();
-
-    const item1 = {
-        
-    }
 
     return (
         <div className={classes.cart}>

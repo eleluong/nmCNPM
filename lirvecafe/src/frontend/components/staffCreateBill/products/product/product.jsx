@@ -28,10 +28,9 @@ const Product = ({product}) => {
         user = {}
     }
     const id = user.id;
-    console.log(product.productId);
     const axios = require('axios');
     const handleAddToCart = ((itemId, price) => {
-        const temp = {cartId: id, productId: itemId, price: price};
+        const temp = {staffId: id, productId: itemId, price: price};
         axios({
             method: 'PUT',
             url: "http://localhost:5000/staffcart/addToCart",

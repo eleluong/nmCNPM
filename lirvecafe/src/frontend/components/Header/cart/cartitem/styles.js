@@ -4,30 +4,36 @@ export default makeStyles((theme) => ({
     item: {
         display: 'flex',
         maxWidth: '90%',
-        paddingLeft: '5%',
         justifyContent: 'center',
-        backgroundColor: '#FFFCDD',
+        marginBottom: '20px',
+
     },
     buttons: {
         maxHeight: '130px',
         maxWidth: '100px',
-        paddingTop: '24px',
+        paddingTop: '10px',
         flexDirection: 'column',
     },
     content: {
-        paddingLeft: '5px',
-        paddingTop: '40px',
-        paddingBottom: '5px',
-        minHeight: '140px',
-        maxHeight: '140px',
+        padding: '14px 0 0 14px',
+
+    },
+    contentWrapper: {
+        justifyContent: 'space-between',
+    },
+    productName: {
+        fontSize: '15px',
+        color: '#4b4b4b',
+        fontWeight: '500',
+    },
+    productInfo: {
+        marginTop: '10px',
+        fontSize: '13px',
+        color: '#969696',
     },
     img: {
-        paddingTop: '5px',
-        paddingBottom: '5px',
-        paddingLeft: '10px',
-        maxWidth: '80px',
-        minHeight: '140px',
-        maxHeight: '140px',
-        objectFit: 'cover',
+        width: '100px',
+        height: '100px',
+        borderRadius: '10px',
     }
 }));

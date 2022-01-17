@@ -93,7 +93,9 @@ class BillsController {
                 bill.collection('productList').doc(product.id).set({
                     number: product.data().quantity,
                 })
+                product.ref.delete();
             }
+            
             bill.update({
                 total: total,
             })

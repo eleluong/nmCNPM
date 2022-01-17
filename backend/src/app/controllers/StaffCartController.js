@@ -1,5 +1,6 @@
 const db = require('../models/firebaseAdmin');
 const carts = db.collection('staffcarts');
+const { FieldValue } = require('firebase-admin/firestore');
 
 class StaffCartController {
     // GET
@@ -89,6 +90,7 @@ class StaffCartController {
     }
     //POST
     async createBill(req, res) {
+        console.log(req.body);
         const productList = carts.doc(req.body.staffId).collection('productList').get();
         let total = 0;
         await db.collection('bills').add({
@@ -104,15 +106,18 @@ class StaffCartController {
                 bill.collection(productList).doc(product.id).set({
                     number: product.number,
                 })
+                product.ref.delete();
             }
             bill.update({
                 total: total,
             })
+        return res.status(200); 
         })
         .catch(err => {
             console.error('err', err);
-            res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message });
         })
+        
     }
 }
 
