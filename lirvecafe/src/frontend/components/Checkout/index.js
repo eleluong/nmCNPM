@@ -40,9 +40,11 @@ function Checkout() {
                 // console.log(user);
                 const { password, ...info } = user
                 // console.log(info);
-                dispatch(setForm(info))
+                dispatch(setForm({ id: ID, ...info }))
             })
     }, [])
+
+
 
 
 
@@ -62,7 +64,7 @@ function Checkout() {
                                 rules={['require', 'email']}/>
                     <InfoFooter
                         linkData={{
-                            link: "https://www.google.com.vn/",
+                            link: "./",
                             label: "Giỏ hàng",
                         }}
                         textBtn="Thanh toán"

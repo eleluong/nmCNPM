@@ -58,7 +58,7 @@ function Navbar() {
                                 <span className={styless.navbar_user_item_link}>{user.name}</span>
                             </li> */}
                             <li className={styless.navbar_user_item}>
-                                <Link to="/" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
+                                <Link to="/userInfo" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
                             </li>
                             <li className={styless.navbar_user_item}>
                                 <span onClick={handleSignout} className={styless.navbar_user_item_link}>Đăng xuất</span>

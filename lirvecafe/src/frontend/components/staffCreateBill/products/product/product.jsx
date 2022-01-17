@@ -3,9 +3,9 @@ import {Card, CardMedia, CardContent, CardActions, Typography, IconButton} from 
 import {Button} from '@material-ui/core';
 import {AddShoppingCart} from '@material-ui/icons';
 import useStyles from './style';
-import * as ROUTES from '../../constants/routes/routes';
-import * as isSignined from '../../constants/isSignined';
-import {getCookie, deleteCookie} from "../../constants/userCookie";
+import * as ROUTES from '../../../constants/routes/routes';
+import * as isSignined from '../../../constants/isSignined';
+import {getCookie, deleteCookie} from "../../../constants/userCookie";
 
 const Product = ({product}) => {
     const classes = useStyles();
@@ -18,7 +18,7 @@ const Product = ({product}) => {
     }
 
     let signined = getCookie(isSignined.customer);
-    let user = getCookie('customer');
+    let user = getCookie('staff');
     if (user) {
         // console.log(typeof user);
         // console.log(user);
@@ -30,11 +30,11 @@ const Product = ({product}) => {
     const id = user.id;
     console.log(product.productId);
     const axios = require('axios');
-    const handleAddToCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+    const handleAddToCart = ((itemId, price) => {
+        const temp = {cartId: id, productId: itemId, price: price};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/staffcart/addToCart/",
+            url: "http://localhost:5000/staffcart/addToCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
@@ -55,11 +55,11 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}$
                 </Typography>
-                {signined?(
-                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
-                        <AddShoppingCart/> 
-                    </Button>
-                ):(<></>)}
+                
+                <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId, product.price)} >
+                    <AddShoppingCart/> 
+                </Button>
+                
 
             </CardActions>
         </Card>

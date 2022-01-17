@@ -5,7 +5,13 @@ import styles from './InfoHeader.module.css'
 function InfoHeader({content}) {
 
     return (
-        <div className={clsx(styles.infoHeader)}>{content}</div>
+        <>
+            <div className={clsx(styles.infoSubHeader)}>
+                <a className={clsx(styles.infoSublink)} href="./">Trang chủ </a>
+                &gt; {content}
+            </div> 
+            <div className={clsx(styles.infoHeader)}>{content}</div>
+        </>
     )
 }
 

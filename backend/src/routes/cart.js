@@ -6,5 +6,6 @@ router.get('/get/:cartId', cartController.getCart);
 router.put('/deleteFromCart', cartController.deleteFromCart);
 router.put('/addToCart', cartController.addToCart);
 router.get('/get_total/:cartId', cartController.getTotal);
+router.put('/addToCart/', cartController.checkIfExists, cartController.addToCart);
 
 module.exports = router;

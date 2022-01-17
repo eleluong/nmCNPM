@@ -67,20 +67,20 @@ class StaffCartController {
                 return product.id === productId;
             })
 
-            if (addingProduct) {
-                carts.doc(cartId)
-                    .collection('productList').doc(productId)
-                    .set({
-                        quantity: addingProduct.data().quantity + 1
-                    });
-            } else {
-                carts.doc(cartId)
-                    .collection('productList').doc(productId)
-                    .set({
-                        quantity: 1,
-                        price: price
-                    });
-            }
+        if (addingProduct) {
+            carts.doc(cartId)
+                .collection('productList').doc(productId)
+                .update({
+                    quantity: addingProduct.data().quantity + 1
+                });
+        } else {
+            carts.doc(cartId)
+                .collection('productList').doc(productId)
+                .set({
+                    quantity: 1,
+                    price: price,
+                });
+        }
 
             return res.status(200).json();
         } catch(e) {

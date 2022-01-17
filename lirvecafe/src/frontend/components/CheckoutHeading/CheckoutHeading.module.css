@@ -1,4 +1,11 @@
 .heading {
     font-size: 30px;
     font-weight: 600;
+    text-decoration: none;
+    color: #333;
+}
+
+.heading:hover{
+    text-decoration: none;
+    color: #333;
 }

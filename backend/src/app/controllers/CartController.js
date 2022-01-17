@@ -54,6 +54,25 @@ class CartController {
         }
     }
 
+    async checkIfExists(req, res, next) {
+        const id = req.body.cartId;
+        await carts.doc(id).get()
+        .then(cart => {
+            if(!cart.exists) {
+                console.log('1')
+                carts.doc(id).set({
+                    number: 1,
+                })
+            }
+            next();
+        })
+        .catch(err => {
+            console.error('err', err);
+            res.status(400).json({ error: err.message });
+        })
+    }
+
+
     //PUT
     async addToCart(req, res) {
         try {

@@ -1,0 +1,119 @@
+.products {
+    /* display: flex; */
+    height: calc(100vh - 91px);
+}
+.header{
+    display: flex;
+    background: #e3dbdb;
+    justify-content: space-between;
+}
+.label{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 12px 40px;
+}
+.AddProduct_link {
+    text-decoration: none;
+    color: #fff;
+    margin: 10px 160px;
+    padding: 5px 16px;
+    background-color: #1a94ff;
+    border-radius: 2px;
+}
+.AddProduct_link:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.img{
+    width: 100px;
+    height: 70px;
+}
+.btn_delete {
+    background-color: #1a94ff;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
+}
+
+.form {
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    width: 600px;
+    min-height: 100px;
+    padding: 32px 24px;
+    text-align: center;
+    background: #e3dbdb;
+    border-radius: 2px;
+    align-self: center;
+    box-shadow: 0 2px 5px 0 rgba(51, 62, 73, .1);
+}
+
+.form_exit {
+    position: absolute;
+    text-decoration: none;
+    justify-items: center;
+    align-items: center;
+    font-size: 1.8rem;
+    height: 32px;
+    width: 32px;
+    top: 0;
+    right: 0;
+}
+.form_exit:hover {
+    background-color: rgb(252, 25, 25);
+    color: #fff;
+}
+.form_heading {
+    font-size: 1.4rem;
+
+}
+
+.field {
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form_label {
+    font-weight: 600;
+    padding-bottom: 6px;
+    line-height: 1.2rem;
+    font-size: 1rem;
+}
+
+.form_input {
+    height: 8px;
+    width: 560px;
+    padding: 16px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 2px;
+    outline: none;
+    font-size: 0.8rem;
+    word-wrap: break-word;
+}
+
+.form_error {
+    color: red;
+}
+
+.form_submit {
+    outline: none;
+    background-color: #39a0fb;
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    width: 25%;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form_submit:hover {
+    opacity: 0.8;
+}

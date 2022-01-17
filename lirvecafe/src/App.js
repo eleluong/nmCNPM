@@ -6,6 +6,10 @@ import Home from './frontend/components/Home/Home'
 import HomeAdmin from './frontend/components/HomeAdmin/HomeAdmin'
 import SigninScreen from './frontend/components/Signin/SigninScreen'
 import RegisterScreen from './frontend/components/Register/RegisterScreen'
+import UserInfor from './frontend/components/UserInfor/UserInfor.js'
+import UserCart from './frontend/components/UserCart/UserCart.js'
+import UserPassword from './frontend/components/UserPassword/UserPassword.js'
+import UserPoint from './frontend/components/UserPoint/UserPoint.js'
 
 import Checkout from './frontend/components/Checkout'
 import {FormProvider} from './frontend/components/store'
@@ -25,6 +29,13 @@ function App() {
                     <Route path={ROUTES.HOMEADMIN} element={<HomeAdmin/>}></Route>
                     <Route path={ROUTES.SIGNIN} element={<SigninScreen/>}></Route>
                     <Route path={ROUTES.REGISTER} element={<RegisterScreen/>}></Route>
+                    <Route path={ROUTES.CUSTOMERINFO} element={<UserInfor />}></Route>
+                    <Route path='/userCart' element={<UserCart />}></Route>
+                    <Route path='/userPassword' element={<UserPassword />}></Route>
+                    <Route path='/userPoint' element={<UserPoint />}></Route>
+
+
+
 
                     <Route path={ROUTES.CHECKOUT} element={
                         <GlobalStyle>
@@ -33,6 +44,8 @@ function App() {
                             </FormProvider>
                         </GlobalStyle>
                     }></Route>
+
+                    
                 </Routes>
             </BrowserRouter>
 
