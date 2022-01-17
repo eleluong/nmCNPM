@@ -25,8 +25,8 @@ const Cart = () => {
     const id = user.id;
 
     const axios = require('axios');
-    const handleAddToCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+    const handleAddToCart = ((itemId, productprice) => {
+        const temp = {cartId: id, productId: itemId, price: productprice};
         axios({
             method: 'PUT',
             url: "http://localhost:5000/cart/addToCart/",
@@ -65,9 +65,11 @@ const Cart = () => {
     return (
         <div>
             <div>
-                <IconButton onClick={() => setCartOpen(true)} style={{'position': 'inherit'}}>
-                    <ShoppingCart style ={{'font-size': '2rem'}} />
-                </IconButton>
+            {signined?(
+                    <IconButton onClick={() => setCartOpen(true)} style ={{'position': 'inherit'}}>
+                        <ShoppingCart style ={{'font-size': '2rem'}} />
+                    </IconButton>
+                    ):(<></>)}
             </div>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                 <div className={classes.cart} align='center'>

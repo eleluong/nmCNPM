@@ -73,7 +73,7 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                         {/* <Button
                             disableElevation
                             variant='contained'
-                            onClick={() => addToCart(item.id)}
+                            onClick={() => addToCart(item.id, data.price)}
                         >
                             +
                         </Button> */}

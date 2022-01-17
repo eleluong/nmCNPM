@@ -11,19 +11,20 @@ const Bill = () => {
     const [items, setItems] = useState([]);
     const [change, setChange] = useState(false);
     let signined = getCookie(isSignined.customer);
-    let user = getCookie('customer');
+    let user = getCookie('staff');
     if (user) {
         user = JSON.parse(user);
     } else {
         user = {}
     }
     const id = user.id;
+    console.log(user);
     const axios = require('axios');
-    const handleAddToCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+    const handleAddToCart = ((itemId, price) => {
+        const temp = {cartId: user.id, productId: itemId, price: price};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/staffcart/addToCart/",
+            url: "http://localhost:5000/staffcart/addToCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
@@ -34,7 +35,7 @@ const Bill = () => {
         const temp = {cartId: id, productId: itemId};
         axios({
             method: 'PUT',
-            url: "http://localhost:5000/staffcart/deleteFromCart/",
+            url: "http://localhost:5000/staffcart/deleteFromCart",
             data: temp,
         }).then(res => console.log(res));
         console.log(temp);
@@ -46,6 +47,7 @@ const Bill = () => {
             const res = await (await (fetch(url
             ))).json();
             setItems(res);
+            console.log("here is cart");
         }
         getCart();
         setChange(false);

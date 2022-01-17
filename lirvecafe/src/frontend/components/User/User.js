@@ -1,10 +1,37 @@
 import React, {Fragment} from 'react';
 import styles from "./User.css"
+import { useState, useEffect } from 'react';
+
+import {getCookie, deleteCookie} from "../constants/userCookie"
+
 
 var link_ava = 'https://scontent-hkt1-1.xx.fbcdn.net/v/t1.15752-9/267201581_265268222375351_7213697060078493469_n.png?_nc_cat=102&ccb=1-5&_nc_sid=ae9488&_nc_ohc=nu5k9VpyfpcAX-vIX5K&_nc_ht=scontent-hkt1-1.xx&oh=03_AVJ-2WaM8wUSO04Wr2ozlHW_Jap-3I4RAsXiLMz1MvkCPw&oe=61FFE492'
 
 
 const User = () => {
+
+    const [name, setName] = useState('')
+
+    let user = getCookie('customer');
+    if (user) {
+        user = JSON.parse(user);
+    } else {
+        user = {}
+    }
+    const ID = user.id;
+
+    console.log('ID: ', ID);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/customer/getInfo/' + ID)
+            .then(response => response.json())
+            .then(user => {
+                // console.log(user);
+                const { password, ...info } = user
+                console.log(info);
+                setName(info.name)
+            })
+    }, [])
 
 
     return (
@@ -23,7 +50,7 @@ const User = () => {
                         <div class="user-avatar">
                             <a class="edit-avatar" href="#"></a><img src={link_ava} alt="User"/></div>
                         <div class="user-data">
-                            <h4>Phạm Vũ Hùng</h4><span>Joined January 08, 2022</span>
+                            <h4>{name}</h4>
                         </div>
                     </div>
                 </aside>

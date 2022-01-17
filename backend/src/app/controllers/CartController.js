@@ -18,98 +18,93 @@ class CartController {
 
             return res.status(200).send(items);
         } catch (error) {
-            return res.status(500);
+            return res.status(500).json();
         }
     }
 
     //PUT
     async deleteFromCart(req, res) {
         //const id = req.session.passport.user;
-        const productId = req.body.productId;
-        const cartId = req.body.cartId;
+        try {
+            const productId = req.body.productId;
+            const cartId = req.body.cartId;
 
-        const products = (await carts.doc(cartId).collection('productList').get()).docs;
+            const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
-        const deletingProduct = products.find(product => {
-            return product.id === productId;
-        })
+            const deletingProduct = products.find(product => {
+                return product.id === productId;
+            })
 
-        let quantity = deletingProduct.data().quantity;
-        if (quantity > 1) {
-            carts.doc(cartId)
-                .collection('productList').doc(deletingProduct.id)
-                .set({
-                    quantity: quantity - 1
-                });
-        } else {
-            carts.doc(cartId)
-                .collection('productList').doc(deletingProduct.id)
-                .delete({});
+            let quantity = deletingProduct.data().quantity;
+            if (quantity > 1) {
+                carts.doc(cartId)
+                    .collection('productList').doc(deletingProduct.id)
+                    .set({
+                        quantity: quantity - 1
+                    });
+            } else {
+                carts.doc(cartId)
+                    .collection('productList').doc(deletingProduct.id)
+                    .delete({});
+            }
+
+            return res.status(200).json();
+        } catch(e) {
+            return res.status(500).json(e);
         }
-
-        return res.status(200);
     }
+
+    async checkIfExists(req, res, next) {
+        const id = req.body.cartId;
+        await carts.doc(id).get()
+        .then(cart => {
+            if(!cart.exists) {
+                console.log('1')
+                carts.doc(id).set({
+                    number: 1,
+                })
+            }
+            next();
+        })
+        .catch(err => {
+            console.error('err', err);
+            res.status(400).json({ error: err.message });
+        })
+    }
+
 
     //PUT
     async addToCart(req, res) {
-        const productId = req.body.productId;
-        const cartId = req.body.cartId;
-        const price = req.body.price;
+        try {
+            const productId = req.body.productId;
+            const cartId = req.body.cartId;
+            const price = req.body.price;
 
-        const products = (await carts.doc(cartId).collection('productList').get()).docs;
+            const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
-        const addingProduct = products.find(product => {
-            return product.id === productId;
-        })
+            const addingProduct = products.find(product => {
+                return product.id === productId;
+            })
 
-        if (addingProduct) {
-            carts.doc(cartId)
-                .collection('productList').doc(productId)
-                .update({
-                    quantity: addingProduct.data().quantity + 1
-                });
-        } else {
-            carts.doc(cartId)
-                .collection('productList').doc(productId)
-                .set({
-                    quantity: 1,
-                    price: price
-                });
+            if (addingProduct) {
+                carts.doc(cartId)
+                    .collection('productList').doc(productId)
+                    .update({
+                        quantity: addingProduct.data().quantity + 1
+                    });
+            } else {
+                carts.doc(cartId)
+                    .collection('productList').doc(productId)
+                    .set({
+                        quantity: 1,
+                        price: price
+                    });
+            }
+
+            return res.status(200).json();
+        } catch(e) {
+            return res.status(500).json(e);
         }
-
-        return res.status(200);
-        //const id = req.session.passport.user;
-        // const id = req.body.customerId;
-        // let doc = carts.doc(id).collection('productList').doc(req.body.id);
-        // await carts.doc(id).get()
-        // .then(cart => {
-        //     if(!cart.exists) {
-        //         console.log('1')
-        //         carts.doc(id).set({
-        //             number: 1,
-        //         })
-        //     }
-        //     return doc.get()
-        // })
-        // .then(product => {
-        //     if(!product.exists)
-        //         return product.ref.set({
-        //             number: 1,
-        //         })
-        //     else return product.ref.update({
-        //         number: product.data().number += 1,
-        //     })
-        // })    
-        // .then(() => {
-        //     return doc.get()
-        // })
-        // .then(doc => {
-        //     res.send(doc.data())
-        // })
-        // .catch(err => {
-        //     console.error('err', err);
-        //     res.status(400).json({ error: err.message });
-        // })
     }
 
     //GET
@@ -122,10 +117,10 @@ class CartController {
             const sum = products.reduce((total, product) => {
                 return total + product.data().quantity*product.data().price;
             }, 0); 
-
+            console.log(sum);
             return res.status(200).json(sum);
         } catch(error) {
-            return res.status(500);
+            return res.status(500).json();
         }
     }
 }

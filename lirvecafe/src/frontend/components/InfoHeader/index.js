@@ -8,7 +8,7 @@ function InfoHeader({content}) {
         <>
             <div className={clsx(styles.infoSubHeader)}>
                 <a className={clsx(styles.infoSublink)} href="./">Trang chủ </a>
-                &gt; Thông tin giao hàng
+                &gt; {content}
             </div> 
             <div className={clsx(styles.infoHeader)}>{content}</div>
         </>

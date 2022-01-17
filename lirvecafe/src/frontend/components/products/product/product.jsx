@@ -30,8 +30,8 @@ const Product = ({product}) => {
     const id = user.id;
     // console.log(product.productId);
     const axios = require('axios');
-    const handleAddToCart = ((itemId) => {
-        const temp = {cartId: id, productId: itemId};
+    const handleAddToCart = ((itemId, price) => {
+        const temp = {cartId: id, productId: itemId, price: price};
         axios({
             method: 'PUT',
             url: "http://localhost:5000/cart/addToCart/",
@@ -56,7 +56,7 @@ const Product = ({product}) => {
                     {product.price}$
                 </Typography>
                 {signined?(
-                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId)} >
+                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId, product.price)} >
                         <AddShoppingCart/> 
                     </Button>
                 ):(<></>)}

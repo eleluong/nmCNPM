@@ -44,7 +44,7 @@ export default function RegisterScreen() {
                 .then(res => {
                     console.log(res);
                     //e.preventDefault();
-                    alert('Đăng nhập Thành công, Nhấn oke để về trang chủ');
+                    alert('Đăng ký Thành công, Nhấn oke để về trang chủ');
                     window.location.href = ROUTES.BASE_URL_WEB;
                 })
                 .catch(err => {
