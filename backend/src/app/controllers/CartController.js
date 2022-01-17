@@ -96,6 +96,7 @@ class CartController {
                 carts.doc(cartId)
                     .collection('productList').doc(productId)
                     .set({
+                        name: addingProduct.data().name,
                         quantity: 1,
                         price: price
                     });

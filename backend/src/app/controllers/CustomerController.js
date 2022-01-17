@@ -51,27 +51,45 @@ class CustomersController {
     }
 
     async updateCustomer(req, res) {
-        if (req.body.password != "") {
-            const password = hash.hash(req.body.password);
-        }
-        await customers.doc(req.user.id).get()
+        await customers.doc(req.params.id).get()
             .then(doc => {
                 if (!doc.exists) {
-                    res.send('damn door');
+                    res.send('Tài khoản không tồn tại');
                 } else {
-                    doc.update({
-                        name: req.body.name || this.name,
-                        phone: req.body.phone || this.phone,
-                        address: req.body.address || this.address,
-                        password: password || this.password,
+                    doc.ref.update({
+                        name: req.body.name,
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        address: req.body.address,
                     })
-                    res.redirect('users/info')
                 }
             })
             .catch(err => {
                 console.error('err', err);
                 res.status(400).json({error: err.message});
             })
+    }
+
+    async updatePassword(req, res) {
+        const user = await db.collection('users').doc(req.params.id).get()
+        if (!hash.validate(req.body.password, user.data().password)) {
+            return res.status(403).json({error: 'Invalid password'});
+        }
+        else if (req.body.rePassword != "") {
+            const password = hash.hash(req.body.rePassword);
+            await customers.doc(req.params.id).get()
+            .then(doc => {
+                doc.ref.update({
+                    password: password,
+                })
+            })
+            .then(() => {
+                res.status(200).send('Successfully')
+            })
+            .catch(err => {
+                res.status(400);
+            })
+        }
     }
 
     async getUserInfo(req, res, next) {
