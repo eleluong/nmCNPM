@@ -4,6 +4,7 @@ import Bill from './bill/bill.jsx';
 import Checkout from './checkout/checkout';
 import { Grid } from '@material-ui/core';
 
+
 const StaffCreateBill = () => {
     return (
         <div>

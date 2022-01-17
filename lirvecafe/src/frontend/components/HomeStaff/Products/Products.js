@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import styles from "./Products.module.css"
 import AddProduct from './AddProduct';
-import NotifyConfirm from './NotifyConfirm';
+// import NotifyConfirm from './NotifyConfirm';
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -38,7 +38,7 @@ function Products() {
 
     return (
         <div className={styles.products}>
-            <NotifyConfirm isOpen={isOpen} />
+            {/* <NotifyConfirm isOpen={isOpen} /> */}
             <div className={styles.header}>
                 <h1 className={styles.label}>Danh sách sản phẩm</h1>
                 <Link to='ThemSanPham' className={styles.AddProduct_link}> Thêm sản phẩm</Link>
