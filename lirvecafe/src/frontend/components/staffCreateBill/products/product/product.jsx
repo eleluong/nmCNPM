@@ -7,12 +7,12 @@ import * as ROUTES from '../../../constants/routes/routes';
 import * as isSignined from '../../../constants/isSignined';
 import {getCookie, deleteCookie} from "../../../constants/userCookie";
 
-const Product = ({product}) => {
+const Product = ({product, handleAdd}) => {
     const classes = useStyles();
 
     function titlechange(string) {
-        if (string.length > 18) {
-            string = string.substring(0, 15) + "...";
+        if (string.length > 15) {
+            string = string.substring(0, 13) + "...";
         }
         return string;
     }
@@ -28,17 +28,7 @@ const Product = ({product}) => {
         user = {}
     }
     const id = user.id;
-    const axios = require('axios');
-    const handleAddToCart = ((itemId, price) => {
-        const temp = {staffId: id, productId: itemId, price: price};
-        axios({
-            method: 'PUT',
-            url: "http://localhost:5000/staffcart/addToCart",
-            data: temp,
-        }).then(res => console.log(res));
-        console.log(temp);
-
-    });
+    
     return (
         <Card className={classes.root}>
             <CardMedia className={classes.media} image={product.image} title={product.name}/>
@@ -52,10 +42,10 @@ const Product = ({product}) => {
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
                 <Typography>
-                    {product.price}$
+                    {product.price}đ
                 </Typography>
                 
-                <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId, product.price)} >
+                <Button aria-label ="Add to Cart" onClick = {()=>handleAdd(product.productId, product.price)} >
                     <AddShoppingCart/> 
                 </Button>
                 

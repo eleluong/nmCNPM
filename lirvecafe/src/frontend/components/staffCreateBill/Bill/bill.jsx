@@ -7,55 +7,9 @@ import * as isSignined from '../../constants/isSignined';
 import {getCookie, deleteCookie} from "../../constants/userCookie";
 import {useState} from 'react';
 
-const Bill = () => {
-    const [items, setItems] = useState([]);
-    const [change, setChange] = useState(0);
-    let user = getCookie('staff');
-    if (user) {
-        user = JSON.parse(user);
-    } else {
-        user = {}
-    }
-    const id = user.id;
-    console.log(user);
-    const axios = require('axios');
-    const handleAddToCart = ((itemId, price) => {
-        const temp = {staffId: user.id, productId: itemId, price: price};
-        axios({
-            method: 'PUT',
-            url: "http://localhost:5000/staffcart/addToCart",
-            data: temp,
-        }).then(res => {
-            setChange(change+1);
-            console.log(res);
-        });
-        console.log(temp);
-
-    });
-    const handleRemoveFromCart = ((itemId) => {
-        const temp = {staffId: id, productId: itemId};
-        axios({
-            method: 'PUT',
-            url: "http://localhost:5000/staffcart/deleteFromCart",
-            data: temp,
-        }).then(res => {
-            setChange(change+1);
-            console.log(res);
-        });
-        console.log(temp);
-    });
-    useEffect(() => {
-        const getCart = async () => {
-            const url = 'http://localhost:5000/staffcart/get/' + id;
-            const res = await (await (fetch(url
-            ))).json();
-            setItems(res);
-            console.log("here is cart");
-        }
-        getCart();
-        setChange(false);
-    }, [change]);
-    console.log(items);
+const Bill = ({items, add, remove}) => {
+    
+    
 
     const classes = useStyles();
 
@@ -63,7 +17,7 @@ const Bill = () => {
         <div className={classes.cart}>
             
             {items.map(item => (
-                <BillItem item={item} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
+                <BillItem item={item} addToCart={add} removeFromCart={remove}/>
             ))}
 
             <div className={classes.total}>
