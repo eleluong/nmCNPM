@@ -33,12 +33,12 @@ const OrdersList = ({ orders, remove, update }) => {
                                 {
                                     (order.state == 0) ? (
                                         <>
+                                            <button className={styles.btn_confirm} onClick={() => update(order)}>Xác nhận</button>
                                             <button className={styles.btn_delete} onClick={() => remove(order)}>Hủy</button>
-                                            <button className={styles.btn_delete} onClick={() => update(order)}>Xác nhận</button>
                                         </>
                                     ) : (order.state == 1) ? (
                                         <>
-                                            <button className={styles.btn_delete} onClick={() => update(order)}>Hoàn thành</button>
+                                            <button className={styles.btn_complete} onClick={() => update(order)}>Hoàn thành</button>
                                         </>
                                     ) : (
                                         <>
