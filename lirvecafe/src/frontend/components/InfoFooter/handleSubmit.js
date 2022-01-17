@@ -1,4 +1,4 @@
-export default function handleSubmit(state) {
+export default function handleSubmit(state, className, hiddenClass) {
 
 
     fetch('http://localhost:5000/bill/add', {
@@ -8,9 +8,19 @@ export default function handleSubmit(state) {
         },
         body: JSON.stringify(state),
     })
-    // .then(response => response.json())
-    // .then(state => {
-    //     console.log(state);
-    // })
+    .then(response => response.json())
+    .then(state => {
+        console.log(state);
+    })
+
+    console.log(className);
+
+    const modal = document.querySelector('.' + className)
+
+    modal.classList.remove(hiddenClass);
+
+    setTimeout(() => {
+        window.location.href = '/'
+    }, 1000)
 
 }
