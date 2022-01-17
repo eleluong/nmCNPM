@@ -128,9 +128,6 @@ class StaffController {
                     id: 2,
                     message: 'Số điện thoại đã tồn tại, nhập số điện thoại khác!'});
             }
-            
-
-            
         } catch (error) {
             return res.status(500).send(error);
         }

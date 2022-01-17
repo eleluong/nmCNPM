@@ -15,7 +15,7 @@ class EventController {
                     description: event.description
                 });
 
-            return res.status(200);
+            return res.status(200).json();
         } catch (error) {
             return res.status(500).send(error);
         }
