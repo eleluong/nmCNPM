@@ -8,5 +8,6 @@ router.get('/get_by_state/:state', billController.getBillbyState);
 router.post('/add', billController.createBill);
 router.delete('/delete', billController.deleteBill);
 router.put('/update', billController.updateBill);
+router.get('/:id', billController.getBillByCustomerID);
 
 module.exports = router;
