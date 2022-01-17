@@ -17,18 +17,6 @@ const Product = ({product, handleAdd}) => {
         return string;
     }
 
-    let signined = getCookie(isSignined.customer);
-    let user = getCookie('staff');
-    if (user) {
-        // console.log(typeof user);
-        // console.log(user);
-        user = JSON.parse(user);
-        //console.log(user);
-    } else {
-        user = {}
-    }
-    const id = user.id;
-    
     return (
         <Card className={classes.root}>
             <CardMedia className={classes.media} image={product.image} title={product.name}/>

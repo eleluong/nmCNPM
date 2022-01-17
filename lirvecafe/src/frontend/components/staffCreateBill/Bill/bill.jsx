@@ -1,13 +1,9 @@
 import React from 'react';
 import useStyles from './styles';
 import BillItem from './billItem/billItem';
-import {useEffect} from 'react';
-import * as ROUTES from '../../constants/routes/routes';
-import * as isSignined from '../../constants/isSignined';
-import {getCookie, deleteCookie} from "../../constants/userCookie";
-import {useState} from 'react';
 
-const Bill = ({items, add, remove}) => {
+
+const Bill = ({items, add, remove, change}) => {
     
     
 
@@ -17,7 +13,7 @@ const Bill = ({items, add, remove}) => {
         <div className={classes.cart}>
             
             {items.map(item => (
-                <BillItem item={item} addToCart={add} removeFromCart={remove}/>
+                <BillItem item={item} addToCart={add} removeFromCart={remove} change = {change}/>
             ))}
 
             <div className={classes.total}>
