@@ -1,7 +1,8 @@
 import HeaderAdmin from "../HeaderAdmin/HeaderAdmin"
 import {Routes, Route} from "react-router-dom"
-import CRUD from "./CRUD/CRUD"
+import CRUD from "../HomeAdmin/CRUD/CRUD"
 import Report from "./Report/Report"
+
 function HomeStaff() {
     return (
         <div>
@@ -14,4 +15,5 @@ function HomeStaff() {
         </div>
     )
 }
+
 export default HomeStaff

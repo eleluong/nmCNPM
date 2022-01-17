@@ -2,10 +2,10 @@ import clsx from "clsx";
 import styles from './CheckoutHeading.module.css';
 
 
-function CheckoutHeading ({ content }){
+function CheckoutHeading({content}) {
 
     return (
-        <h1 className={clsx(styles.heading)}>{content}</h1>
+        <a href="./" className={clsx(styles.heading)}>{content}</a>
     )
 }
 

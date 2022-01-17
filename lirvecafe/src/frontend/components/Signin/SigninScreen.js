@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import * as ROUTES from '../../components/constants/routes/routes'
 import * as isSignined from '../constants/isSignined'
 import styles from './SigninScreen.module.css'
-import { deleteCookie, setCookie } from '../constants/userCookie'
+import {deleteCookie, setCookie} from '../constants/userCookie'
 
 
 const eye = "far fa-eye";
@@ -67,7 +67,7 @@ export default function SigninScreen() {
         // setErrorMsg('');
         axios({
             method: 'POST',
-            url: 'http://localhost:5000/users/login',
+            url: 'http://localhost:5000/user/login',
             data: {
                 phone: phone,
                 password: password,
@@ -80,14 +80,15 @@ export default function SigninScreen() {
 
                 let username = (value.role === 1) ? 'customer' : ((value.role === 2) ? 'staff' : 'admin');
                 let end_path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN)
-                window.location.href=(ROUTES.BASE_URL_WEB + end_path);
-                setCookie(username, JSON.stringify(res.data) , 1);
+                window.location.href = (ROUTES.BASE_URL_WEB + end_path);
+                setCookie(username, JSON.stringify(res.data), 1);
                 setCookie(isSignined[username], 'true', 1);
             })
             .catch(error => {
                 console.log(error.response.data);
+                error = Object.values(error.response.data);
                 // console.log("sai mật khẩu")
-                setErrorMsg(error.response.data);
+                setErrorMsg(error);
             })
         //Test
         // let path = (value.role === 1) ? ROUTES.HOME : ((value.role === 2) ? ROUTES.HOMESTAFF : ROUTES.HOMEADMIN);
@@ -113,14 +114,14 @@ export default function SigninScreen() {
                 <div className={styles.form_div}>
                     <h1 className={styles.form_div_h1}>Đăng nhập</h1>
                 </div>
-                <div className={styles.choosesignin} style={{ padding: 2 }}>
-                    <legend className={styles.legend}>Đăng nhập với vai trò: </legend>
+                <div className={styles.choosesignin} style={{padding: 2}}>
+                    <legend className={styles.legend}>Đăng nhập với vai trò:</legend>
                     {users.map(user => (
                         <label key={user.id} className={styles.radio}>
                             <input type="radio"
-                                className={styles.radio__input}
-                                checked={checked === user.id}
-                                onChange={() => setChecked(user.id)} />
+                                   className={styles.radio__input}
+                                   checked={checked === user.id}
+                                   onChange={() => setChecked(user.id)}/>
                             <div className={styles.radio__radio}></div>
                             {user.name}
                         </label>))
@@ -129,11 +130,11 @@ export default function SigninScreen() {
                 <div className={styles.form_div}>
                     <label className={styles.form_label} htmlFor="phone">Số điện thoại</label>
                     <input className={styles.form_input}
-                        type="text"
-                        id="email"
-                        placeholder="Số điện thoại"
-                        required
-                        onChange={(e) => setPhone(e.target.value)}
+                           type="text"
+                           id="email"
+                           placeholder="Số điện thoại"
+                           required
+                           onChange={(e) => setPhone(e.target.value)}
                     ></input>
                 </div>
 
@@ -149,7 +150,8 @@ export default function SigninScreen() {
                             onChange={(e) => setPassword(e.target.value)}
 
                         ></input>
-                        <span onClick={handleShowHidePassword}><i className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
+                        <span onClick={handleShowHidePassword}><i
+                            className={`${isShowPassword ? eye : eye_slash} ${styles.far_eye}`}></i></span>
                     </div>
                 </div>
                 <div className={styles.form_div}>
@@ -157,8 +159,8 @@ export default function SigninScreen() {
                 </div>
 
                 <div className={styles.form_div}>
-                    <label />
-                    <button className={`${styles.form_btn} ${styles.primary}`}  onClick={handleSignin} type="submit">
+                    <label/>
+                    <button className={`${styles.form_btn} ${styles.primary}`} onClick={handleSignin} type="submit">
                         Đăng nhập
                     </button>
                 </div>

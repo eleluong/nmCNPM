@@ -4,26 +4,26 @@ const passport = require('passport');
 const customersController = require('../app/controllers/CustomerController')
 require('../app/config/passport')
 
-router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/users/login-failure',
-    successRedirect: '/users/login-success', 
-}))
+router.post('/login', (req, res) => { 
+    passport.authenticate('local', (error, user, info) => {
+        if (error) return;
 
-router.post('/register', customersController.createCustomer)
+        if (!user) return res.status(401).send( info.message );
 
-router.get('/logout', (req, res, next) => {
-    req.logout();
-    res.redirect('/protected-route');
+        req.session.user = user.data();
+        return res.status(200).json({
+            id: user.id,
+            name: user.data().name
+        });
+    })(req, res);
 });
 
-router.get('/login-success', (req, res, next) => {
-    console.log(req.user);
-    res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
-});
+router.post('/register', (req, res) => { customersController.createCustomer })
 
-router.get('/login-failure', (req, res, next) => {
-    console.log(req.user);
-    res.send('You entered the wrong password.');
+router.get('/logout', (req, res) => {
+    req.session.destroy((req, res) => {
+        // return res.status(200);
+    });
 });
 
 module.exports = router;

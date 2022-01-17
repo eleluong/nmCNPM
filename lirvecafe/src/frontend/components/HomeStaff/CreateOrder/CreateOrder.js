@@ -1,7 +1,9 @@
-import styles from'./CreateOrder.module.css'
+import StaffCreateBill from '../../staffCreateBill/staffCreateBill'
+import styles from './CreateOrder.module.css'
+
 function CreateOrder() {
-    return(
-        <h1 className={styles.CreateOrder}> Tạo Đơn Hàng</h1>
+    return (
+        <StaffCreateBill/>
     )
 
 }

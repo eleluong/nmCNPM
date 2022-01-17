@@ -15,6 +15,7 @@ class ReportController {
             return res.status(500).send(error);
         }
     }
+
     // UPDATE
     async updateCost(req, res) {
         try {
@@ -24,19 +25,19 @@ class ReportController {
             const time = d.getDate().toString() + '/' + d.getMonth().toString() + '/' + d.getFullYear().toString();
 
             await db.collection('reports')
-                    .doc('/report/')
-                    .update({
-                        time: time,
-                        profit: report.profit,
-                        materialCost: report.materialCost,
-                        maintenanceCost: report.maintenanceCost,
-                        staffCost: report.staffCost,
-                        revenue: report.revenue,
-                        siteCost: report.siteCost
-                    });
-                    
+                .doc('/report/')
+                .update({
+                    time: time,
+                    profit: report.profit,
+                    materialCost: report.materialCost,
+                    maintenanceCost: report.maintenanceCost,
+                    staffCost: report.staffCost,
+                    revenue: report.revenue,
+                    siteCost: report.siteCost
+                });
+
             return res.status(200).json();
-        } catch(error) {
+        } catch (error) {
             return res.status(500).send(error);
         }
     }

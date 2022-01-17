@@ -1,18 +1,20 @@
 .register {
     position: relative;
-    background-image: url(https://images.unsplash.com/photo-1615324606662-5d6d2ae148f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmVlJTIwYm9va3xlbnwwfHwwfHw%3D&w=1000&q=80);
+    background-image: url(./background_register.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     justify-content: center;
     height: 100vh;
 }
-.home{
+
+.home {
     text-decoration: none;
     font-size: 2rem;
     color: #2197fe;
     padding: 16px 20px;
-  }
-.registerform {   
+}
+
+.registerform {
     position: absolute;
     top: 80px;
     left: 300px;
@@ -22,6 +24,7 @@
     border-radius: 0.2rem;
     box-shadow: 1px 1px #dbdada;
 }
+
 .form_div1 {
     display: flex;
     flex-direction: row;
@@ -29,19 +32,23 @@
     flex-wrap: wrap;
     position: relative;
 }
+
 .form_div {
     display: flex;
     min-width: 280px;
     flex-direction: column;
     margin: 0.3rem;
 }
+
 .form_div_h1 {
     text-align: center;
 }
+
 .form_label {
     margin: 0.5rem 0;
     display: block;
 }
+
 .form_input,
 .form_btn {
     padding: 0.5rem;
@@ -52,24 +59,30 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .form_btn {
     background-color: #f8f8f8;
     cursor: pointer;
 }
+
 .form_input:hover,
 .form_btn:hover {
     border: 0.1rem #404040 solid;
 }
+
 .form_btn.primary {
     background-color: #1c8af1;
     color: #fff;
 }
+
 .form_btn_block {
     width: 100%;
 }
+
 .form_button.small {
     font-size: 1.2rem;
 }
+
 .form_div.center {
     padding-bottom: 10px;
     text-align: center;
@@ -80,13 +93,15 @@
     flex-direction: column;
     position: relative;
 }
+
 .far_eye {
     position: absolute;
     top: 25%;
     right: 2%;
     font-size: 20px;
     cursor: pointer;
-  }
+}
+
 .far_eye_slash {
     position: absolute;
     top: 25%;

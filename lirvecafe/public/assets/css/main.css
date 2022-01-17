@@ -1,4 +1,4 @@
-.header{
+.header {
     background-color: #feaa39;
     height: var(--header-height);
     position: fixed;
@@ -9,7 +9,7 @@
     z-index: 100;
 }
 
-.header-wrap{
+.header-wrap {
     height: 100%;
     margin: 0 auto;
     display: flex;
@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-.header_logo-link{
+.header_logo-link {
     text-decoration: none;
     padding: 0 10px;
 }
@@ -31,7 +31,7 @@
     letter-spacing: 2px;
 }
 
-.header_user{
+.header_user {
     display: flex;
     flex-direction: row;
     justify-self: center;
@@ -39,7 +39,7 @@
 }
 
 .header_auth,
-.header_cart-link{
+.header_cart-link {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,12 +58,12 @@
 }
 
 .header_auth-link:hover,
-.header_cart-link:hover{
+.header_cart-link:hover {
     background-color: #eb9e39;
 
 }
 
-.header_auth-link:first-child::after{
+.header_auth-link:first-child::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -74,7 +74,7 @@
 }
 
 
-.header_cart-link{
+.header_cart-link {
     margin: 5px 0;
     border-radius: 50%;
     transition: background-color 0.2s linear;
@@ -87,26 +87,26 @@
     padding: 13px 11px;
 }
 
-.content{
+.content {
     margin-top: var(--header-height);
     /* height: 3000px; */
     background-color: #fff;
 }
 
-.slider{
+.slider {
 
 }
 
-.slider_img{
+.slider_img {
     width: 100%;
 }
 
-.product{
+.product {
 
 
 }
 
-.product_header{
+.product_header {
     text-align: center;
     padding: 50px 0;
 }
@@ -116,13 +116,13 @@
     color: #faa515;
 }
 
-.product_header-text{
+.product_header-text {
     font-size: 2.7rem;
     font-weight: 500;
     margin-left: 10px;
 }
 
-.drink_list{
+.drink_list {
     margin-bottom: 100px;
 }
 
@@ -137,27 +137,27 @@
     margin-top: 12px;
 }
 
-.drink_item-img{
+.drink_item-img {
     background: url(/lirvecafe/src/assets/img/caphesuada-moi_847396.jpg) top center / contain no-repeat;
     padding-top: 100%;
     background-color: #fff3d9;
     border-radius: 8px;
 }
 
-.drink_item-name{
+.drink_item-name {
     margin-top: 10px;
     font-size: 1.7rem;
     font-weight: 500;
 }
 
-.drink_item-price{
+.drink_item-price {
     margin-top: 20px;
     display: block;
     font-size: 1.4rem;
     color: #faa515;
 }
 
-.drink_item-icon{
+.drink_item-icon {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -166,11 +166,11 @@
     transition: all 0.1s linear;
 }
 
-.drink_item-icon:hover{
+.drink_item-icon:hover {
     opacity: 0.8;
 }
 
-.book_list{
+.book_list {
 
 }
 
@@ -180,7 +180,7 @@
     margin-top: 16px;
 }
 
-.book_item-img-link{
+.book_item-img-link {
     display: block;
     padding-top: 150px;
     background: url(/lirvecafe/src/assets/img/book.jpg) center center / cover no-repeat;
@@ -188,11 +188,11 @@
     border-top-right-radius: 10px;
 }
 
-.book_item-img{
+.book_item-img {
 
 }
 
-.book_item-name{
+.book_item-name {
     font-size: 1.7rem;
     font-weight: 500;
     margin-top: 12px;
@@ -203,13 +203,13 @@
     min-height: 46px;
 }
 
-.book_item-button{
+.book_item-button {
     padding: 16px;
     display: flex;
     justify-content: flex-end;
 }
 
-.book_item-button-link{
+.book_item-button-link {
     text-decoration: none;
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -217,49 +217,49 @@
     background-color: #ea7b03;
     padding: 11px 23px;
     border-radius: 20px;
-    display: block;   
+    display: block;
     transition: all 0.1s linear
 }
 
-.book_item-button-link:hover{
+.book_item-button-link:hover {
     opacity: 0.8;
     transform: translateY(-2px)
 }
 
-.footer{
+.footer {
     display: flex;
     justify-content: space-between;
     padding: 100px 0 20px 0;
 }
 
-.footer__copyright{
+.footer__copyright {
     display: flex;
     align-items: center;
     padding-left: 60px;
     font-size: 14px;
     color: #555;
-}   
+}
 
-.footer__copyright-link{
+.footer__copyright-link {
     padding: 0 3px;
     color: #555;
 }
 
-.footer__img-container{
+.footer__img-container {
     text-align: center;
 }
 
-.footer__img{
+.footer__img {
     width: 300px;
 }
 
-.footer__contact{
+.footer__contact {
     display: flex;
     padding-right: 40px;
     font-size: 14px;
 }
 
-.footer__contact-option{
+.footer__contact-option {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -269,12 +269,12 @@
 
 }
 
-.footer-contact-header{
+.footer-contact-header {
     font-weight: 700;
     padding-bottom: 8px;
 }
 
-.footer-contact-text{
+.footer-contact-text {
 
 }
 

@@ -1,10 +1,12 @@
 import styles from "../Header.module.css";
 import styless from "../../HeaderStaff/HeaderStaffAdmin.module.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
 import { useState } from "react";
 import { getCookie, deleteCookie } from "../../constants/userCookie";
+import axios from "axios";
+
 function Navbar() {
     //let [user, setUser] = useState(getCookie('userInfo'));
 
@@ -19,8 +21,7 @@ function Navbar() {
         // console.log(user);
         user = JSON.parse(user);
         //console.log(user);
-    }
-    else {
+    } else {
         user = {}
     }
     const ID = user.id;
@@ -28,30 +29,36 @@ function Navbar() {
     // console.log(user);
 
     const handleSignout = () => {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:5000/user/logout'
+        })
+
         window.location.href = `${ROUTES.BASE_URL_WEB}`;
         deleteCookie(isSignined.customer);
     }
     return (
         <nav className={styles.navbar}>
-            <Link to="/" className={styles.navbar_home}> Lirve Coffe</Link>
+            <Link to={ROUTES.HOME} className={styles.navbar_home}> Lirve Coffe</Link>
 
             <ul className={styles.navbar_list}>
                 {!signined ? (<>
-                    <Link to={ROUTES.REGISTER} className={`${styles.navbar_item} ${styles.navbar_item_separate}`}> Đăng ký</Link>
+                    <Link to={ROUTES.REGISTER} className={`${styles.navbar_item} ${styles.navbar_item_separate}`}> Đăng
+                        ký</Link>
                     <Link to={ROUTES.SIGNIN} className={styles.navbar_item}>Đăng nhập</Link>
                 </>) : (
-                    <li className={styless.navbar_user} >
+                    <li className={styless.navbar_user}>
                         <i className={`${styless.navbar_user_icon} fas fa-user`}></i>
-                        <span className={styless.navbar_user_name}>ID: {user.id}</span>
+                        <span className={styless.navbar_user_name}>{user.name}</span>
                         <ul className={styless.navbar_user_menu}>
                             {/* <li className={styles.navbar_user_item}>
                                     <span>ID: {userObj.ID}</span>
                                 </li> */}
-                            <li className={styless.navbar_user_item}>
+                            {/* <li className={styless.navbar_user_item}>
                                 <span className={styless.navbar_user_item_link}>{user.name}</span>
-                            </li>
+                            </li> */}
                             <li className={styless.navbar_user_item}>
-                                <Link to="/" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
+                                <Link to="/userInfo" className={styless.navbar_user_item_link}>Tài khoản của tôi</Link>
                             </li>
                             <li className={styless.navbar_user_item}>
                                 <span onClick={handleSignout} className={styless.navbar_user_item_link}>Đăng xuất</span>

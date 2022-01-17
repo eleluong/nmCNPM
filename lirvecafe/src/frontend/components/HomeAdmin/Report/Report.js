@@ -1,5 +1,5 @@
-function Report(){
-    return(
+function Report() {
+    return (
         <h1>Thống kê kinh doanh</h1>
     )
 }

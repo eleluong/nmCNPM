@@ -24,16 +24,16 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-// app.use(csrfMiddleware); 
 app.use(flash());
 
 app.use(session({
   secret: 'asdfjalsadsf',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 1000*60*60*24,
 }
+
 }));
 app.use(passport.initialize());
 app.use(passport.session());

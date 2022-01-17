@@ -1,18 +1,18 @@
-.infoFooter{
+.infoFooter {
     margin-top: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.linkBack{
+.linkBack {
     margin-left: 20px;
     font-size: 14px;
     color: #338dbc;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
-.submitBtn{
+.submitBtn {
     background: #338dbc;
     padding: 16px 70px;
     font-size: 16px;
@@ -22,8 +22,63 @@
     transition: all 0.1s ease;
 }
 
-.submitBtn:hover{
+.submitBtn:hover {
     cursor: pointer;
     opacity: 0.8;
 
 }
+
+.modalCheckout{
+    position: fixed;
+    top: 0;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    background-color: rgb(204 204 204 / 66%);
+    animation: fadein 0.5s ease; 
+}
+
+@keyframes fadein {
+    0%{
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100%{
+        opacity: 1;
+    }
+    
+}
+
+.modalCheckout.hidden{
+    display: none;
+}
+
+.modalContent{
+    position: absolute;
+    background-color: #fff;
+    top: calc(50% - 75px);
+    left: calc(50% - 170px);
+    width: 340px;
+    height: 150px;
+    border-radius: 18px;
+    border: 2px solid #338dbc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalIcon{
+    font-size: 14px;
+    font-size: 34px;
+    font-weight: 900;
+    color: #338dbc;
+}
+
+.modalText{
+    font-size: 21px;
+    color: #338dbc;
+    margin-left: 20px;
+    font-weight: 300;
+}
+
+

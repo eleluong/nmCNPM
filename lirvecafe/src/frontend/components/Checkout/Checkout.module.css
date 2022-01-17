@@ -1,7 +1,13 @@
 
-
 .checkout {
-    padding: 50px 50px;
-    width: 50vw;
+    padding-left: 60px;
+    display: flex;
+    min-height: 100vh;
 }
+
+.checkoutForm{
+    flex-grow: 1;
+    padding: 60px 60px 60px 0;
+}
+
 

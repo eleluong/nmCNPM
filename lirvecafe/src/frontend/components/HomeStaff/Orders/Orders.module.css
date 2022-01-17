@@ -1,0 +1,52 @@
+.orders {
+    /* display: flex; */
+    height: calc(100vh - 91px);
+}
+.tabs{
+    top: 91px;
+    position: absolute;
+    color: #0384f5;
+    width: 100%;
+}
+
+.tabs_list{
+    background-color: #e2e3e3;
+}
+
+.btn_delete {
+    background-color: #f80f0f;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 12px;
+    margin: 0 2px;
+    cursor: pointer;
+    border: 0px;
+}
+
+.btn_delete:hover {
+    opacity: 0.8;
+}
+.btn_confirm{
+    background-color: #e7d322;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    margin: 0 2px;
+    cursor: pointer;
+    border: 0px;
+}
+.btn_confirm:hover {
+    opacity: 0.8;
+}
+.btn_complete{
+    background-color: #1a94ff;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    margin: 0 2px;
+    cursor: pointer;
+    border: 0px;
+}
+.btn_complete:hover {
+    opacity: 0.8;
+}
