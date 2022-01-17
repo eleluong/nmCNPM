@@ -22,7 +22,23 @@ class StaffCartController {
             return res.status(500).json();
         }
     }
-
+    async checkIfExists(req, res, next) {
+        const id = req.body.staffId;
+        await carts.doc(id).get()
+        .then(cart => {
+            if(!cart.exists) {
+                console.log('1')
+                carts.doc(id).set({
+                    number: 1,
+                })
+            }
+            next();
+        })
+        .catch(err => {
+            console.error('err', err);
+            res.status(400).json({ error: err.message });
+        })
+    }
     //PUT
     async deleteFromCart(req, res) {
         //const id = req.session.passport.user;
@@ -91,8 +107,10 @@ class StaffCartController {
     //POST
     async createBill(req, res) {
         console.log(req.body);
-        const productList = carts.doc(req.body.staffId).collection('productList').get();
+        const productList = (await carts.doc(req.body.staffId).collection('productList').get()).docs;
         let total = 0;
+        console.log(productList);
+
         await db.collection('bills').add({
             phone: req.body.phone,
             shippingAddress: req.body.address,
@@ -103,8 +121,8 @@ class StaffCartController {
         .then(bill => {
             for(const product of productList) {
                 total += product.number * product.price;
-                bill.collection(productList).doc(product.id).set({
-                    number: product.number,
+                bill.collection('productList').doc(product.id).set({
+                    number: product.data().quantity,
                 })
                 product.ref.delete();
             }
