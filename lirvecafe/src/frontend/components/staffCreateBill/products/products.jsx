@@ -19,7 +19,6 @@ const Products = ({handleAdd}) => {
         };
         getProduct();
     }, []);
-    console.log(products);
     return(
         <div className={classes.root}>
             <Grid container justify= "center" spacing = {4}>
