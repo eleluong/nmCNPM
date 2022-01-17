@@ -1,5 +1,6 @@
 const db = require('../models/firebaseAdmin');
 const carts = db.collection('staffcarts');
+const { FieldValue } = require('firebase-admin/firestore');
 
 class StaffCartController {
     // GET
@@ -18,49 +19,54 @@ class StaffCartController {
 
             return res.status(200).send(items);
         } catch (error) {
-            return res.sendStatus(500);
+            return res.status(500).json();
         }
     }
 
     //PUT
     async deleteFromCart(req, res) {
         //const id = req.session.passport.user;
-        const productId = req.body.productId;
-        const cartId = req.body.staffId;
+        try {
+            const productId = req.body.productId;
+            const cartId = req.body.staffId;
 
-        const products = (await carts.doc(cartId).collection('productList').get()).docs;
+            const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
-        const deletingProduct = products.find(product => {
-            return product.id === productId;
-        })
+            const deletingProduct = products.find(product => {
+                return product.id === productId;
+            })
 
-        let quantity = deletingProduct.data().quantity;
-        if (quantity > 1) {
-            carts.doc(cartId)
-                .collection('productList').doc(deletingProduct.id)
-                .set({
-                    quantity: quantity - 1
-                });
-        } else {
-            carts.doc(cartId)
-                .collection('productList').doc(deletingProduct.id)
-                .delete({});
+            let quantity = deletingProduct.data().quantity;
+            if (quantity > 1) {
+                carts.doc(cartId)
+                    .collection('productList').doc(deletingProduct.id)
+                    .set({
+                        quantity: quantity - 1
+                    });
+            } else {
+                carts.doc(cartId)
+                    .collection('productList').doc(deletingProduct.id)
+                    .delete({});
+            }
+
+            return res.status(200).json();
+        } catch(e) {
+            return res.status(500).json(e);
         }
-
-        return res.status(200);
     }
 
     //PUT
     async addToCart(req, res) {
-        const productId = req.body.productId;
-        const cartId = req.body.cartId;
-        const price = req.body.price
+        try {
+            const productId = req.body.productId;
+            const cartId = req.body.staffId;
+            const price = req.body.price;
 
-        const products = (await carts.doc(cartId).collection('productList').get()).docs;
+            const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
-        const addingProduct = products.find(product => {
-            return product.id === productId;
-        })
+            const addingProduct = products.find(product => {
+                return product.id === productId;
+            })
 
         if (addingProduct) {
             carts.doc(cartId)
@@ -77,39 +83,40 @@ class StaffCartController {
                 });
         }
 
-        return res.status(200);
-        //const id = req.session.passport.user;
-        // const id = req.body.customerId;
-        // let doc = carts.doc(id).collection('productList').doc(req.body.id);
-        // await carts.doc(id).get()
-        // .then(cart => {
-        //     if(!cart.exists) {
-        //         console.log('1')
-        //         carts.doc(id).set({
-        //             number: 1,
-        //         })
-        //     }
-        //     return doc.get()
-        // })
-        // .then(product => {
-        //     if(!product.exists)
-        //         return product.ref.set({
-        //             number: 1,
-        //         })
-        //     else return product.ref.update({
-        //         number: product.data().number += 1,
-        //     })
-        // })    
-        // .then(() => {
-        //     return doc.get()
-        // })
-        // .then(doc => {
-        //     res.send(doc.data())
-        // })
-        // .catch(err => {
-        //     console.error('err', err);
-        //     res.status(400).json({ error: err.message });
-        // })
+            return res.status(200).json();
+        } catch(e) {
+            return res.status(500).json();
+        }
+    }
+    //POST
+    async createBill(req, res) {
+        console.log(req.body);
+        const productList = carts.doc(req.body.staffId).collection('productList').get();
+        let total = 0;
+        await db.collection('bills').add({
+            phone: req.body.phone,
+            shippingAddress: req.body.address,
+            state: 0,
+            staffID: req.body.staffId,
+            time: FieldValue.serverTimestamp(),
+        })
+        .then(bill => {
+            for(const product of productList) {
+                total += product.number * product.price;
+                bill.collection(productList).doc(product.id).set({
+                    number: product.number,
+                })
+            }
+            bill.update({
+                total: total,
+            })
+        return res.status(200); 
+        })
+        .catch(err => {
+            console.error('err', err);
+            return res.status(400).json({ error: err.message });
+        })
+        
     }
 }
 
