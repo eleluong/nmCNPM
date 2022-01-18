@@ -51,14 +51,9 @@ const UserInfor = () => {
             })
     }, [])
 
-    console.log('name: ', name);
-    console.log('address: ', address);
-    console.log('email: ', email);
-    console.log('phone: ', phone);
-
     function handleSubmit() {
 
-        fetch('http://localhost:3000/user', {   // chua co api
+        fetch('http://localhost:5000/customer/update/' + ID, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

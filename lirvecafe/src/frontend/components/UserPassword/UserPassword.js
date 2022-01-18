@@ -4,6 +4,8 @@ import {useEffect, useReducer} from "react";
 import {setName, setPhone, setEmail, setAddress, setForm} from "../UserStore/actions";
 import {useContext} from "react"
 import {Context} from "../UserStore"
+import clsx from "clsx";
+import styles from './UserPassword.module.css'
 
 import reducer, {initState} from "../UserStore/reducer";
 // import UserPassword from "../UserPassword/UserPassword";
@@ -36,23 +38,29 @@ const UserPassword = () => {
 
 
     function changePassword(){
-        // fetch('http://localhost:5000/customer/update_password' + ID,{
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         password: password,
-        //         rePassword: rePassword,
-        //     }),
-        // }) 
-        //     .then(response => response.json())
-        //     .then (result => {
-        //         console.log(result);
-        //         setIsSuccess(result)
-        //     })
+        fetch('http://localhost:5000/customer/update_password/' + ID,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                password: password,
+                rePassword: rePassword,
+            }),
+        }) 
+            .then(res => res.json())
+            .then (result => {
+                console.log('xxx');
+                console.log(result);
+                setIsSuccess(false);
+            })
+            .catch(error => {
+                console.log('yyy');
+                console.log(error)
+                setIsSuccess(true);
 
-        console.log(132);
+            })
+
     }
 
     return (
@@ -74,6 +82,7 @@ const UserPassword = () => {
                                         onChange={e => setPassword(e.target.value)}
                                     />
 								</div>
+                                <div className={clsx(styles.inputError, isSuccess && styles.inputSuccess)}>Mật khẩu không chính xác</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-sm-3">
