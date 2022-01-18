@@ -70,7 +70,7 @@ const CartItem = ({item, add, remove}) => {
                         <Button
                             disableElevation
                             variant='contained'
-                            onClick={() => add(item.productId, data.price)}
+                            onClick={() => add(item.productId)}
                         >
                             +
                         </Button>

@@ -36,15 +36,24 @@ const UserInfor = () => {
 
 
     function handleDeleteBill(id){
-    //     console.log(id);
-    //     fetch('http://localhost:5000/bill/delete/' + id, {
-    //             method: 'DELETE',
-    //         })
-    //         .then(response => response.json())
-    //         .then(res => {
-    //             console.log(res);
-    //             setBillsChange(!billsChange)
-    //         })
+        console.log('xxxx', id);
+        fetch('http://localhost:5000/bill/delete/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+            })
+            .then(response => {
+                console.log(response);
+                console.log(response.json());
+                return response
+            })
+            .then(res => {
+                console.log(132);
+                console.log(res);
+                setBillsChange(!billsChange)
+                
+            })
     }
 
     return (
@@ -61,7 +70,7 @@ const UserInfor = () => {
                             <thead>
                                 <tr>
                                     <th>Đơn hàng</th>
-                                    <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Xóa toàn bộ</a></th>
+                                    {/* <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Xóa toàn bộ</a></th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,26 +84,26 @@ const UserInfor = () => {
                                                             {/* <h4 class="product-title"><a href="#">Caffe sữa</a></h4> */}
                                                             {
                                                                 bill.products.map((product, index) => 
-                                                                    <div key= {index} class="text-lg text-medium text-muted">{product.name || 'productname'} x {product.quantity}</div>
+                                                                    <div key= {index} class="text-lg text-medium text-muted">{product.name || 'productname'} x {product.number}</div>
                                                                 
                                                                 )
                                                             }
                                                             <div>Trạng thái: 
                                                                 <div class={"d-inline text-" + (bill.state == 0 ? 'danger' : bill.state == 1 ? 'warning' : 'success')}>
-                                                                    {bill.state == 0 ? ' Chưa xác nhận' : bill.state == 1 ? ' Chưa giao' : ' Hoàn thành'}
+                                                                    {bill.state == 0 ? ' Chờ xác nhận' : bill.state == 1 ? ' Chưa giao' : ' Hoàn thành'}
                                                                 </div>
                                                                 {
                                                                     
                                                                 }
                                                             </div>
-                                                            <h4 class="product-title"><a href="#">Tổng tiền: {bill.total || 'tongvnd'}</a></h4>
+                                                            <h4 class="product-title"><a href="#">Tổng tiền: {bill.total || 'tong'} VND</a></h4>
                                                         </div>
                                                     </div>
                                                 </td>
                                                             {/* <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Xóa toàn bộ</a></th> */}
                                                 <td class="text-center">
                                                     <a class="remove-from-cart"  data-toggle="tooltip" title="" data-original-title="Remove item"
-                                                        onClick={() => handleDeleteBill(bill.billID)}
+                                                        onClick={() => handleDeleteBill(bill.billId)}
                                                     >
                                                         <i class="icon-cross"></i>
                                                         Xóa
