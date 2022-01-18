@@ -39,7 +39,7 @@ class CartController {
             if (quantity > 1) {
                 carts.doc(cartId)
                     .collection('productList').doc(deletingProduct.id)
-                    .set({
+                    .update({
                         quantity: quantity - 1
                     });
             } else {
@@ -79,6 +79,7 @@ class CartController {
             const productId = req.body.productId;
             const cartId = req.body.cartId;
             const price = req.body.price;
+            const name = req.body.name;
 
             const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
@@ -96,7 +97,7 @@ class CartController {
                 carts.doc(cartId)
                     .collection('productList').doc(productId)
                     .set({
-                        name: addingProduct.data().name,
+                        name: name,
                         quantity: 1,
                         price: price
                     });
@@ -116,7 +117,7 @@ class CartController {
             const products = (await carts.doc(cartId).collection('productList').get()).docs;
 
             const sum = products.reduce((total, product) => {
-                return total + product.data().quantity*product.data().price;
+                return total + product.data().quantity * product.data().price;
             }, 0); 
             console.log(sum);
             return res.status(200).json(sum);

@@ -2,7 +2,6 @@ import React from 'react';
 import useStyles from './styles';
 import BillItem from './billItem/billItem';
 import {useEffect} from 'react';
-import * as ROUTES from '../constants/routes/routes';
 import * as isSignined from '../constants/isSignined';
 import {getCookie, deleteCookie} from "../constants/userCookie";
 import {useState} from 'react';
@@ -63,10 +62,9 @@ const Bill = () => {
         fetch('http://localhost:5000/cart/get_total/' + id)
             .then(response => response.json())
             .then(total => {
-                console.log(total);
                 setTotal(total);
             })
-    }, [])
+    }, [change])
 
 
     return (
@@ -78,7 +76,7 @@ const Bill = () => {
 
             <div className={classes.total}>
                 <span className={classes.totalText}>Tổng cộng:</span>
-                <span className={classes.totalPrice}>{total || ' 280,000'}VNĐ</span>
+                <span className={classes.totalPrice}>{total || 0}VNĐ</span>
             </div>
         </div>
 
