@@ -64,6 +64,9 @@ const UpdateProduct = ({change, IsChange, setIsOpen, product}) => {
         UpdateProduct(newProduct);
         setIsOpen(false);
     };
+    const handleRejectUpdate =() =>{
+        setIsOpen(false);
+    }
     return (
         <div className={styles.addProduct}>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -120,7 +123,8 @@ const UpdateProduct = ({change, IsChange, setIsOpen, product}) => {
                     />
                 </div>
                 <div className={styles.field_submit}>
-                    <button className={styles.form_submit} type="submit">Submit</button>
+                    <button className={styles.form_submit} type="submit">Xác nhận</button>
+                    <button className={styles.form_reject} onClick={handleRejectUpdate}>Hủy bỏ</button>
                 </div>
             </form>
         </div>

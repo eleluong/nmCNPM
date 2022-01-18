@@ -3,17 +3,24 @@ import { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import UpdateProduct from './UpdateProduct';
 import styles from './Products.module.css'
+import AlertDialog from '../Dialog/AlertDialog';
 const ProductList = ({ change, IsChange, type, products, remove }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [product, setProduct] = useState([]);
     function handleUpdateProduct(product) {
-        setIsOpen(true);
+        setIsOpenUpdate(true);
         setProduct(product);
+    }
+    function handleDialog(product){
+        setIsOpenDialog(true);
+        setProduct(product)
     }
     // console.log(product);
     return (
         <>
-            {isOpen && <UpdateProduct change={change} IsChange={IsChange} setIsOpen={setIsOpen} product={product}></UpdateProduct>}
+            {isOpenUpdate && <UpdateProduct change={change} IsChange={IsChange} setIsOpen={setIsOpenUpdate} product={product}></UpdateProduct>}
+            {isOpenDialog && <AlertDialog setOpen={setIsOpenDialog} remove={remove} data={product}></AlertDialog>}
             <TableContainer component={Paper}>
                 <Table aria-label="a dense table">
                     <TableHead>
@@ -44,7 +51,7 @@ const ProductList = ({ change, IsChange, type, products, remove }) => {
                                     <TableCell align="center">{product.stock}</TableCell>
                                     <TableCell align="center">
                                         <button className={styles.btn_update} onClick={() => handleUpdateProduct(product)}>Sửa</button>
-                                        <button className={styles.btn_delete} onClick={() => remove(product)}>Xóa</button>
+                                        <button className={styles.btn_delete} onClick={() => handleDialog(product)}>Xóa</button>
                                     </TableCell>
                                 </TableRow>
                             ) : (
