@@ -4,7 +4,7 @@ class ProductController {
     //GET
     async getProducts(req, res) {
         try {
-            console.log('\n'+req.session.cookie+'\n');
+            console.log('\n' + req.session.cookie + '\n');
             const query = db.collection('products');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
@@ -82,15 +82,20 @@ class ProductController {
     }
 
     // PUT
-    async updateProductType(req, res) {
+    async updateProduct(req, res) {
         try {
-            const type = req.body.type;
+            const product = req.body;
             const productId = req.body.id;
 
             await db.collection('products')
                 .doc(productId)
                 .update({
-                    type: type
+                    name: product.name,
+                    price: product.price,
+                    type: product.type,
+                    stock: product.stock,
+                    image: product.image,
+                    description: product.description,
                 });
 
             return res.status(200).json();
