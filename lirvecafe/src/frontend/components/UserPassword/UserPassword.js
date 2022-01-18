@@ -12,25 +12,48 @@ import "../../css/bootstrap.min.css";
 import "../../css/bootstrap.css";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header'
+import {getCookie, deleteCookie} from "../constants/userCookie"
+
 
 
 const UserPassword = () => {
 
     const [password, setPassword] = useState('')
     const [rePassword, setRePassword] = useState('')
+    const [isSuccess, setIsSuccess] = useState(true)
+
+    console.log({ password, rePassword });
+
+    let user = getCookie('customer');
+    if (user) {
+        user = JSON.parse(user);
+    } else {
+        user = {}
+    }
+    const ID = user.id;
+
+    console.log('ID: ', ID);
 
 
-    // const [state, dispatch] = useStore()
+    function changePassword(){
+        // fetch('http://localhost:5000/customer/update_password' + ID,{
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         password: password,
+        //         rePassword: rePassword,
+        //     }),
+        // }) 
+        //     .then(response => response.json())
+        //     .then (result => {
+        //         console.log(result);
+        //         setIsSuccess(result)
+        //     })
 
-    // const { phone, email, name, address} = state
-
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/user') //??????
-    //         .then(response => response.json())
-    //         .then (users => {
-    //             dispatch(setForm(users[0]))
-    //         })
-    // }, [])
+        console.log(132);
+    }
 
     return (
         <Fragment>
@@ -47,7 +70,9 @@ const UserPassword = () => {
 									<h6 class="mb-0">Mật khẩu cũ</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="password" class="form-control" value={password} placeholder="Mật khẩu cũ" />
+									<input type="password" class="form-control" value={password} placeholder="Mật khẩu cũ"
+                                        onChange={e => setPassword(e.target.value)}
+                                    />
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -55,7 +80,9 @@ const UserPassword = () => {
 									<h6 class="mb-0">Mật khẩu mới</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="password" class="form-control" value={rePassword} placeholder="Mật khẩu mới" />
+									<input type="password" class="form-control" value={rePassword} placeholder="Mật khẩu mới"
+                                        onChange={e => setRePassword(e.target.value)}
+                                    />
 								</div>
 							</div>
 							{/* <div class="row mb-3">
@@ -71,7 +98,11 @@ const UserPassword = () => {
 							<div class="row">
 								<div class="col-sm-3"></div>
 								<div class="col-sm-9 text-secondary">
-                                <button type="button" class="button-7">Lưu thay đổi</button>&nbsp;								</div>
+                                    <button type="button" class="button-7"
+                                        onClick={changePassword}
+                                    >Lưu thay đổi
+                                    </button>&nbsp;								
+                                </div>
 							</div>
 						</div>
 					</div>

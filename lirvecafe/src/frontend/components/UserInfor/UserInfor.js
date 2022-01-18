@@ -58,7 +58,7 @@ const UserInfor = () => {
 
     function handleSubmit() {
 
-        fetch('http://localhost:3000/user', {
+        fetch('http://localhost:3000/user', {   // chua co api
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
