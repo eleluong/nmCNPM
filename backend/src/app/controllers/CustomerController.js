@@ -71,7 +71,7 @@ class CustomersController {
     }
 
     async updatePassword(req, res) {
-        const user = await db.collection('users').doc(req.params.id).get()
+        const user = await db.collection('customers').doc(req.params.id).get()
         if (!hash.validate(req.body.password, user.data().password)) {
             return res.status(403).json({error: 'Invalid password'});
         }
@@ -87,7 +87,7 @@ class CustomersController {
                 res.status(200).send('Successfully')
             })
             .catch(err => {
-                res.status(400);
+                res.status(400).send('ngu');
             })
         }
     }

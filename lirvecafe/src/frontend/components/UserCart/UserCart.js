@@ -70,7 +70,7 @@ const UserInfor = () => {
                             <thead>
                                 <tr>
                                     <th>Đơn hàng</th>
-                                    <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Xóa toàn bộ</a></th>
+                                    {/* <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Xóa toàn bộ</a></th> */}
                                 </tr>
                             </thead>
                             <tbody>

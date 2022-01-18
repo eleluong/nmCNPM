@@ -55,9 +55,9 @@ const User = () => {
                     </div>
                 </aside>
                 <nav class="list-group" id='nav'>
-                    <a name="info" class="list-group-item with-badge active" href="/UserInfo"><i class="fa fa-user"></i>Thông
+                    <a name="info" class="list-group-item with-badge" href="/UserInfo"><i class="fa fa-user"></i>Thông
                         tin cá nhân<span class="badge badge-primary badge-pill"></span></a>
-                    <a name="password" class="list-group-item with-badge " href="/UserPassword"><i class="fa "></i>Đổi
+                    <a name="password" class="list-group-item with-badge " href="/UserPassword"><i class="fa fa-key"></i>Đổi
                         mật khẩu<span class="badge badge-primary badge-pill"></span></a>
                     <a name="cart" class="list-group-item" href="/UserCart"><i class="fa fa-th"></i>Đơn hàng</a>
 
