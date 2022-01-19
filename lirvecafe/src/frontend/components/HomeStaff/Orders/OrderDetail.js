@@ -17,7 +17,13 @@ function OrderDetail({ order, setOpen }) {
                         <label className={styles.label}>Địa chỉ:</label>
                         <span className={styles.text}> {order.shippingAddress}</span><br />
                         <div className={styles.order_list}>
-                            <label className={styles.label}>Danh sách sản phẩm:</label>
+                            <label className={styles.label}>Danh sách sản phẩm:</label><br />
+                            {order.products.map(product => (
+                                <>
+                                <span className={styles.product}>{product.name}</span>
+                                <span className={styles.product_number}>x{product.number}</span><br />
+                                </>
+                            ))}
                         </div>
                         <label className={styles.label}>Tổng số tiền:</label>
                         <span className={styles.total}> {order.total}Đ</span>

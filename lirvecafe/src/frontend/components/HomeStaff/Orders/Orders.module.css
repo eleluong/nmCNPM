@@ -3,8 +3,6 @@
     height: calc(100vh - 91px);
 }
 .tabs{
-    top: 91px;
-    position: absolute;
     color: #0384f5;
     width: 100%;
 }
@@ -116,4 +114,10 @@
 .total{
     font-size: 1.6rem;
     font-weight: 500;
+}
+.product{
+    padding: 4px 0px 4px 160px;
+}
+.product_number{
+    margin: 4px 20px;
 }

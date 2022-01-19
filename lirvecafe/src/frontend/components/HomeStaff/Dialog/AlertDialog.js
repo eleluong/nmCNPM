@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import styles from './AlertDialog.module.css'
 export default function AlertDialog({ setOpen, remove, data }) {
 
