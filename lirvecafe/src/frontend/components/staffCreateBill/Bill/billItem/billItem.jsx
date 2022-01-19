@@ -8,7 +8,7 @@ import * as isSignined from '../../../constants/isSignined';
 import {getCookie, deleteCookie} from "../../../constants/userCookie";
 import {useState} from 'react';
 
-const BillItem = ({item, addToCart, removeFromCart}) => {
+const BillItem = ({item, addToCart, removeFromCart, change}) => {
     // let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
@@ -34,9 +34,8 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
         }
         getData();
         console.log(data);
-    }, []);
-
-
+    }, [change]);
+    
 
     const classes = useStyles();
     return (

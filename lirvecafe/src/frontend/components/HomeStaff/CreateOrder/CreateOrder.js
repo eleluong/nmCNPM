@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import StaffCreateBill from '../../staffCreateBill/staffCreateBill'
 import styles from './CreateOrder.module.css'
 

@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, Link } from "react-router-dom"
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Box, Tab } from '@material-ui/core';
+import { TabContext, TabList, TabPanel } from '@material-ui/lab'
 import styles from "./Products.module.css"
 import AddProduct from './AddProduct';
-// import NotifyConfirm from './NotifyConfirm';
-
+import ProductList from './ProductList'
+import { SettingsPowerRounded } from '@material-ui/icons';
 function Products() {
     const [products, setProducts] = useState([]);
-    const [product, setProduct] = useState([]);
-    const [isOpen, setIsOpen] = useState(['false']);
+    const [value, setValue] = useState('1');
+    const [change, setChange] = useState(0);
+    var drink = 0;
+    var book = 1;
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     useEffect(() => {
         const getProduct = async () => {
             const url = "http://localhost:5000/product/get_all";
@@ -16,10 +22,21 @@ function Products() {
             setProducts(res);
         };
         getProduct();
-    }, []);
-    function handleConfirmDelete(product){
-        setIsOpen("true");
+    }, [change]);
+
+    function handleAddProduct(product) {
+        var productsAPI = 'http://localhost:5000/product/add'
+        fetch(productsAPI, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product),
+        })
+            .then(res => setChange(change + 1));
+
     }
+
     function handleDeleteProduct(product) {
         var ProductsDeleteAPI = 'http://localhost:5000/product/delete';
         var e = document.getElementById(product.productId);
@@ -35,53 +52,49 @@ function Products() {
         })
             .then(res => res.json())
     }
-
+    // function handleUpdateProduct() {
+    //     setIsOpen(true);
+    // }
     return (
         <div className={styles.products}>
-            {/* <NotifyConfirm isOpen={isOpen} /> */}
-            <div className={styles.header}>
-                <h1 className={styles.label}>Danh sách sản phẩm</h1>
-                <Link to='ThemSanPham' className={styles.AddProduct_link}> Thêm sản phẩm</Link>
+            <div className={styles.tabs}>
+                <Box sx={{ width: '100%', typography: 'body1' }}>
+                    <TabContext value={value}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={styles.tabs_list}>
+                            <TabList onChange={handleChange} aria-label="lab API tabs example">
+                                <Tab label="Đồ uống" value="1" style={{ 'font-weight': '700' }} />
+                                <Tab label="Sách" value="2" style={{ 'font-weight': '700' }} />
+                                <Tab label="Thêm sản phẩm" value="3" style={{ 'font-weight': '700' }} />
+                            </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                            <ProductList
+                                change={change}
+                                IsChange={setChange}
+                                type={drink}
+                                products={products}
+                                remove={handleDeleteProduct}
+                            // update={handleUpdateProduct}
+                            />
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <ProductList
+                                change={change}
+                                IsChange={setChange}
+                                type={book}
+                                products={products}
+                                remove={handleDeleteProduct}
+                            // update={handleUpdateProduct}
+                            />
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <AddProduct
+                                add={handleAddProduct}
+                            />
+                        </TabPanel>
+                    </TabContext>
+                </Box>
             </div>
-            <TableContainer component={Paper}>
-                <Table aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Hình ảnh</TableCell>
-                            <TableCell align="center">Tên sản phẩm</TableCell>
-                            <TableCell align="center">Phân loại</TableCell>
-                            <TableCell align="center">Giá tiền</TableCell>
-                            <TableCell align="center">Số lượng còn lại</TableCell>
-                            <TableCell align="center">Hành động</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {products.map((product) => (
-                            <TableRow
-                                id={product.productId}
-                                key={product.productId}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                style={{ 'padding': '4px 8px' }}
-                            >
-                                <TableCell component="th" scope="row" align="center">
-                                    <img src={product.image} className={styles.img}></img>
-                                </TableCell>
-                                <TableCell align="center">{product.name}</TableCell>
-                                <TableCell align="center">{product.type}</TableCell>
-                                <TableCell align="center">{product.price}</TableCell>
-                                <TableCell align="center">{product.stock}</TableCell>
-                                <TableCell align="center">
-                                    <button className={styles.btn_delete} onClick={() => handleConfirmDelete(product)}>Xóa
-                                    </button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <Routes>
-                <Route path='ThemSanPham' element={<AddProduct/>}></Route>
-            </Routes>
         </div>
     );
 

@@ -36,6 +36,20 @@
     cursor: pointer;
     border: 0px;
 }
+.btn_delete:hover {
+    opacity: 0.8;
+}
+.btn_update{
+    background-color: #ecd718;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: 0px;
+}
+.btn_update:hover {
+    opacity: 0.8;
+}
 
 .form {
     position: absolute;
@@ -102,8 +116,23 @@
 
 .form_submit {
     outline: none;
-    background-color: #39a0fb;
+    background-color: #0043ff;
     margin-top: 8px;
+    margin-right: 15%;
+    padding: 8px 12px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    width: 25%;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.form_reject{
+    outline: none;
+    background-color: #f30a0a;
+    margin-top: 8px;
+    margin-left: 15%;
     padding: 8px 12px;
     font-weight: 600;
     color: #fff;
@@ -115,5 +144,8 @@
 }
 
 .form_submit:hover {
+    opacity: 0.8;
+}
+.form_reject:hover {
     opacity: 0.8;
 }

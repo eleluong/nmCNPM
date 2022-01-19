@@ -1,11 +1,9 @@
 import React from 'react'
 import Products from './products/products';
-import Bill from './bill/bill.jsx';
+import Bill from './Bill/bill.jsx';
 import Checkout from './checkout/checkout';
 import { Grid } from '@material-ui/core';
 import {useEffect} from 'react';
-import * as ROUTES from '../constants/routes/routes';
-import * as isSignined from '../constants/isSignined';
 import {getCookie, deleteCookie} from "../constants/userCookie";
 import {useState} from 'react';
 const StaffCreateBill = () => {
@@ -18,7 +16,6 @@ const StaffCreateBill = () => {
         user = {}
     }
     const id = user.id;
-    console.log(user);
     const axios = require('axios');
     const handleAddToCart = ((itemId, price) => {
         const temp = {staffId: user.id, productId: itemId, price: price};
@@ -28,7 +25,6 @@ const StaffCreateBill = () => {
             data: temp,
         }).then(res => {
             setChange(change+1);
-            console.log(res);
         });
         console.log(temp);
 
@@ -41,7 +37,6 @@ const StaffCreateBill = () => {
             data: temp,
         }).then(res => {
             setChange(change+1);
-            console.log(res);
         });
         console.log(temp);
     });
@@ -51,20 +46,20 @@ const StaffCreateBill = () => {
             const res = await (await (fetch(url
             ))).json();
             setItems(res);
-            console.log("here is cart");
         }
         getCart();
+        console.log(change);
     }, [change]);
     console.log(items);
 
     return (
-        <div>
+        <div paddingTop = '50px'>
             <Grid container>
                 <Grid item xs = "8">
                     <Products handleAdd = {handleAddToCart}/>
                 </Grid>
                 <Grid items xs = "4">
-                    <Bill items = {items} add = {handleAddToCart} remove = {handleRemoveFromCart}/>
+                    <Bill items = {items} add = {handleAddToCart} remove = {handleRemoveFromCart} change = {change}/>
                     <Checkout/>
                 </Grid>
             </Grid>

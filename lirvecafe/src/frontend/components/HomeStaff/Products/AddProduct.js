@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./Products.module.css"
-import { Link } from "react-router-dom";
 
 const schema = yup.object().shape({
     name: yup
@@ -23,7 +22,7 @@ const schema = yup.object().shape({
         .string(),
 
 });
-const AddProduct = () => {
+const AddProduct = ({add}) => {
     const {
         register,
         reset,
@@ -31,22 +30,9 @@ const AddProduct = () => {
         handleSubmit,
         formState: { errors }
     } = useForm({ resolver: yupResolver(schema) });
-    var productsAPI = 'http://localhost:5000/product/add'
-
-    function AddProduct(data) {
-        fetch(productsAPI, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-        })
-        .then(res=>res.json())
-        
-    }
 
     const onSubmit = (data) => {
-        AddProduct(data);
+        add(data);
         reset({
             name: "",
             price: "",
@@ -60,7 +46,6 @@ const AddProduct = () => {
     return (
         <div className={styles.addProduct}>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <Link to="/staff/Products" className={styles.form_exit}>&times;</Link>
                 <h1 className={styles.form_heading}>Điền các thông tin cần thiết để thêm sản phẩm</h1>
 
                 <div className={styles.field}>

@@ -35,22 +35,29 @@ class BillsController {
     async getBillByCustomerID(req, res) {
         const user = req.params.id;
         const billList = (await bills.where('userId', '==', user).get()).docs;
-        let array = billList.map(bill => {
-            console.log(bill.data())
+        let array = [];
+        for(const bill of billList) {
             const data = bill.data();
-            return {
+            const productList = (await bill.ref.collection('productList').get()).docs;
+            let productArray = productList.map(product => {
+                return {
+                    productId: product.id,
+                    name: product.data().name,
+                    number: product.data().number,
+                }
+            })
+            array.push({
+                products: productArray,
                 billId: bill.id,
                 userId: data.userId,
                 address: data.shippingAddress,
                 phone: data.phone,
                 total: data.total,
-            }
-        })
+                state: data.state,
+            });
+        }
         res.json(array);
     }
-
-    async
-
 
     async getBillbyState(req, res) {
         const state = parseInt(req.params.state);
@@ -87,10 +94,12 @@ class BillsController {
             staffID: "",
             time: FieldValue.serverTimestamp(),
         })
+
             .then(bill => {
                 for (const product of productList) {
-                    total += product.quantity * product.price;
+                    total += product.data().quantity * product.data().price;
                     bill.collection('productList').doc(product.id).set({
+                        name: product.data().name,
                         number: product.data().quantity,
                     })
                     product.ref.delete();
@@ -98,6 +107,7 @@ class BillsController {
 
                 bill.update({
                     total: total,
+
                 })
             })
             .catch(err => {
@@ -105,6 +115,8 @@ class BillsController {
                 res.status(400).json({ error: err.message });
             })
     }
+
+    
 
     async deleteBill(req, res) {
         const productList = (await bills.doc(req.params.id).collection('productList').get()).docs;

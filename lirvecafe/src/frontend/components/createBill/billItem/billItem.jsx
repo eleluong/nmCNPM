@@ -51,12 +51,12 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                     <CardContent className={classes.content}>
                         <Typography variant='h7' className={classes.productName}>{data.name}</Typography>
                         <div className={classes.productInfo}>
-                            <p>Price: ${data.price}</p>
+                            <p>Price: {data.price} VND</p>
                             <p style={{marginTop: '4px'}}>Quantity: {item.quantity}</p>
                         </div>
                     </CardContent>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <CardActions className={classes.buttons}>
                         <Button
                             disableElevation
@@ -68,8 +68,9 @@ const BillItem = ({item, addToCart, removeFromCart}) => {
                         <p style={{
                             paddingTop: '4px',
                             color: '#4b4b4b',
-                            fontWeight: '500'
-                        }}>${item.quantity * data.price}</p>
+                            fontWeight: '500',
+                            margin: '0',
+                        }}>{item.quantity * data.price} VND</p>
                         <Button
                             disableElevation
                             variant='contained'
