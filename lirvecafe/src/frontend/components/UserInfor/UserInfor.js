@@ -16,7 +16,8 @@ import HeaderStaff from '../HeaderStaff/HeaderStaff'
 
 import styles from './UserInfor.module.css';
 
-import {getCookie, deleteCookie} from "../constants/userCookie"
+import {getCookie, setCookie} from "../constants/userCookie"
+import { useTheme } from "@material-ui/core";
 
 
 
@@ -34,7 +35,8 @@ const UserInfor = () => {
         user = {}
     }
     const ID = user.id;
-
+    console.log("UserInfor ~ user", user)
+    
     console.log('ID: ', ID);
 
     useEffect(() => {
@@ -52,6 +54,8 @@ const UserInfor = () => {
     }, [])
 
     function handleSubmit() {
+        user.name = name;
+        setCookie('customer', JSON.stringify(user), 100)
 
         fetch('http://localhost:5000/customer/update/' + ID, {
             method: 'POST',
@@ -60,14 +64,14 @@ const UserInfor = () => {
             },
             body: JSON.stringify({name, email, phone, address}),
         })
-
+    
     }
 
 
     return (
         <Fragment>
             {/* <HeaderStaff /> */}
-            <Header />
+            <Header/>
 
             
             <User></User>
