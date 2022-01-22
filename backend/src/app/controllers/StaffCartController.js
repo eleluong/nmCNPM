@@ -134,8 +134,24 @@ class StaffCartController {
         .catch(err => {
             console.error('err', err);
             return res.status(400).json({ error: err.message });
-        })
-        
+        })      
+    }
+
+    //GET
+    async getTotal(req, res) {
+        try {
+            const staffId = req.params.staffId;
+
+            const products = (await carts.doc(staffId).collection('productList').get()).docs;
+
+            const sum = products.reduce((total, product) => {
+                return total + product.data().quantity * product.data().price;
+            }, 0); 
+            console.log(sum);
+            return res.status(200).json(sum);
+        } catch(error) {
+            return res.status(500).json();
+        }
     }
 }
 

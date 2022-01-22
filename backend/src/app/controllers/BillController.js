@@ -36,6 +36,7 @@ class BillsController {
         const user = req.params.id;
         const billList = (await bills.where('userId', '==', user).get()).docs;
         let array = [];
+
         for(const bill of billList) {
             const data = bill.data();
             const productList = (await bill.ref.collection('productList').get()).docs;
@@ -46,6 +47,7 @@ class BillsController {
                     number: product.data().number,
                 }
             })
+
             array.push({
                 products: productArray,
                 billId: bill.id,
@@ -90,12 +92,16 @@ class BillsController {
     }
 
     async createBill(req, res) {
-        console.log('asdfsadfsadf')
+        //console.log('asdfsadfsadf')
         const user = req.body.id;
-        console.log(user);
+        //console.log(user);
         const productList = (await carts.doc(user).collection('productList').get()).docs;
-        console.log(productList);
+        //console.log(productList);
         let total = 0;
+
+        const d = new Date();
+        const time = d.getDate().toString() + '/' + (d.getMonth() + 1).toString() + '/' + d.getFullYear().toString();
+
         await bills.add({
             userId: user,
             name: req.body.name,
@@ -103,9 +109,8 @@ class BillsController {
             shippingAddress: req.body.address,
             state: 0,
             staffID: "",
-            time: FieldValue.serverTimestamp(),
+            time: time,
         })
-
             .then(bill => {
                 for (const product of productList) {
                     total += product.data().quantity * product.data().price;
@@ -114,6 +119,7 @@ class BillsController {
                         number: product.data().quantity,
                         price: product.data().price,
                     })
+
                     product.ref.delete();
                 }
 
@@ -174,6 +180,38 @@ class BillsController {
                 console.error('err', err);
                 res.status(400).json({ error: err.message });
             })
+    }
+
+    //GET
+    async getAll(req, res) {
+        try {
+            const bills_ = (await bills.get()).docs;
+
+            const statistics = bills_.map(bill => {
+                return {
+                    time: bill.data().time,
+                    total: bill.data().total,
+                    day: 1
+                }
+            })
+
+            let statistics_ = []
+            statistics_.push(statistics[0])
+
+            for (var data of statistics) {
+                let tmp = statistics_[statistics_.length - 1];
+                if (data.time === tmp.time) {
+                    tmp.total += data.total;
+                    tmp.day ++;
+                } else {
+                    statistics_.push(data);
+                }
+            }
+
+            return res.status(200).json(statistics_);
+        } catch(e) {
+            return res.status(500).json(e);
+        }
     }
 }
 
