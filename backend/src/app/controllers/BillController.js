@@ -62,19 +62,30 @@ class BillsController {
     async getBillbyState(req, res) {
         const state = parseInt(req.params.state);
         const billList = (await bills.where('state', '==', state).get()).docs;
-        let array = billList.map(bill => {
+        let array = [];
+        for(const bill of billList) {
             const data = bill.data();
-            return {
+            const productList = (await bill.ref.collection('productList').get()).docs;
+            let productArray = productList.map(product => {
+                return {
+                    productId: product.id,
+                    name: product.data().name,
+                    number: product.data().number,
+                    price: product.data().price,
+                }
+            })
+            array.push({
+                products: productArray,
                 billId: bill.id,
                 name: data.name,
-                customerId: data.customerId,
-                shippingAddress: data.shippingAddress,
+                userId: data.userId,
+                address: data.shippingAddress,
+                time: data.time,
                 phone: data.phone,
                 total: data.total,
-                time: data.time,
                 state: data.state,
-            }
-        })
+            });
+        }
         res.json(array);
     }
 
@@ -101,6 +112,7 @@ class BillsController {
                     bill.collection('productList').doc(product.id).set({
                         name: product.data().name,
                         number: product.data().quantity,
+                        price: product.data().price,
                     })
                     product.ref.delete();
                 }

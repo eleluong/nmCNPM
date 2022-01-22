@@ -7,7 +7,7 @@ import { useState } from "react";
 import { getCookie, deleteCookie } from "../../constants/userCookie";
 import axios from "axios";
 
-function Navbar() {
+function Navbar({ name }) {
     //let [user, setUser] = useState(getCookie('userInfo'));
 
     deleteCookie('admin');
@@ -25,7 +25,7 @@ function Navbar() {
         user = {}
     }
     const ID = user.id;
-    console.log(ID);
+    // console.log(ID);
     // console.log(user);
 
     const handleSignout = () => {

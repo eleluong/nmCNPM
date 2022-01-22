@@ -1,14 +1,18 @@
 import React from 'react';
-import {Card, CardMedia, CardContent, CardActions, Typography, IconButton} from '@material-ui/core';
-import {Button} from '@material-ui/core';
-import {AddShoppingCart} from '@material-ui/icons';
+import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { AddShoppingCart } from '@material-ui/icons';
 import useStyles from './style';
 import * as ROUTES from '../../constants/routes/routes';
 import * as isSignined from '../../constants/isSignined';
-import {getCookie, deleteCookie} from "../../constants/userCookie";
+import { getCookie, deleteCookie } from "../../constants/userCookie";
+import { useState } from 'react';
+import ProductDetail from './ProductDetail';
+import styles from './ProductDetail.module.css'
 
-const Product = ({product}) => {
+const Product = ({ product }) => {
     const classes = useStyles();
+    const [isOpen, setIsOpen] = useState(false);
 
     function titlechange(string) {
         if (string.length > 18) {
@@ -31,7 +35,7 @@ const Product = ({product}) => {
     // console.log(product.productId);
     const axios = require('axios');
     const handleAddToCart = ((itemId, price, name) => {
-        const temp = {cartId: id, productId: itemId, price: price, name: name};
+        const temp = { cartId: id, productId: itemId, price: price, name: name };
         axios({
             method: 'PUT',
             url: "http://localhost:5000/cart/addToCart/",
@@ -42,7 +46,7 @@ const Product = ({product}) => {
     });
     return (
         <Card className={classes.root}>
-            <CardMedia className={classes.media} image={product.image} title={product.name}/>
+            <CardMedia className={classes.media} image={product.image} title={product.name} />
             <CardContent>
                 <div className={classes.cardContent}>
                     <Typography variant="h6" align='left'>
@@ -55,11 +59,13 @@ const Product = ({product}) => {
                 <Typography>
                     {product.price}Đ
                 </Typography>
-                {signined?(
-                    <Button aria-label ="Add to Cart" onClick = {()=>handleAddToCart(product.productId, product.price, product.name)} >
-                        <AddShoppingCart/> 
+                <i className = {`${styles.icon_detail} fas fa-info-circle`} onClick={() => setIsOpen(true)}></i>
+                {isOpen && <ProductDetail product={product} setOpen={setIsOpen}></ProductDetail>}
+                {signined ? (
+                    <Button aria-label="Add to Cart" onClick={() => handleAddToCart(product.productId, product.price, product.name)} >
+                        <AddShoppingCart />
                     </Button>
-                ):(<></>)}
+                ) : (<></>)}
 
             </CardActions>
         </Card>
