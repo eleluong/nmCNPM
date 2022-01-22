@@ -25,7 +25,7 @@ function Navbar() {
         user = {}
     }
     const ID = user.id;
-    console.log(ID);
+    // console.log(ID);
     // console.log(user);
 
     const handleSignout = () => {
