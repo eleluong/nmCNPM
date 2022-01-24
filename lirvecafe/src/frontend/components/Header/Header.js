@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+import styles from "./";
 import Navbar from "./Navbar/Navbar";
 import Search from "./Search/Search";
 import Cart from "./cart/Cart";

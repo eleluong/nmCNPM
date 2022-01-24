@@ -2,7 +2,7 @@ import { Grid, Typography } from "@material-ui/core";
 import Product from '../../products/product/product'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import styles from '../Header.module.css'
+import styles from '../'
 
 const Search = () => {
     const [searchInput, setSearchInput] = useState("");

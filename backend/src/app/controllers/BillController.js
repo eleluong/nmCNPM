@@ -191,24 +191,32 @@ class BillsController {
                 return {
                     time: bill.data().time,
                     total: bill.data().total,
-                    number: 1
                 }
             })
 
-            let statistics_ = []
-            statistics_.push(statistics[0])
+            let arr_total = [];
+            let arr_number = [];
 
-            for (var data of statistics) {
-                let tmp = statistics_[statistics_.length - 1];
-                if (data.time === tmp.time) {
-                    tmp.total += data.total;
-                    tmp.number ++;
-                } else {
-                    statistics_.push(data);
-                }
+            for (let i = 0; i < statistics.length; i++) {
+                if (!arr_total[statistics[i].time]) arr_total[statistics[i].time] = 0;
+                if (!arr_number[statistics[i].time]) arr_number[statistics[i].time] = 0;
+
+                arr_total[statistics[i].time] += statistics[i].total;
+                arr_number[statistics[i].time] ++;
             }
- 
-            return res.status(200).json(statistics_);
+
+            // console.log(arr_number);
+            // console.log(arr_total);
+            let arr = [];
+            for(let i in arr_number) {
+                let tmp = {}
+                tmp.time = i;
+                tmp.total = arr_total[i];
+                tmp.number = arr_number[i];
+                arr.push(tmp);
+            }
+
+            return res.status(200).send(arr);
         } catch(e) {
             return res.status(500).json(e);
         }
