@@ -1,6 +1,6 @@
 import React from 'react'
 import Products from './products/products';
-import Bill from './Bill/bill.jsx';
+import Bill from './bill/bill.jsx';
 import Checkout from './checkout/checkout';
 import { Grid } from '@material-ui/core';
 import {useEffect} from 'react';
@@ -40,6 +40,7 @@ const StaffCreateBill = () => {
         });
         console.log(temp);
     });
+    const [total, setTotal] = useState(0);
     useEffect(() => {
         const getCart = async () => {
             const url = 'http://localhost:5000/staffcart/get/' + id;
@@ -47,7 +48,14 @@ const StaffCreateBill = () => {
             ))).json();
             setItems(res);
         }
+        const getTotal = async()=>{
+            const url = "http://localhost:5000/staffcart/get_total/"+id;
+            const res = await (await (fetch(url
+                ))).json();
+            setTotal(res);
+        }
         getCart();
+        getTotal();
         console.log(change);
     }, [change]);
     console.log(items);
@@ -59,7 +67,7 @@ const StaffCreateBill = () => {
                     <Products handleAdd = {handleAddToCart}/>
                 </Grid>
                 <Grid items xs = "4">
-                    <Bill items = {items} add = {handleAddToCart} remove = {handleRemoveFromCart} change = {change}/>
+                    <Bill items = {items} add = {handleAddToCart} remove = {handleRemoveFromCart} change = {change} total = {total}/>
                     <Checkout/>
                 </Grid>
             </Grid>

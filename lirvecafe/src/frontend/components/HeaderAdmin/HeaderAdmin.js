@@ -7,7 +7,7 @@ import {deleteCookie, getCookie} from '../constants/userCookie'
 import * as ROUTES from '../constants/routes/routes'
 import * as isSignined from '../constants/isSignined'
 
-function HeaderStaff() {
+function HeaderAdmin() {
     const [state, setState] = useState('CRUD');
     const classes = clsx(styles.tab_item, styles.active);
     const isActive = (value) => {
@@ -63,4 +63,4 @@ function HeaderStaff() {
     )
 }
 
-export default HeaderStaff
+export default HeaderAdmin

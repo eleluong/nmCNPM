@@ -3,19 +3,13 @@ import {Button, Card, CardActions, CardContent, CardMedia, Grid} from '@material
 import useStyles from './styles';
 import {Typography} from '@material-ui/core';
 import {useEffect} from 'react';
-import * as ROUTES from '../../../constants/routes/routes';
-import * as isSignined from '../../../constants/isSignined';
 import {getCookie, deleteCookie} from "../../../constants/userCookie";
 import {useState} from 'react';
 
 const BillItem = ({item, addToCart, removeFromCart, change}) => {
-    // let signined = getCookie(isSignined.customer);
     let user = getCookie('customer');
     if (user) {
-        // console.log(typeof user);
-        // console.log(user);
         user = JSON.parse(user);
-        //console.log(user);
     } else {
         user = {}
     }

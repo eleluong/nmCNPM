@@ -191,7 +191,7 @@ class BillsController {
                 return {
                     time: bill.data().time,
                     total: bill.data().total,
-                    day: 1
+                    number: 1
                 }
             })
 
@@ -202,12 +202,12 @@ class BillsController {
                 let tmp = statistics_[statistics_.length - 1];
                 if (data.time === tmp.time) {
                     tmp.total += data.total;
-                    tmp.day ++;
+                    tmp.number ++;
                 } else {
                     statistics_.push(data);
                 }
             }
-
+ 
             return res.status(200).json(statistics_);
         } catch(e) {
             return res.status(500).json(e);

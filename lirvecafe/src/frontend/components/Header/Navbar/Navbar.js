@@ -7,7 +7,7 @@ import { useState } from "react";
 import { getCookie, deleteCookie } from "../../constants/userCookie";
 import axios from "axios";
 
-function Navbar({ name }) {
+function Navbar() {
     //let [user, setUser] = useState(getCookie('userInfo'));
 
     deleteCookie('admin');

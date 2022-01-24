@@ -44,7 +44,7 @@ const OrdersList = ({ orders, remove, update }) => {
                                 </TableCell>
                                 <TableCell align="center">{order.phone}</TableCell>
                                 <TableCell align="center">{order.total}</TableCell>
-                                <TableCell align="center">{order.shippingAddress}</TableCell>
+                                <TableCell align="center">{order.address}</TableCell>
                                 <TableCell align="center">
                                     <button className={styles.btn_detail} onClick={() => handleDetail(order)}>Chi tiết</button>
                                 </TableCell>
