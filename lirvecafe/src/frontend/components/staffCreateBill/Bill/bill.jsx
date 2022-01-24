@@ -3,7 +3,7 @@ import useStyles from './styles';
 import BillItem from './billItem/billItem';
 
 
-const Bill = ({items, add, remove, change}) => {
+const Bill = ({items, add, remove, change, total}) => {
     
     
 
@@ -17,7 +17,7 @@ const Bill = ({items, add, remove, change}) => {
             ))}
 
             <div className={classes.total}>
-                <span>Tổng thanh toán:</span>
+                <span>Tổng thanh toán: {total}</span>
                 <span>{
                     
                 }</span>

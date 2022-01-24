@@ -7,9 +7,7 @@ class ReportController {
             const query = db.collection('reports');
             const querySnapshot = await query.get();
             const docs = querySnapshot.docs;
-
             var report = docs[0];
-
             return res.status(200).send(report.data());
         } catch (error) {
             return res.status(500).send(error);
@@ -20,10 +18,8 @@ class ReportController {
     async updateCost(req, res) {
         try {
             const report = req.body;
-
             const d = new Date();
             const time = d.getDate().toString() + '/' + d.getMonth().toString() + '/' + d.getFullYear().toString();
-
             await db.collection('reports')
                 .doc('/report/')
                 .update({
